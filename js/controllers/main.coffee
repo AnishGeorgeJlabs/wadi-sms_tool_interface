@@ -1,11 +1,14 @@
 angular.module('Wadi.controllers.main', [])
-.controller 'MainCtrl', ($scope, $state, $http, $log) ->
+.controller 'MainCtrl', ($scope, $state, $http, $log, wdLinks) ->
   $log.debug "Main executed"
   $state.go('login')
 
   isLoggedIn = false
 
   $scope.checkLogin = () -> isLoggedIn
+
+  $scope.sheet_link = wdLinks.scheduling_sheet
+  $scope.doc_link = wdLinks.docs
 
   $scope.login = (username, pass) ->
     $log.debug "Got submission #{username}, #{pass}"
