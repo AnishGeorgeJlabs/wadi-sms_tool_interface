@@ -1,4 +1,7 @@
-angular.module('Wadi.form', [])
+###
+  Just the form controller
+###
+angular.module('Wadi.controllers.form', [])
 .controller 'FormCtrl', ($scope, $state, $log, $http, $modal) ->
   $scope.checkLogin = () ->
     $log.info "Checking login status at FormCtrl"

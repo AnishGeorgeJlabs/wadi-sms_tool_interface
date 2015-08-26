@@ -12,8 +12,10 @@ html(ng-app='Wadi')
     each file in files
       script(src='bower_components/'+file)
 
-    each file in ['external', 'app', 'app_form', 'directives']
+    each file in ['app', 'directives']
       script(src='js/'+file+'.js')
+    each file in ['main', 'form']
+      script(src='js/controllers/'+file+'.js')
 
     // link(href='bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet')
 
@@ -29,7 +31,7 @@ html(ng-app='Wadi')
 
         .btn-group(role='group' ng-if='checkLogin()')
           a(
-             href='https://docs.google.com/spreadsheets/d/144fuYSOgi8md4n2Ezoj9yNMi6AigoXrkHA9rWIF0EDw/edit#gid=1507780804'
+             href='https://docs.google.com/spreadsheets/d/144fuYSOgi8md4n2Ezoj9yNMi6AigoXrkHA9rWIF0EDw/edit'
              target='_blank'
             ).btn.btn-success
             | Visit the scheduling sheet

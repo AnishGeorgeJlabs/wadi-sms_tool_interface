@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'Wadi.form', 'Wadi.directives']).config(function($stateProvider, $urlRouterProvider, uiSelectConfig) {
+  angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.directives']).config(function($stateProvider, $urlRouterProvider, uiSelectConfig) {
     uiSelectConfig.theme = 'bootstrap';
     return $stateProvider.state('login', {
       templateUrl: './templates/view_login.html',
@@ -17,54 +17,6 @@
       templateUrl: './templates/view_test.html',
       controller: 'TestCtrl'
     });
-  }).controller('MainCtrl', function($scope, $state, $http, $log) {
-    var isLoggedIn;
-    $log.debug("Main executed");
-    $state.go('login');
-    isLoggedIn = false;
-    $scope.checkLogin = function() {
-      return isLoggedIn;
-    };
-    return $scope.login = function(username, pass) {
-      $log.debug("Got submission " + username + ", " + pass);
-      return $http.post("http://45.55.72.208/wadi/interface/login", {
-        username: username,
-        password: pass
-      }).success(function(result) {
-        $log.debug("Got result: " + (JSON.stringify(result)));
-        isLoggedIn = result.success;
-        if (isLoggedIn) {
-          return $state.go('form');
-        } else {
-          return alert("Authentication failed");
-        }
-      });
-    };
-  }).controller('LoginCtrl', function($scope, $log) {
-    $scope.data = {
-      username: '',
-      password: ''
-    };
-    return $scope.submit = function() {
-      $log.debug("Submitting : " + (JSON.stringify($scope.data)));
-      $scope.$parent.login($scope.data.username, md5($scope.data.password));
-      $scope.data.username = '';
-      return $scope.data.password = '';
-    };
-  }).controller('TestCtrl', function($scope, $state, $log) {
-    $scope.data = {
-      selected: [],
-      set: ''
-    };
-    return $scope.sampleData = ['electronics', 'shoes', 'sports bags', 'goodies', 'long list', 'another useless item', 'someone else'];
-
-    /*
-    $scope.sampleData = [
-      {id: 1, label: 'electronics'},
-      {id: 2, label: 'shoes'},
-      {id: 3, label: 'sports'}
-    ]
-     */
   });
 
 }).call(this);
