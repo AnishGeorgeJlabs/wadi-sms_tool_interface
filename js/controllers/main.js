@@ -36,12 +36,28 @@
       $scope.data.username = '';
       return $scope.data.password = '';
     };
-  }).controller('TestCtrl', function($scope, $state, $log) {
+  }).controller('TestCtrl', function($scope, $state, $log, wdLinks, $modal) {
+    var res;
     $scope.data = {
-      selected: [],
-      set: ''
+      test: "This is a test you see"
     };
-    return $scope.sampleData = ['electronics', 'shoes', 'sports bags', 'goodies', 'long list', 'another useless item', 'someone else'];
+    $scope.sampleData = ['electronics', 'shoes', 'sports bags', 'goodies', 'long list', 'another useless item', 'someone else'];
+    $scope.docs = wdLinks.docs;
+    res = {
+      success: true
+    };
+    return $scope.tFunc = function() {
+      return $modal.open({
+        controller: function($scope, $modalInstance, wdLinks) {
+          $scope.result = res;
+          $scope.sheet_link = wdLinks.scheduling_sheet;
+          return $scope.close = function() {
+            return $modalInstance.dismiss('ok');
+          };
+        },
+        templateUrl: 'templates/modal_submission.html'
+      });
+    };
   });
 
 }).call(this);

@@ -37,10 +37,22 @@ angular.module('Wadi.controllers.main', [])
     $scope.data.username = ''
     $scope.data.password = ''
 
-.controller 'TestCtrl', ($scope, $state, $log) ->
+.controller 'TestCtrl', ($scope, $state, $log, wdLinks, $modal) ->
   $scope.data =
-    selected: []
-    set: ''
+    test: "This is a test you see"
+
   $scope.sampleData = [
     'electronics', 'shoes', 'sports bags', 'goodies', 'long list', 'another useless item', 'someone else'
   ]
+
+  $scope.docs = wdLinks.docs
+  res = { success: true }
+  $scope.tFunc = () ->
+    $modal.open(
+      controller: ($scope, $modalInstance, wdLinks) ->
+        $scope.result = res
+        $scope.sheet_link = wdLinks.scheduling_sheet
+        $scope.close = () ->
+          $modalInstance.dismiss('ok')
+      templateUrl: 'templates/modal_submission.html'
+    )

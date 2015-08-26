@@ -69,8 +69,9 @@ angular.module('Wadi.controllers.form', [])
       $log.debug "Submission result: "+JSON.stringify(res)
       $scope.submitting = false
       $modal.open(
-        controller: ($scope, $modalInstance) ->
+        controller: ($scope, $modalInstance, wdLinks) ->
           $scope.result = res
+          $socpe.sheet_link = wdLinks.scheduling_sheet
           $scope.close = () ->
             $modalInstance.dismiss('ok')
         templateUrl: 'templates/modal_submission.html'

@@ -85,8 +85,9 @@
         $log.debug("Submission result: " + JSON.stringify(res));
         $scope.submitting = false;
         return $modal.open({
-          controller: function($scope, $modalInstance) {
+          controller: function($scope, $modalInstance, wdLinks) {
             $scope.result = res;
+            $socpe.sheet_link = wdLinks.scheduling_sheet;
             return $scope.close = function() {
               return $modalInstance.dismiss('ok');
             };
