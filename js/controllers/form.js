@@ -65,6 +65,11 @@
       },
       datetime: null
     };
+    $scope.misc = {
+      name: 'Untitled',
+      description: '',
+      debug: false
+    };
     $scope.submit = function() {
       var dt, resM, resR, resS, result, target_config;
       $scope.submitting = true;
@@ -78,7 +83,9 @@
       result = {
         target_config: target_config,
         campaign_config: $scope.campaign,
-        debug: false
+        debug: $scope.misc.debug,
+        name: $scope.misc.name,
+        description: $scope.misc.description
       };
       $log.info("Final submission: " + JSON.stringify(result));
       return $http.post('http://45.55.72.208/wadi/interface/post', result).success(function(res) {

@@ -49,6 +49,11 @@ angular.module('Wadi.controllers.form', [])
       english: ''
     datetime: null
 
+  $scope.misc =
+    name: 'Untitled'
+    description: ''
+    debug: false
+
   $scope.submit = () ->
     $scope.submitting = true
     resM = cleanObj($scope.selectedMulti)
@@ -60,7 +65,13 @@ angular.module('Wadi.controllers.form', [])
     $scope.campaign.date = dt[0]
     $scope.campaign.time = dt[1]
 
-    result = { target_config: target_config, campaign_config: $scope.campaign, debug: false}
+    result =
+      target_config: target_config
+      campaign_config: $scope.campaign
+      debug: $scope.misc.debug
+      name: $scope.misc.name
+      description: $scope.misc.description
+
     $log.info "Final submission: "+JSON.stringify(result)
 
 
