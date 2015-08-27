@@ -87,7 +87,7 @@
         return $modal.open({
           controller: function($scope, $modalInstance, wdLinks) {
             $scope.result = res;
-            $socpe.sheet_link = wdLinks.scheduling_sheet;
+            $scope.sheet_link = wdLinks.scheduling_sheet;
             return $scope.close = function() {
               return $modalInstance.dismiss('ok');
             };
