@@ -3,12 +3,19 @@
   Tested on Sat, 15 Aug, 06:44 PM
 ###
 angular.module('Wadi.directives', [])
+.directive 'wdCoTypeSelect', () ->
+  restrict: 'E'
+  scope:
+    model: '=model'
+  templateUrl: './templates/dir_co_type.html'
+
 .directive 'wdRangeInput', () ->
   restrict: 'E'
   scope:
     label: '=label'
     model: '=model'
   templateUrl: './templates/dir_range.html'
+  replace: true
   controller: ($scope, $log) ->
     $scope.lt = "Less than"
     $scope.eq = "Equal to"

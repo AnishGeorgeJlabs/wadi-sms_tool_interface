@@ -39,7 +39,11 @@
   }).controller('TestCtrl', function($scope, $state, $log, wdLinks, $modal) {
     var res;
     $scope.data = {
-      test: "This is a test you see"
+      test: "This is a test you see",
+      co_type: 'required'
+    };
+    $scope.setReq = function() {
+      return $scope.data.co_type = 'required';
     };
     $scope.sampleData = ['electronics', 'shoes', 'sports bags', 'goodies', 'long list', 'another useless item', 'someone else'];
     $scope.docs = wdLinks.docs;

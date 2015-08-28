@@ -34,7 +34,8 @@
         if (data.type === 'single') {
           $scope.single[data.operation] = {
             name: data.pretty,
-            values: data.values
+            values: data.values,
+            co_type: data.co_type
           };
           results.push($scope.selectedSingle[data.operation] = {
             value: '',
@@ -43,7 +44,8 @@
         } else if (data.type === 'multi') {
           $scope.multi[data.operation] = {
             name: data.pretty,
-            values: data.values
+            values: data.values,
+            co_type: data.co_type
           };
           results.push($scope.selectedMulti[data.operation] = {
             value: [],
@@ -51,7 +53,8 @@
           });
         } else if (data.type === 'range') {
           $scope.range[data.operation] = {
-            name: data.pretty
+            name: data.pretty,
+            co_type: data.co_type
           };
           results.push($scope.selectedRange[data.operation] = {
             value: '',

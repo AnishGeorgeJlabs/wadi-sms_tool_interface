@@ -1,6 +1,11 @@
 <div class="row">
+<!--
   <a class="btn btn-success btn-lg" target='_blank' ng-href="{{ docs }}">Redirect to sheet</a>
   <button class="btn btn-lg btn-danger" ng-click="tFunc()">Test modal</button>
+  -->
+  <button class="btn btn-lg btn-default" ng-click="setReq()">Set</button>
 
   {{ data }}
+
+  <wd-co-type-select model="data.co_type"></wd-co-type-select>
 </div>

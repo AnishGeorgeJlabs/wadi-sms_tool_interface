@@ -6,7 +6,15 @@
  */
 
 (function() {
-  angular.module('Wadi.directives', []).directive('wdRangeInput', function() {
+  angular.module('Wadi.directives', []).directive('wdCoTypeSelect', function() {
+    return {
+      restrict: 'E',
+      scope: {
+        model: '=model'
+      },
+      templateUrl: './templates/dir_co_type.html'
+    };
+  }).directive('wdRangeInput', function() {
     return {
       restrict: 'E',
       scope: {
@@ -14,6 +22,7 @@
         model: '=model'
       },
       templateUrl: './templates/dir_range.html',
+      replace: true,
       controller: function($scope, $log) {
         var compileResult;
         $scope.lt = "Less than";

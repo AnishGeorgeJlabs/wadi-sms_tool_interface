@@ -40,6 +40,9 @@ angular.module('Wadi.controllers.main', [])
 .controller 'TestCtrl', ($scope, $state, $log, wdLinks, $modal) ->
   $scope.data =
     test: "This is a test you see"
+    co_type: 'required'
+
+  $scope.setReq = () -> $scope.data.co_type = 'required'
 
   $scope.sampleData = [
     'electronics', 'shoes', 'sports bags', 'goodies', 'long list', 'another useless item', 'someone else'
@@ -56,3 +59,4 @@ angular.module('Wadi.controllers.main', [])
           $modalInstance.dismiss('ok')
       templateUrl: 'templates/modal_submission.html'
     )
+
