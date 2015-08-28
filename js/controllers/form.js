@@ -36,16 +36,26 @@
             name: data.pretty,
             values: data.values
           };
-          results.push($scope.selectedSingle[data.operation] = '');
+          results.push($scope.selectedSingle[data.operation] = {
+            value: '',
+            co_type: 'required'
+          });
         } else if (data.type === 'multi') {
           $scope.multi[data.operation] = {
             name: data.pretty,
             values: data.values
           };
-          results.push($scope.selectedMulti[data.operation] = []);
+          results.push($scope.selectedMulti[data.operation] = {
+            value: [],
+            co_type: 'required'
+          });
         } else if (data.type === 'range') {
-          results.push($scope.range[data.operation] = {
+          $scope.range[data.operation] = {
             name: data.pretty
+          };
+          results.push($scope.selectedRange[data.operation] = {
+            value: '',
+            co_type: 'required'
           });
         } else {
           results.push(void 0);
@@ -55,7 +65,7 @@
     };
     cleanObj = function(obj) {
       return _.pick(obj, function(val, key, o) {
-        return val && val.length > 0;
+        return val && val.value && val.value.length > 0;
       });
     };
     $scope.campaign = {
@@ -105,13 +115,22 @@
     };
     return $scope.reset = function() {
       $scope.selectedMulti = _.mapObject($scope.selectedMulti, function() {
-        return [];
+        return {
+          value: [],
+          co_type: 'required'
+        };
       });
       $scope.selectedSingle = _.mapObject($scope.selectedSingle, function() {
-        return '';
+        return {
+          value: '',
+          co_type: 'required'
+        };
       });
       return $scope.selectedRange = _.mapObject($scope.selectedRange, function() {
-        return '';
+        return {
+          value: '',
+          co_type: 'required'
+        };
       });
     };
   });

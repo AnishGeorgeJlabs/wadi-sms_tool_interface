@@ -79,7 +79,7 @@
       <div class="form-group" ng-repeat="(operation, config) in multi">
         <label class="control-label col-sm-4">{{config.name}}</label>
         <div class="col-sm-8">
-          <ui-select multiple ng-model="selectedMulti[operation]" title="{{config.name}}">
+          <ui-select multiple ng-model="selectedMulti[operation].value" title="{{config.name}}">
             <ui-select-match placeholder="Select {{config.name}}">{{$item}}</ui-select-match>
             <ui-select-choices repeat="opt in config.values | filter:$select.search">
               {{opt}}
@@ -91,7 +91,7 @@
       <div class="form-group" ng-repeat="(operation, config) in single">
         <label class="control-label col-sm-4">{{config.name}}</label>
         <div class="col-sm-8">
-          <ui-select ng-model="selectedSingle[operation]" title="{{config.name}}">
+          <ui-select ng-model="selectedSingle[operation].value" title="{{config.name}}">
             <ui-select-match allow-clear placeholder="Select {{config.name}}">{{$select.selected}}</ui-select-match>
             <ui-select-choices repeat="opt in config.values | filter:$select.search">
               {{opt}}
@@ -99,7 +99,7 @@
           </ui-select>
         </div>
       </div>
-      <wd-range-input model="selectedRange[operation]" label='config.name' ng-repeat="(operation, config) in range"></wd-range-input>
+      <wd-range-input model="selectedRange[operation].value" label='config.name' ng-repeat="(operation, config) in range"></wd-range-input>
 
       <div class="panel panel-default" ng-show="false">
         <div class="panel-body">

@@ -29,17 +29,18 @@ angular.module('Wadi.controllers.form', [])
   configureForm = (mainData) ->
     for data in mainData
       if data.type == 'single'
-        $scope.single[data.operation] = {name: data.pretty, values: data.values }
-        $scope.selectedSingle[data.operation] = ''
+        $scope.single[data.operation] = {name: data.pretty, values: data.values }   # > todo: add and/or here
+        $scope.selectedSingle[data.operation] = { value: '', co_type: 'required' }
       else if data.type == 'multi'
         $scope.multi[data.operation] = {name: data.pretty, values: data.values }
-        $scope.selectedMulti[data.operation] = []
+        $scope.selectedMulti[data.operation] = { value: [], co_type: 'required' }
       else if data.type == 'range'
         $scope.range[data.operation] = {name: data.pretty}
+        $scope.selectedRange[data.operation] = { value: '', co_type: 'required' }
 
   cleanObj = (obj) ->
     _.pick obj, (val, key, o) ->
-      val and val.length > 0
+      val and val.value and val.value.length > 0
 
   # ------------------------------------- #
 
@@ -90,6 +91,6 @@ angular.module('Wadi.controllers.form', [])
 
 
   $scope.reset = () ->
-    $scope.selectedMulti = _.mapObject($scope.selectedMulti, () -> [] )
-    $scope.selectedSingle = _.mapObject($scope.selectedSingle, () -> '')
-    $scope.selectedRange = _.mapObject($scope.selectedRange, () -> '')
+    $scope.selectedMulti = _.mapObject($scope.selectedMulti, () -> { value: [], co_type: 'required' })
+    $scope.selectedSingle = _.mapObject($scope.selectedSingle, () -> { value: '', co_type: 'required' })
+    $scope.selectedRange = _.mapObject($scope.selectedRange, () -> { value: '', co_type: 'required' })
