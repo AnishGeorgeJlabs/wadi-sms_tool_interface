@@ -14,6 +14,7 @@ angular.module('Wadi.directives', [])
   scope:
     label: '=label'
     model: '=model'
+    showCoType: '=showCoType'
   templateUrl: './templates/dir_range.html'
   replace: true
   controller: ($scope, $log) ->
@@ -28,7 +29,7 @@ angular.module('Wadi.directives', [])
       max: 2
 
     compileResult = () ->
-      $scope.model = switch $scope.data.op
+      $scope.model.value = switch $scope.data.op
         when '' then ''
         when $scope.bw then "#{$scope.bw} #{$scope.data.min} and #{$scope.data.max}"
         when $scope.eq then "#{$scope.data.min}"
@@ -45,7 +46,7 @@ angular.module('Wadi.directives', [])
     )
 
     $scope.$watch(
-      'model',
+      'model.value',
       (nVal, oVal) ->
         if oVal != '' and nVal == ''
           $scope.data.op = ''

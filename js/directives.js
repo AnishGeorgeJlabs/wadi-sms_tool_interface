@@ -19,7 +19,8 @@
       restrict: 'E',
       scope: {
         label: '=label',
-        model: '=model'
+        model: '=model',
+        showCoType: '=showCoType'
       },
       templateUrl: './templates/dir_range.html',
       replace: true,
@@ -35,7 +36,7 @@
           max: 2
         };
         compileResult = function() {
-          return $scope.model = (function() {
+          return $scope.model.value = (function() {
             switch ($scope.data.op) {
               case '':
                 return '';
@@ -57,7 +58,7 @@
           }
           return compileResult();
         });
-        $scope.$watch('model', function(nVal, oVal) {
+        $scope.$watch('model.value', function(nVal, oVal) {
           if (oVal !== '' && nVal === '') {
             return $scope.data.op = '';
           }

@@ -105,7 +105,11 @@
                            ng-if="single[operation].co_type == 'both'"
                            class="col-sm-3"></wd-co-type-select>
       </div>
-      <wd-range-input model="selectedRange[operation].value" label='config.name' ng-repeat="(operation, config) in range"></wd-range-input>
+
+      <wd-range-input ng-repeat="(operation, config) in range"
+        model="selectedRange[operation]"
+        show-co-type="range[operation].co_type == 'both'"
+        label='config.name'></wd-range-input>
 
       <div class="panel panel-default" ng-show="false">
         <div class="panel-body">

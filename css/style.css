@@ -1,0 +1,7 @@
+.no-gutter {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.control-label.text-center {
+    text-align: center !important;
+}

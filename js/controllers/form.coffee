@@ -29,7 +29,7 @@ angular.module('Wadi.controllers.form', [])
   configureForm = (mainData) ->
     for data in mainData
       if data.type == 'single'
-        $scope.single[data.operation] = {name: data.pretty, values: data.values, co_type: data.co_type }   # > todo: add and/or here
+        $scope.single[data.operation] = {name: data.pretty, values: data.values, co_type: data.co_type }
         $scope.selectedSingle[data.operation] = { value: '', co_type: 'required' }
       else if data.type == 'multi'
         $scope.multi[data.operation] = {name: data.pretty, values: data.values, co_type: data.co_type }
