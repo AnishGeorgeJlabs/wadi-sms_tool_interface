@@ -60,9 +60,7 @@ angular.module('Wadi.controllers.form', [])
     description: ''
     debug: false
 
-  $scope.submit = (ev) ->
-
-    ###
+  $scope.submit = () ->
     $scope.submitting = true
     resM = cleanObj($scope.selectedMulti)
     resS = cleanObj($scope.selectedSingle)
@@ -95,8 +93,6 @@ angular.module('Wadi.controllers.form', [])
             $modalInstance.dismiss('ok')
         templateUrl: 'templates/modal_submission.html'
       )
-
-###
 
 
   $scope.reset = () ->
