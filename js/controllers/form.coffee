@@ -43,6 +43,11 @@ angular.module('Wadi.controllers.form', [])
       val and val.value and val.value.length > 0
 
   # ------------------------------------- #
+  $scope.debug = (ev) ->
+    if ev.keyCode == 13
+      alert("Got it")
+      ev.stopPropagation()
+      ev.preventDefault()
 
   $scope.campaign =
     text:
@@ -55,7 +60,9 @@ angular.module('Wadi.controllers.form', [])
     description: ''
     debug: false
 
-  $scope.submit = () ->
+  $scope.submit = (ev) ->
+
+    ###
     $scope.submitting = true
     resM = cleanObj($scope.selectedMulti)
     resS = cleanObj($scope.selectedSingle)
@@ -88,6 +95,8 @@ angular.module('Wadi.controllers.form', [])
             $modalInstance.dismiss('ok')
         templateUrl: 'templates/modal_submission.html'
       )
+
+###
 
 
   $scope.reset = () ->

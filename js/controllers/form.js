@@ -71,6 +71,13 @@
         return val && val.value && val.value.length > 0;
       });
     };
+    $scope.debug = function(ev) {
+      if (ev.keyCode === 13) {
+        alert("Got it");
+        ev.stopPropagation();
+        return ev.preventDefault();
+      }
+    };
     $scope.campaign = {
       text: {
         arabic: '',
@@ -83,38 +90,42 @@
       description: '',
       debug: false
     };
-    $scope.submit = function() {
-      var dt, resM, resR, resS, result, target_config;
-      $scope.submitting = true;
-      resM = cleanObj($scope.selectedMulti);
-      resS = cleanObj($scope.selectedSingle);
-      resR = cleanObj($scope.selectedRange);
-      target_config = _.extend({}, resS, resM, resR);
-      dt = moment($scope.campaign.datetime).format("MM/DD/YYYY HH:mm").split(" ");
-      $scope.campaign.date = dt[0];
-      $scope.campaign.time = dt[1];
-      result = {
-        target_config: target_config,
-        campaign_config: $scope.campaign,
-        debug: $scope.misc.debug,
-        name: $scope.misc.name,
+    $scope.submit = function(ev) {
+
+      /*
+      $scope.submitting = true
+      resM = cleanObj($scope.selectedMulti)
+      resS = cleanObj($scope.selectedSingle)
+      resR = cleanObj($scope.selectedRange)
+      target_config = _.extend({}, resS, resM, resR)
+      
+      dt = moment($scope.campaign.datetime).format("MM/DD/YYYY HH:mm").split(" ")
+      $scope.campaign.date = dt[0]
+      $scope.campaign.time = dt[1]
+      
+      result =
+        target_config: target_config
+        campaign_config: $scope.campaign
+        debug: $scope.misc.debug
+        name: $scope.misc.name
         description: $scope.misc.description
-      };
-      $log.info("Final submission: " + JSON.stringify(result));
-      return $http.post('http://45.55.72.208/wadi/interface/post', result).success(function(res) {
-        $log.debug("Submission result: " + JSON.stringify(res));
-        $scope.submitting = false;
-        return $modal.open({
-          controller: function($scope, $modalInstance, wdLinks) {
-            $scope.result = res;
-            $scope.sheet_link = wdLinks.scheduling_sheet;
-            return $scope.close = function() {
-              return $modalInstance.dismiss('ok');
-            };
-          },
+      
+      $log.info "Final submission: "+JSON.stringify(result)
+      
+      
+      $http.post('http://45.55.72.208/wadi/interface/post', result)
+      .success (res) ->
+        $log.debug "Submission result: "+JSON.stringify(res)
+        $scope.submitting = false
+        $modal.open(
+          controller: ($scope, $modalInstance, wdLinks) ->
+            $scope.result = res
+            $scope.sheet_link = wdLinks.scheduling_sheet
+            $scope.close = () ->
+              $modalInstance.dismiss('ok')
           templateUrl: 'templates/modal_submission.html'
-        });
-      });
+        )
+       */
     };
     return $scope.reset = function() {
       $scope.selectedMulti = _.mapObject($scope.selectedMulti, function() {

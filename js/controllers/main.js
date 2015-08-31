@@ -3,7 +3,7 @@
   angular.module('Wadi.controllers.main', []).controller('MainCtrl', function($scope, $state, $http, $log, wdLinks) {
     var isLoggedIn;
     $log.debug("Main executed");
-    $state.go('test');
+    $state.go('login');
     isLoggedIn = false;
     $scope.checkLogin = function() {
       return isLoggedIn;

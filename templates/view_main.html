@@ -75,36 +75,17 @@
         <h3 class="text-center">Configure Target consumer</h3>
       </div>
       <div class="alert alert-info text-center" ng-if="loading">Building your form... </div>
+      <wd-select
+          input-model="config"
+          output-model="selectedMulti[operation]"
+          single-select="false"
+          ng-repeat="(operation, config) in multi"></wd-select>
 
-      <div class="form-group" ng-repeat="(operation, config) in multi">
-        <label class="control-label col-sm-3">{{ config.name }}</label>
-        <div class="col-sm-6">
-            <ui-select multiple ng-model="selectedMulti[operation].value" title="{{config.name}}">
-              <ui-select-match placeholder="Select {{config.name}}">{{$item}}</ui-select-match>
-              <ui-select-choices repeat="opt in config.values | filter:$select.search">
-                {{opt}}
-              </ui-select-choices>
-            </ui-select>
-        </div>
-        <wd-co-type-select model="selectedMulti[operation].co_type"
-                           ng-if="multi[operation].co_type == 'both'"
-                           class="col-sm-3"></wd-co-type-select>
-      </div>
-
-      <div class="form-group" ng-repeat="(operation, config) in single">
-        <label class="control-label col-sm-3">{{config.name}}</label>
-        <div class="col-sm-6">
-          <ui-select ng-model="selectedSingle[operation].value" title="{{config.name}}">
-            <ui-select-match allow-clear placeholder="Select {{config.name}}">{{$select.selected}}</ui-select-match>
-            <ui-select-choices repeat="opt in config.values | filter:$select.search">
-              {{opt}}
-            </ui-select-choices>
-          </ui-select>
-        </div>
-        <wd-co-type-select model="selectedSingle[operation].co_type"
-                           ng-if="single[operation].co_type == 'both'"
-                           class="col-sm-3"></wd-co-type-select>
-      </div>
+      <wd-select
+          input-model="config"
+          output-model="selectedSingle[operation]"
+          single-select="true"
+          ng-repeat="(operation, config) in single"></wd-select>
 
       <wd-range-input ng-repeat="(operation, config) in range"
         model="selectedRange[operation]"

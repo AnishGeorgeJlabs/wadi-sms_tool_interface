@@ -806,8 +806,13 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                     e.preventDefault();                   
                     e.stopPropagation();
                     $scope.toggleCheckboxes( e );
-                }                    
-                
+                }
+
+                if ( key === 13 ) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+
                 
                 // next element ( tab, down & right key )                    
                 else if ( key === 40 || key === 39 || ( !e.shiftKey && key == 9 ) ) {                    

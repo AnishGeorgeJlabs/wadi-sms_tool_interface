@@ -1,7 +1,7 @@
 <div class="form-group">
-  <label class="col-sm-3 col-xs-12">{{ inputModel.name }}</label>
+  <label class="col-sm-3 col-xs-12 control-label">{{ inputModel.name }}</label>
   <div
-    class="col-sm-6 col-xs-9"
+    class="col-sm-6 col-xs-9 no-right-gutter"
     isteven-multi-select
     input-model="options"
     output-model="selected"
@@ -9,6 +9,7 @@
     button-label="name"
     search-property="name"
     max-labels="3"
+    max-height="250px"
     ng-attr-selection-mode="{{ singleSelect ? 'single': 'multiple' }}"
     tick-property="selected"
     ></div>

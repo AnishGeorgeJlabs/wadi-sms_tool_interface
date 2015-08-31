@@ -74,7 +74,6 @@ angular.module('Wadi.directives', [])
     $scope.$watchCollection(
       'inputModel',
       (nVal, oVal) ->
-        $log.info "Directive got data: "+JSON.stringify(nVal)
         $scope.options = _.map(nVal.values, (v) ->
           res = {name: v}
           if _.contains($scope.outputModel.value, v)

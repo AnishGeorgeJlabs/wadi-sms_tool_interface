@@ -90,7 +90,6 @@
           }
         ];
         $scope.$watchCollection('inputModel', function(nVal, oVal) {
-          $log.info("Directive got data: " + JSON.stringify(nVal));
           return $scope.options = _.map(nVal.values, function(v) {
             var res;
             res = {

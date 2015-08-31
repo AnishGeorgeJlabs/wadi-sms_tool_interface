@@ -1,7 +1,7 @@
 angular.module('Wadi.controllers.main', [])
 .controller 'MainCtrl', ($scope, $state, $http, $log, wdLinks) ->
   $log.debug "Main executed"
-  $state.go('test')
+  $state.go('login')
 
   isLoggedIn = false
 
