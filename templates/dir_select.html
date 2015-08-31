@@ -1,0 +1,20 @@
+<div class="form-group">
+  <label class="col-sm-3 col-xs-12">{{ inputModel.name }}</label>
+  <div
+    class="col-sm-6 col-xs-9"
+    isteven-multi-select
+    input-model="options"
+    output-model="selected"
+    item-label="name"
+    button-label="name"
+    search-property="name"
+    max-labels="3"
+    ng-attr-selection-mode="{{ singleSelect ? 'single': 'multiple' }}"
+    tick-property="selected"
+    ></div>
+  <wd-co-type-select
+    model="outputModel.co_type"
+    ng-if="inputModel.co_type == 'both'"
+    class="col-sm-3 col-xs-3"
+    ></wd-co-type-select>
+</div>

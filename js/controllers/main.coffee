@@ -1,7 +1,7 @@
 angular.module('Wadi.controllers.main', [])
 .controller 'MainCtrl', ($scope, $state, $http, $log, wdLinks) ->
   $log.debug "Main executed"
-  $state.go('login')
+  $state.go('test')
 
   isLoggedIn = false
 
@@ -38,25 +38,17 @@ angular.module('Wadi.controllers.main', [])
     $scope.data.password = ''
 
 .controller 'TestCtrl', ($scope, $state, $log, wdLinks, $modal) ->
-  $scope.data =
-    test: "This is a test you see"
+  $scope.sOpts = [
+    { name: 'Option 1'},
+    { name: 'Option 2'},
+    { name: 'Option 3'}
+  ]
+  $scope.sample =
+    name: 'Something I guess'
+    values: ['Option1', 'Option2', 'Option3']
+    co_type: 'both'
+  $scope.selected =
+    value: ['Option2']
     co_type: 'required'
 
-  $scope.setReq = () -> $scope.data.co_type = 'required'
-
-  $scope.sampleData = [
-    'electronics', 'shoes', 'sports bags', 'goodies', 'long list', 'another useless item', 'someone else'
-  ]
-
-  $scope.docs = wdLinks.docs
-  res = { success: true }
-  $scope.tFunc = () ->
-    $modal.open(
-      controller: ($scope, $modalInstance, wdLinks) ->
-        $scope.result = res
-        $scope.sheet_link = wdLinks.scheduling_sheet
-        $scope.close = () ->
-          $modalInstance.dismiss('ok')
-      templateUrl: 'templates/modal_submission.html'
-    )
 

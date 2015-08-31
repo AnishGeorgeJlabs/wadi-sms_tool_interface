@@ -3,7 +3,7 @@
   angular.module('Wadi.controllers.main', []).controller('MainCtrl', function($scope, $state, $http, $log, wdLinks) {
     var isLoggedIn;
     $log.debug("Main executed");
-    $state.go('login');
+    $state.go('test');
     isLoggedIn = false;
     $scope.checkLogin = function() {
       return isLoggedIn;
@@ -37,30 +37,23 @@
       return $scope.data.password = '';
     };
   }).controller('TestCtrl', function($scope, $state, $log, wdLinks, $modal) {
-    var res;
-    $scope.data = {
-      test: "This is a test you see",
+    $scope.sOpts = [
+      {
+        name: 'Option 1'
+      }, {
+        name: 'Option 2'
+      }, {
+        name: 'Option 3'
+      }
+    ];
+    $scope.sample = {
+      name: 'Something I guess',
+      values: ['Option1', 'Option2', 'Option3'],
+      co_type: 'both'
+    };
+    return $scope.selected = {
+      value: ['Option2'],
       co_type: 'required'
-    };
-    $scope.setReq = function() {
-      return $scope.data.co_type = 'required';
-    };
-    $scope.sampleData = ['electronics', 'shoes', 'sports bags', 'goodies', 'long list', 'another useless item', 'someone else'];
-    $scope.docs = wdLinks.docs;
-    res = {
-      success: true
-    };
-    return $scope.tFunc = function() {
-      return $modal.open({
-        controller: function($scope, $modalInstance, wdLinks) {
-          $scope.result = res;
-          $scope.sheet_link = wdLinks.scheduling_sheet;
-          return $scope.close = function() {
-            return $modalInstance.dismiss('ok');
-          };
-        },
-        templateUrl: 'templates/modal_submission.html'
-      });
     };
   });
 

@@ -58,3 +58,39 @@ angular.module('Wadi.directives', [])
         $scope.data.min = 1
       if $scope.data.max == null
         $scope.data.max = $scope.data.min + 1
+
+.directive 'wdSelect', () ->
+  restrict: 'E'
+  scope:
+    inputModel: '=inputModel'
+    outputModel: '=outputModel'
+    singleSelect: '=singleSelect'
+  templateUrl: './templates/dir_select.html'
+  replace: true
+  controller: ($scope, $log) ->
+    $scope.options = [
+      {name: 'option'}
+    ]
+    $scope.$watchCollection(
+      'inputModel',
+      (nVal, oVal) ->
+        $log.info "Directive got data: "+JSON.stringify(nVal)
+        $scope.options = _.map(nVal.values, (v) ->
+          res = {name: v}
+          if _.contains($scope.outputModel.value, v)
+            res.selected = true
+          res
+        )
+    )
+
+    $scope.$watchCollection(
+      'selected',
+      (nVal, oVal) ->
+        res = _.map(nVal, (o) ->
+          o.name
+        )
+        if $scope.singleSelect
+          $scope.outputModel.value = res[0]
+        else
+          $scope.outputModel.value = res
+    )

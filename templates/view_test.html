@@ -1,11 +1,23 @@
 <div class="row">
-<!--
-  <a class="btn btn-success btn-lg" target='_blank' ng-href="{{ docs }}">Redirect to sheet</a>
-  <button class="btn btn-lg btn-danger" ng-click="tFunc()">Test modal</button>
+  <div class="page-header">
+    <h1>This is a testing page, for all kinds of rubbish</h1>
+  </div>
+  <!--
+  <isteven-multi-select
+    class="col-sm-6 no-right-gutter"
+    input-model="sOpts"
+    output-model="selected"
+    item-label="name"
+    button-label="name"
+    search-property="name"
+    max-labels="3"
+    selection-mode="single"
+    output-properties="name"
+    tick-property="selected"
+    ></isteven-multi-select>
   -->
-  <button class="btn btn-lg btn-default" ng-click="setReq()">Set</button>
-
-  {{ data }}
-
-  <wd-co-type-select model="data.co_type"></wd-co-type-select>
+  <wd-select input-model="sample" output-model="selected" single-select="false"></wd-select>
+</div>
+<div class="row">
+  {{ selected }}
 </div>

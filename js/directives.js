@@ -73,6 +73,48 @@
         };
       }
     };
+  }).directive('wdSelect', function() {
+    return {
+      restrict: 'E',
+      scope: {
+        inputModel: '=inputModel',
+        outputModel: '=outputModel',
+        singleSelect: '=singleSelect'
+      },
+      templateUrl: './templates/dir_select.html',
+      replace: true,
+      controller: function($scope, $log) {
+        $scope.options = [
+          {
+            name: 'option'
+          }
+        ];
+        $scope.$watchCollection('inputModel', function(nVal, oVal) {
+          $log.info("Directive got data: " + JSON.stringify(nVal));
+          return $scope.options = _.map(nVal.values, function(v) {
+            var res;
+            res = {
+              name: v
+            };
+            if (_.contains($scope.outputModel.value, v)) {
+              res.selected = true;
+            }
+            return res;
+          });
+        });
+        return $scope.$watchCollection('selected', function(nVal, oVal) {
+          var res;
+          res = _.map(nVal, function(o) {
+            return o.name;
+          });
+          if ($scope.singleSelect) {
+            return $scope.outputModel.value = res[0];
+          } else {
+            return $scope.outputModel.value = res;
+          }
+        });
+      }
+    };
   });
 
 }).call(this);
