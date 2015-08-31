@@ -15,7 +15,8 @@
       controller: 'FormCtrl'
     }).state('test', {
       templateUrl: './templates/view_test.html',
-      controller: 'TestCtrl'
+      controller: 'TestCtrl',
+      url: '/test'
     });
   });
 

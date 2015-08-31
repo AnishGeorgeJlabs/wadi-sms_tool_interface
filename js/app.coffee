@@ -20,4 +20,5 @@ angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 
   .state('test',
     templateUrl: './templates/view_test.html'
     controller: 'TestCtrl'
+    url: '/test'
   )
