@@ -25,6 +25,7 @@
     "angular-ui-select": "~0.12.1",
     "angular-sanitize": "~1.4.4",
     "moment": "~2.10.6",
-    "angular-bootstrap": "~0.13.3"
+    "angular-bootstrap": "~0.13.3",
+    "isteven-angular-multiselect": "~4.0.0"
   }
 }
