@@ -101,7 +101,7 @@
             return res;
           });
         });
-        return $scope.$watchCollection('selected', function(nVal, oVal) {
+        $scope.$watchCollection('selected', function(nVal, oVal) {
           var res;
           res = _.map(nVal, function(o) {
             return o.name;
@@ -110,6 +110,19 @@
             return $scope.outputModel.value = res[0];
           } else {
             return $scope.outputModel.value = res;
+          }
+        });
+        return $scope.$watchCollection('outputModel', function(nVal, oVal) {
+          var nValues;
+          if (nVal.value !== oVal.value) {
+            if ($scope.singleSelect) {
+              nValues = [nVal.value];
+            } else {
+              nValues = nVal.value;
+            }
+            return _.each($scope.options, function(v, k) {
+              return v.selected = _.contains(nValues, v.name);
+            });
           }
         });
       }
