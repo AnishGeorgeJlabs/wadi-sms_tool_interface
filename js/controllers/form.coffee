@@ -61,6 +61,8 @@ angular.module('Wadi.controllers.form', [])
     debug: false
 
   $scope.submit = () ->
+    if not confirm("Are you sure you want to submit?")
+      return
     $scope.submitting = true
     resM = cleanObj($scope.selectedMulti)
     resS = cleanObj($scope.selectedSingle)

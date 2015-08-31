@@ -92,6 +92,9 @@
     };
     $scope.submit = function() {
       var dt, resM, resR, resS, result, target_config;
+      if (!confirm("Are you sure you want to submit?")) {
+        return;
+      }
       $scope.submitting = true;
       resM = cleanObj($scope.selectedMulti);
       resS = cleanObj($scope.selectedSingle);
