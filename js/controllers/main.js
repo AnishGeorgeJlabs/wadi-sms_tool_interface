@@ -52,7 +52,7 @@
       co_type: 'both'
     };
     return $scope.selected = {
-      value: ['Option2'],
+      value: '',
       co_type: 'required'
     };
   });

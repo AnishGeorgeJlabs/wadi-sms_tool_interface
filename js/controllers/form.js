@@ -5,8 +5,8 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.form', []).controller('FormCtrl', function($scope, $state, $log, $http, $modal) {
-    var cleanObj, configureForm;
+  angular.module('Wadi.controllers.form', []).controller('FormCtrl', function($scope, $state, $log, $http, $modal, $filter) {
+    var cleanObj, configureForm, repeat;
     $scope.checkLogin = function() {
       $log.info("Checking login status at FormCtrl");
       if (!$scope.$parent.checkLogin()) {
@@ -60,6 +60,9 @@
             value: '',
             co_type: 'required'
           });
+        } else if (data.type === 'config') {
+          $scope.config.repeat = data.repeat;
+          results.push($scope.campaign.repeat = data.repeat[0]);
         } else {
           results.push(void 0);
         }
@@ -71,19 +74,45 @@
         return val && val.value && val.value.length > 0;
       });
     };
-    $scope.debug = function(ev) {
-      if (ev.keyCode === 13) {
-        alert("Got it");
-        ev.stopPropagation();
-        return ev.preventDefault();
+    $scope.getMessage = function() {
+      var day, dfilter, dt, res;
+      dfilter = $filter('date');
+      dt = $scope.campaign.datetime;
+      day = dfilter(dt);
+      res = "The campaign will execute " + (function() {
+        switch ($scope.campaign.repeat) {
+          case "Immediately":
+            return "once, as soon as it is processed";
+          case "Once":
+            return "on " + day;
+          case "Hourly":
+            return "every " + dfilter(dt, 'h') + " hours at " + dfilter(dt, 'm') + " minutes";
+          case "Daily":
+            return "daily at " + dfilter(dt, 'hh:mm a');
+          case "Weekly":
+            return "every " + dfilter(dt, 'EEEE');
+          case "Fortnightly":
+            return "every other " + dfilter(dt, 'EEEE');
+          case "Monthly":
+            return "every month on " + dfilter(dt, 'dd');
+          default:
+            return "soon";
+        }
+      })();
+      if ($scope.campaign.repeat !== 'Once' && $scope.campaign.repeat !== 'Immediately') {
+        return res + (" starting " + day);
+      } else {
+        return res;
       }
     };
+    $scope.config = repeat = [];
     $scope.campaign = {
       text: {
         arabic: '',
         english: ''
       },
-      datetime: null
+      datetime: null,
+      repeat: ''
     };
     $scope.misc = {
       name: 'Untitled',

@@ -16,8 +16,19 @@
     tick-property="selected"
     ></isteven-multi-select>
   -->
-  <wd-select input-model="sample" output-model="selected" single-select="false"></wd-select>
+  <wd-select input-model="sample" output-model="selected" single-select="true"></wd-select>
 </div>
 <div class="row">
   {{ selected }}
+</div>
+<div class="row">
+  <form class="form-horizontal">
+    <div class="form-group" ng-init="idata = ''">
+      <label class="control-label col-sm-4">Arabic</label>
+      <div class="input-group col-sm-8">
+        <input type="text" class="form-control" ng-model="idata">
+        <div class="input-group-addon">AED {{ idata.length }}</div>
+      </div>
+    </div>
+  </form>
 </div>

@@ -48,7 +48,7 @@ angular.module('Wadi.controllers.main', [])
     values: ['Option1', 'Option2', 'Option3']
     co_type: 'both'
   $scope.selected =
-    value: ['Option2']
+    value: ''
     co_type: 'required'
 
 
