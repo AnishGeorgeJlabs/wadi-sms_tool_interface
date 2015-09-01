@@ -1,34 +1,14 @@
 <div class="row">
-  <div class="page-header">
-    <h1>This is a testing page, for all kinds of rubbish</h1>
-  </div>
-  <!--
-  <isteven-multi-select
-    class="col-sm-6 no-right-gutter"
-    input-model="sOpts"
-    output-model="selected"
-    item-label="name"
-    button-label="name"
-    search-property="name"
-    max-labels="3"
-    selection-mode="single"
-    output-properties="name"
-    tick-property="selected"
-    ></isteven-multi-select>
-  -->
-  <wd-select input-model="sample" output-model="selected" single-select="true"></wd-select>
+  <div class="page-header"><h1>Testing page for everything</h1></div>
 </div>
 <div class="row">
-  {{ selected }}
-</div>
-<div class="row">
-  <form class="form-horizontal">
-    <div class="form-group" ng-init="idata = ''">
-      <label class="control-label col-sm-4">Arabic</label>
-      <div class="input-group col-sm-8">
-        <input type="text" class="form-control" ng-model="idata">
-        <div class="input-group-addon">AED {{ idata.length }}</div>
-      </div>
-    </div>
-  </form>
+<form name="fileForm" ng-submit="submit()">
+  <div class="btn btn-default"
+       ngf-select
+       ng-model="file"
+       name="file"
+       ngf-pattern=".csv">Select file</div>
+
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
 </div>

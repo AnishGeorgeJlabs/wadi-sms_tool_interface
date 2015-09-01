@@ -44,18 +44,17 @@ angular.module('Wadi.controllers.main', [])
     $scope.data.username = ''
     $scope.data.password = ''
 
-.controller 'TestCtrl', ($scope, $state, $log, wdLinks, $modal) ->
-  $scope.sOpts = [
-    { name: 'Option 1'},
-    { name: 'Option 2'},
-    { name: 'Option 3'}
-  ]
-  $scope.sample =
-    name: 'Something I guess'
-    values: ['Option1', 'Option2', 'Option3']
-    co_type: 'both'
-  $scope.selected =
-    value: ''
-    co_type: 'required'
+.controller 'TestCtrl', ($scope, $state, $log, wdLinks, $modal, Upload) ->
+  $scope.submit = () ->
+    if $scope.file && !$scope.file.$error
+      $scope.upload($scope.file)
 
-
+  $scope.upload = (file) ->
+    Upload.upload({
+      url: 'http://45.55.72.208/wadi/block_list/upload'
+      file: file
+    }).progress((evt) ->
+      progPerc = parseInt(100.0 * evt.loaded / evt.total )
+      $log.info "Progress: #{progPerc}% #{evt.config.file.name}"
+    ).success (data) ->
+      $log.info "Got result: "+JSON.stringify(data)

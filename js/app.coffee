@@ -2,7 +2,7 @@
   Wadi sms tool web interface
 ###
 
-angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select',
+angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload'
                         'Wadi.controllers.form', 'Wadi.controllers.main'
                         'Wadi.directives', 'Wadi.constants'])
 

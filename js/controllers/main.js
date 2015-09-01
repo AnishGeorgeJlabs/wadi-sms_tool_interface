@@ -42,24 +42,23 @@
       $scope.data.username = '';
       return $scope.data.password = '';
     };
-  }).controller('TestCtrl', function($scope, $state, $log, wdLinks, $modal) {
-    $scope.sOpts = [
-      {
-        name: 'Option 1'
-      }, {
-        name: 'Option 2'
-      }, {
-        name: 'Option 3'
+  }).controller('TestCtrl', function($scope, $state, $log, wdLinks, $modal, Upload) {
+    $scope.submit = function() {
+      if ($scope.file && !$scope.file.$error) {
+        return $scope.upload($scope.file);
       }
-    ];
-    $scope.sample = {
-      name: 'Something I guess',
-      values: ['Option1', 'Option2', 'Option3'],
-      co_type: 'both'
     };
-    return $scope.selected = {
-      value: '',
-      co_type: 'required'
+    return $scope.upload = function(file) {
+      return Upload.upload({
+        url: 'http://45.55.72.208/wadi/block_list/upload',
+        file: file
+      }).progress(function(evt) {
+        var progPerc;
+        progPerc = parseInt(100.0 * evt.loaded / evt.total);
+        return $log.info("Progress: " + progPerc + "% " + evt.config.file.name);
+      }).success(function(data) {
+        return $log.info("Got result: " + JSON.stringify(data));
+      });
     };
   });
 
