@@ -27,18 +27,45 @@ html(ng-app='Wadi')
   body(ng-controller='MainCtrl')
     .jumbotron
       .container
-        h1
+        h1.text-center
           | Wadi SMS Tool
           small   v1.4-beta
 
-        .btn-group(role='group' ng-if='checkLogin()')
-          a(
-             ng-href='{{sheet_link}}'
-             target='_blank'
-            ).btn.btn-success
-            | Visit the scheduling sheet
-          a( ng-href='{{doc_link}}' target='_blank').btn.btn-warning
-            | Documentation
+        //
+          .btn-group(role='group' ng-if='checkLogin()')
+            a(
+               ng-href='{{sheet_link}}'
+               target='_blank'
+              ).btn.btn-success
+              | Visit the scheduling sheet
+            a( ng-href='{{doc_link}}' target='_blank').btn.btn-warning
+              | Documentation
 
     .container
+      nav.navbar.navbar-default.navbar-fixed-top
+        .container
+          .navbar-header
+            button(type='button', data-toggle='collapse' data-target='#navCollapse' aria-expanded='false').navbar-toggle.collapsed
+              span.glyphicon.glyphicon-menu-hamburger
+            a.navbar-brand(href='#') Wadi SMS Tool
+
+          #navCollapse.collapse.navbar-collapse(ng-if='checkLogin()')
+            ul.nav.navbar-nav
+              li(ng-class="{'active': isState('dashboard')}")
+                a(href="#" ng-click="goTo('dashboard')") Dashboard
+              li(ng-class="{'active': isState('form')}")
+                a(href='#' ng-click="goTo('form')") New Job
+              li(ng-class="{'active': isState('block_list')}")
+                a(href="#" ng-click="goTo('block_list')") Block List
+            .btn-group.navbar-right(role='group')
+              a.btn.btn-success.navbar-btn.navbar-btn(ng-href="{{sheet_link}}", target='_blank') Scheduling Sheet
+              a.btn.btn-warning.navbar-btn.navbar-btn(ng-href="{{doc_link}}", target='_blank') Documentation
+      //
+        ul.nav.nav-tabs.nav-justified(ng-if='checkLogin()')
+          li.active
+            a(href="#") Form
+          li
+            a(href="#") Blocked list
+          li
+            a(href="#") Other
       ui-view

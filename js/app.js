@@ -12,7 +12,14 @@
       controller: 'LoginCtrl'
     }).state('form', {
       templateUrl: './templates/view_main.html',
-      controller: 'FormCtrl'
+      controller: 'FormCtrl',
+      url: '/form'
+    }).state('dashboard', {
+      templateUrl: './templates/view_dashboard.html',
+      url: '/dashboard'
+    }).state('block_list', {
+      templateUrl: './templates/view_block_list.html',
+      url: './block_list'
     }).state('test', {
       templateUrl: './templates/view_test.html',
       controller: 'TestCtrl',

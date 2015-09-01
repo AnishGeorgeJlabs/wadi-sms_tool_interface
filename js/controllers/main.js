@@ -10,7 +10,7 @@
     };
     $scope.sheet_link = wdLinks.scheduling_sheet;
     $scope.doc_link = wdLinks.docs;
-    return $scope.login = function(username, pass) {
+    $scope.login = function(username, pass) {
       $log.debug("Got submission " + username + ", " + pass);
       return $http.post("http://45.55.72.208/wadi/interface/login", {
         username: username,
@@ -24,6 +24,12 @@
           return alert("Authentication failed");
         }
       });
+    };
+    $scope.isState = function(statename) {
+      return $state.is(statename);
+    };
+    return $scope.goTo = function(statename) {
+      return $state.go(statename);
     };
   }).controller('LoginCtrl', function($scope, $log) {
     $scope.data = {

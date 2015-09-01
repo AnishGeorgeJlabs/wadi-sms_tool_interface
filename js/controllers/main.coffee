@@ -25,6 +25,13 @@ angular.module('Wadi.controllers.main', [])
         alert "Authentication failed"
 
 
+  $scope.isState = (statename) ->
+     $state.is(statename)
+
+  $scope.goTo = (statename) ->
+    $state.go(statename)
+
+
 .controller 'LoginCtrl', ($scope, $log) ->
   $scope.data = {
     username: ''

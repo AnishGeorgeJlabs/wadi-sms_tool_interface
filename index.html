@@ -28,11 +28,45 @@
   <body ng-controller="MainCtrl">
     <div class="jumbotron">
       <div class="container">
-        <h1>Wadi SMS Tool<small>  v1.4-beta</small></h1>
-        <div role="group" ng-if="checkLogin()" class="btn-group"><a ng-href="{{sheet_link}}" target="_blank" class="btn btn-success">Visit the scheduling sheet</a><a ng-href="{{doc_link}}" target="_blank" class="btn btn-warning">Documentation</a></div>
+        <h1 class="text-center">Wadi SMS Tool<small>  v1.4-beta</small></h1>
+        <!--
+        .btn-group(role='group' ng-if='checkLogin()')
+          a(
+             ng-href='{{sheet_link}}'
+             target='_blank'
+            ).btn.btn-success
+            | Visit the scheduling sheet
+          a( ng-href='{{doc_link}}' target='_blank').btn.btn-warning
+            | Documentation
+        
+        -->
       </div>
     </div>
     <div class="container">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" data-toggle="collapse" data-target="#navCollapse" aria-expanded="false" class="navbar-toggle collapsed"><span class="glyphicon glyphicon-menu-hamburger"></span></button><a href="#" class="navbar-brand">Wadi SMS Tool</a>
+          </div>
+          <div id="navCollapse" ng-if="checkLogin()" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{'active': isState('dashboard')}"><a href="#" ng-click="goTo('dashboard')">Dashboard</a></li>
+              <li ng-class="{'active': isState('form')}"><a href="#" ng-click="goTo('form')">New Job</a></li>
+              <li ng-class="{'active': isState('block_list')}"><a href="#" ng-click="goTo('block_list')">Block List</a></li>
+            </ul>
+            <div role="group" class="btn-group navbar-right"><a ng-href="{{sheet_link}}" target="_blank" class="btn btn-success navbar-btn navbar-btn">Scheduling Sheet</a><a ng-href="{{doc_link}}" target="_blank" class="btn btn-warning navbar-btn navbar-btn">Documentation</a></div>
+          </div>
+        </div>
+      </nav>
+      <!--
+      ul.nav.nav-tabs.nav-justified(ng-if='checkLogin()')
+        li.active
+          a(href="#") Form
+        li
+          a(href="#") Blocked list
+        li
+          a(href="#") Other
+      -->
       <ui-view></ui-view>
     </div>
   </body>
