@@ -49,20 +49,24 @@
           <!-- Arabic Text -->
           <div class="form-group">
             <label class="control-label col-sm-2">Arabic</label>
-            <div class="input-group col-sm-10">
-              <input type="text" dir="rtl" class='form-control' name="Arabic" ng-model="campaign.text.arabic"
-                     ng-disabled="selectedSingle.language.value && selectedSingle.language.value != 'Arabic'" required>
-              <div class="input-group-addon">AED {{ campaign.text.arabic.length }}</div>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="text" dir="rtl" class='form-control' name="Arabic" ng-model="campaign.text.arabic"
+                       ng-disabled="selectedSingle.language.value && selectedSingle.language.value != 'Arabic'" required>
+                <div class="input-group-addon">{{ campaign.text.arabic.length }}</div>
+              </div>
             </div>
           </div>
 
           <!-- English Text -->
           <div class="form-group">
             <label class="control-label col-sm-2">English</label>
-            <div class="col-sm-10 input-group">
-              <input type="text" class='form-control' name="English" ng-model="campaign.text.english"
-                     ng-disabled="selectedSingle.language.value && selectedSingle.language.value != 'English'" required>
-              <div class="input-group-addon">AED {{ campaign.text.english.length }}</div>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="text" class='form-control' name="English" ng-model="campaign.text.english"
+                       ng-disabled="selectedSingle.language.value && selectedSingle.language.value != 'English'" required>
+                <div class="input-group-addon">{{ campaign.text.english.length }}</div>
+              </div>
             </div>
           </div>
         </div>
