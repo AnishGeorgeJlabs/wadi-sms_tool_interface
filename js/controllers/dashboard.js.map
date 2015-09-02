@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "dashboard.js",
+  "sourceRoot": "",
+  "sources": [
+    "dashboard.coffee"
+  ],
+  "names": [],
+  "mappings": ";;AAAA;;;;AAAA;EAIA,OAAO,CAAC,MAAR,CAAe,4BAAf,EAA6C,EAA7C,CACA,CAAC,UADD,CACY,eADZ,EAC6B,SAAC,MAAD,EAAS,MAAT,EAAiB,IAAjB,EAAuB,KAAvB;IAC3B,IAAG,CAAI,MAAM,CAAC,OAAO,CAAC,UAAf,CAAA,CAAP;aACE,MAAM,CAAC,EAAP,CAAU,OAAV,EADF;;EAD2B,CAD7B;AAJA"
+}

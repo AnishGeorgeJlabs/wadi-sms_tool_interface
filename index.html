@@ -21,6 +21,7 @@
     <script src="js/controllers/main.js"></script>
     <script src="js/controllers/form.js"></script>
     <script src="js/controllers/block_list.js"></script>
+    <script src="js/controllers/dashboard.js"></script>
     <!-- link(href='bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet')-->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/lumen/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/angular-ui-select/dist/select.min.css" rel="stylesheet">
@@ -54,7 +55,7 @@
             <ul class="nav navbar-nav">
               <li ng-class="{'active': isState('dashboard')}"><a href="#" ng-click="goTo('dashboard')">Dashboard</a></li>
               <li ng-class="{'active': isState('form')}"><a href="#" ng-click="goTo('form')">New Job</a></li>
-              <li ng-class="{'active': isState('block_list')}"><a href="#" ng-click="goTo('block_list')">Block List</a></li>
+              <li ng-class="{'active': isState('block_list')}"><a href="#" ng-click="goTo('block_list')">Block List&nbsp<span class="badge">new!</span></a></li>
             </ul>
             <div role="group" class="btn-group navbar-right"><a ng-href="{{sheet_link}}" target="_blank" class="btn btn-success navbar-btn navbar-btn">Scheduling Sheet</a><a ng-href="{{doc_link}}" target="_blank" class="btn btn-warning navbar-btn navbar-btn">Documentation</a></div>
           </div>

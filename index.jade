@@ -14,7 +14,7 @@ html(ng-app='Wadi')
 
     each file in ['app', 'directives', 'constants']
       script(src='js/'+file+'.js')
-    each file in ['main', 'form', 'block_list']
+    each file in ['main', 'form', 'block_list', 'dashboard']
       script(src='js/controllers/'+file+'.js')
 
     // link(href='bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet')
@@ -56,7 +56,8 @@ html(ng-app='Wadi')
               li(ng-class="{'active': isState('form')}")
                 a(href='#' ng-click="goTo('form')") New Job
               li(ng-class="{'active': isState('block_list')}")
-                a(href="#" ng-click="goTo('block_list')") Block List
+                a(href="#" ng-click="goTo('block_list')") Block List&nbsp
+                  span.badge new!
             .btn-group.navbar-right(role='group')
               a.btn.btn-success.navbar-btn.navbar-btn(ng-href="{{sheet_link}}", target='_blank') Scheduling Sheet
               a.btn.btn-warning.navbar-btn.navbar-btn(ng-href="{{doc_link}}", target='_blank') Documentation

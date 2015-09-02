@@ -2,11 +2,19 @@
   Block list View form
 ###
 angular.module('Wadi.controllers.block_list', [])
-.controller 'BlockListCtrl', ($log, $scope, $state, Upload, $timeout) ->
+.controller 'BlockListCtrl', ($log, $scope, $state, Upload, $timeout, $http) ->
   if not $scope.$parent.checkLogin()
     $state.go 'login'
 
   $scope.uploading = false
+  $scope.report = {}
+
+  $http.get "http://45.55.72.208/wadi/block_list/count"
+  .success (data) ->
+    if data.success
+      $scope.report.total_blocked =
+        email: data.email
+        phone: data.phone
 
   # For testing
   ###

@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload', 'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.controllers.block_list', 'Wadi.directives', 'Wadi.constants']).config(function($stateProvider, $urlRouterProvider, uiSelectConfig) {
+  angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload', 'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.controllers.block_list', 'Wadi.controllers.dashboard', 'Wadi.directives', 'Wadi.constants']).config(function($stateProvider, $urlRouterProvider, uiSelectConfig) {
     uiSelectConfig.theme = 'bootstrap';
     return $stateProvider.state('login', {
       templateUrl: './templates/view_login.html',
@@ -16,6 +16,7 @@
       url: '/form'
     }).state('dashboard', {
       templateUrl: './templates/view_dashboard.html',
+      controller: 'DashboardCtrl',
       url: '/dashboard'
     }).state('block_list', {
       templateUrl: './templates/view_block_list.html',
