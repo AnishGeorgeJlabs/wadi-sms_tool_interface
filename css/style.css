@@ -1,6 +1,11 @@
 body {
     padding-top: 50px;
 }
+
+.control-label {
+    font-weight: normal !important;
+}
+
 .no-gutter {
     padding-left: 0px !important;
     padding-right: 0px !important;
