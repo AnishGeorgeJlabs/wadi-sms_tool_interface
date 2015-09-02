@@ -1,3 +1,50 @@
 <div class="row">
-
+  <div class="well well-lg">
+    <h3 class="text-info">Instructions</h3>
+    <p>
+      Upload a <strong>.csv</strong> file which contains the columns
+      <code>Email</code>, <code>Phone</code> and <code>Languages</code>.
+      The first line may contain these headers as <em>this line will be ignored.</em>
+    </p>
+    <p>
+      The <code>Languages</code> column may contain a comma separated list of languages
+      (one or both of <em>English</em> and <em>Arabic</em>).
+    </p>
+    <p>
+      Please note, the emails and phones are blocked separately so you may skip emails or phones in the records.
+      The <code>Languages</code> column is meant for the <code>Phone</code> entries, therefore please make sure
+      that whenever a phone entry is present, it also has it's corresponding language selection.
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <form class="form-horizontal" name="blockForm">
+      <div class="form-group">
+        <label class="control-label col-xs-2"><strong>Upload your csv</strong></label>
+        <div class="col-xs-6">
+          <div class="btn btn-default btn-block form-control"
+               ngf-select
+               ng-model="file"
+               name="file"
+               ngf-pattern=".csv">Select file</div>
+        </div>
+        <div class="col-xs-4" ng-if="blockForm.file.$valid && file && !file.$error">
+          <label class="control-label">Uploaded file: <strong>{{ file.name }}</strong>, size: <strong>{{ file.size }}</strong></label>
+        </div>
+        <div class="col-xs-4" ng-if="!blockForm.file.$valid">
+          <label class="text-danger control-label">The uploaded file is invalid</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+        <button type="submit"
+                class="btn btn-block btn-primary"
+                ng-disabled="!blockForm.file.$valid || !file || file.$error"
+                ng-click="submit()">
+          Upload</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
