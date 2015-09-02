@@ -1,0 +1,42 @@
+.row
+  .page-header
+    h3 This page is a work in progress
+.row
+  .col-md-offset-2.col-md-8
+    .panel.panel-default(ng-repeat="job in data")
+      .panel-heading
+        div.pull-right.text-info
+          | {{ job.status }} &nbsp
+          span.badge {{ job.t_id }}
+        h3.panel-title {{ job.name }}
+      .panel-body
+        p.text-muted {{ job.description }}
+        .row
+          .col-sm-10.col-xs-8
+            dl.dl-horizontal
+              dt(ng-if='job.repeat') Repeat type
+              dd(ng-if='job.repeat') {{ job.repeat }}
+
+              dt Job entry date
+              dd {{ job.timestamp | date }}
+
+              dt Execution Start date
+              dd {{ job.start_date }}
+
+              dt(ng-if='job.end_date') Execution Termination
+              dd(ng-if='job.end_date') {{ job.end_date }}
+          .col-sm-2.col-xs-4
+            ul.list-unstyled
+              li(ng-if='job.count')
+                span.glyphicon.glyphicon-user &nbsp
+                | {{ job.count }}
+              li(ng-if='job.file')
+                a(ng-href="{{ job.file }}", target='_blank')
+                  span.glyphicon.glyphicon-cloud-download &nbsp
+                  | Data
+      //
+        ul.list-group
+          li.list-group-item
+            strong Repetition type: &nbsp
+            | {{ job.repeat }}
+

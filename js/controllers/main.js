@@ -19,7 +19,7 @@
         $log.debug("Got result: " + (JSON.stringify(result)));
         isLoggedIn = result.success;
         if (isLoggedIn) {
-          return $state.go('block_list');
+          return $state.go('dashboard');
         } else {
           return alert("Authentication failed");
         }

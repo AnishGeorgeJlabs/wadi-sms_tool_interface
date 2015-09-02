@@ -20,7 +20,7 @@ angular.module('Wadi.controllers.main', [])
       $log.debug "Got result: #{JSON.stringify(result)}"
       isLoggedIn = result.success
       if isLoggedIn
-        $state.go('block_list')
+        $state.go('dashboard')
       else
         alert "Authentication failed"
 

@@ -1,5 +1,45 @@
+
 <div class="row">
   <div class="page-header">
-    <h4>This page is a work in progress</h4>
+    <h3>This page is a work in progress</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <div ng-repeat="job in data" class="panel panel-default">
+      <div class="panel-heading">
+        <div class="pull-right text-info">{{ job.status }} &nbsp<span class="badge">{{ job.t_id }}</span></div>
+        <h3 class="panel-title">{{ job.name }}</h3>
+      </div>
+      <div class="panel-body">
+        <p class="text-muted">{{ job.description }}</p>
+        <div class="row">
+          <div class="col-sm-10 col-xs-8">
+            <dl class="dl-horizontal">
+              <dt ng-if="job.repeat">Repeat type</dt>
+              <dd ng-if="job.repeat">{{ job.repeat }}</dd>
+              <dt>Job entry date</dt>
+              <dd>{{ job.timestamp | date }}</dd>
+              <dt>Execution Start date</dt>
+              <dd>{{ job.start_date }}</dd>
+              <dt ng-if="job.end_date">Execution Termination</dt>
+              <dd ng-if="job.end_date">{{ job.end_date }}</dd>
+            </dl>
+          </div>
+          <div class="col-sm-2 col-xs-4">
+            <ul class="list-unstyled">
+              <li ng-if="job.count"><span class="glyphicon glyphicon-user">&nbsp</span>{{ job.count }}</li>
+              <li ng-if="job.file"><a ng-href="{{ job.file }}" target="_blank"><span class="glyphicon glyphicon-cloud-download">&nbsp</span>Data</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--
+      ul.list-group
+        li.list-group-item
+          strong Repetition type: &nbsp
+          | {{ job.repeat }}
+      -->
+    </div>
   </div>
 </div>

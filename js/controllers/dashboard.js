@@ -6,9 +6,42 @@
 
 (function() {
   angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http) {
+    var sampleData, store_data;
     if (!$scope.$parent.checkLogin()) {
-      return $state.go('login');
+      $state.go('login');
     }
+    sampleData = [
+      {
+        name: "Sample Job",
+        status: "Data Loaded",
+        t_id: 35,
+        count: 610,
+        file: "http://jlabs.co/downloadcsv.php?file=res_56.csv",
+        _id: {
+          $oid: "55e5587e21aaec7ec1b48247"
+        },
+        description: "This is a long sample description for the job. It has many additional information, which we are not interested in",
+        timestamp: {
+          $date: 1441113558632
+        },
+        start_date: "09/01/2015",
+        repeat: "Hourly"
+      }
+    ];
+    store_data = function(dt) {
+      return $scope.data = _.map(dt, function(obj) {
+        obj._id = obj._id.$oid;
+        obj.timestamp = obj.timestamp.$date;
+        return obj;
+      });
+    };
+    return $http.get('http://45.55.72.208/wadi/interface/jobs').success(function(data) {
+      if (data.success) {
+        return store_data(data.data);
+      } else {
+        return $log.warning("Problem fetching data: " + JSON.stringify(data));
+      }
+    });
   });
 
 }).call(this);
