@@ -36,7 +36,7 @@
         </div>
 
         <div class="col-xs-4">
-          <div class="btn btn-default btn-block form-control"
+          <div class="btn btn-primary btn-block form-control"
                ngf-select
                ng-model="file"
                name="file"
@@ -46,13 +46,13 @@
       <div class="form-group">
         <div class="col-sm-4">
         <button type="submit"
-                class="btn btn-block btn-primary"
+                class="btn btn-block btn-success"
                 ng-disabled="!blockForm.file.$valid || !file || file.$error"
                 ng-click="submit()">
           Upload</button>
         </div>
-        <div class="col-sm-8" ng-show="message">
-          {{ message }}
+        <div class="col-sm-8 text-muted" ng-show="message">
+          <label class="control-label">{{ message }}</label>
         </div>
       </div>
     </form>
@@ -63,40 +63,14 @@
       <h3>Status</h3>
     </div>
     <ul class="list-group" ng-if="report.total_blocked">
-      <li class="list-group-item list-group-item-info"><h4>Total Items</h4></li>
+      <li class="list-group-item list-group-item-info"><h4>Total items blocked in the system</h4></li>
       <li class="list-group-item"><strong>Emails: </strong>{{ report.total_blocked.email }}</li>
       <li class="list-group-item"><strong>Phone: </strong>{{ report.total_blocked.phone }}</li>
     </ul>
     <ul class="list-group" ng-if="report.blocked">
-      <li class="list-group-item list-group-item-success"><h4>Last request</h4></li>
+      <li class="list-group-item list-group-item-success"><h4>Items blocked on last request</h4></li>
       <li class="list-group-item"><strong>Emails: </strong>{{ report.blocked.email }}</li>
       <li class="list-group-item"><strong>Phone: </strong>{{ report.blocked.phone }}</li>
     </ul>
-    <!--
-    <div class="panel panel-info" ng-if="report.total_blocked">
-      <div class="panel-heading">
-        Total blocked items
-      </div>
-      <div class="panel-body">
-        <ul class="list-group">
-          <li class="list-group-item"><strong>Emails: </strong>{{ report.total_blocked.email }}</li>
-          <li class="list-group-item"><strong>Phone: </strong>{{ report.total_blocked.phone }}</li>
-        </ul>
-      </div>
-    </div> -->
   </div>
 </div>
-<!--
-<div class="row" ng-show="report != {}">
-  <div class="col-md-offset-2 col-md-8">
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        Report for blocking
-      </div>
-      <div class="panel-body">
-        blah blah blah
-      </div>
-    </div>
-  </div>
-</div>
--->
