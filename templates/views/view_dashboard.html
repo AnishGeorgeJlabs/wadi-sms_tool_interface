@@ -21,9 +21,11 @@
               <dt>Job entry date</dt>
               <dd>{{ job.timestamp | date }}</dd>
               <dt>Execution Start date</dt>
-              <dd>{{ job.start_date }}</dd>
+              <dd>{{ job.start_date | date }}</dd>
               <dt ng-if="job.end_date">Execution Termination</dt>
-              <dd ng-if="job.end_date">{{ job.end_date }}</dd>
+              <dd ng-if="job.end_date">{{ job.end_date | date }}</dd>
+              <dt ng-if="job.time">Time</dt>
+              <dd ng-if="job.time">{{job.time | date : 'hh:mm a' }}</dd>
             </dl>
           </div>
           <div class="col-sm-2 col-xs-4">

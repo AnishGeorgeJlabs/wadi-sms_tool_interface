@@ -21,10 +21,13 @@
               dd {{ job.timestamp | date }}
 
               dt Execution Start date
-              dd {{ job.start_date }}
+              dd {{ job.start_date | date }}
 
               dt(ng-if='job.end_date') Execution Termination
-              dd(ng-if='job.end_date') {{ job.end_date }}
+              dd(ng-if='job.end_date') {{ job.end_date | date }}
+
+              dt(ng-if='job.time') Time
+              dd(ng-if='job.time') {{job.time | date : 'hh:mm a' }}
           .col-sm-2.col-xs-4
             ul.list-unstyled
               li(ng-if='job.count')
