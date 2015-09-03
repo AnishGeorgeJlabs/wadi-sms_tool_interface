@@ -5,8 +5,8 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http) {
-    var sampleData, store_data;
+  angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http, $interval) {
+    var periodicRefresh, refresh, sampleData, store_data;
     if (!$scope.$parent.checkLogin()) {
       $state.go('login');
     }
@@ -35,12 +35,21 @@
         return obj;
       });
     };
-    return $http.get('http://45.55.72.208/wadi/interface/jobs').success(function(data) {
-      if (data.success) {
-        return store_data(data.data);
-      } else {
-        return $log.warning("Problem fetching data: " + JSON.stringify(data));
-      }
+    refresh = function() {
+      return $http.get('http://45.55.72.208/wadi/interface/jobs').success(function(data) {
+        if (data.success) {
+          return store_data(data.data);
+        } else {
+          return $log.warning("Problem fetching data: " + JSON.stringify(data));
+        }
+      });
+    };
+    refresh();
+    periodicRefresh = $interval(function() {
+      return refresh();
+    }, 10000);
+    return $scope.$on("$destroy", function() {
+      return $interval.cancel(periodicRefresh);
     });
   });
 

@@ -155,6 +155,18 @@
         });
       });
     };
+    $scope.testMessage = function() {
+      if (!confirm("Are you sure you want to send test messages now?")) {
+        return;
+      }
+      return $http.post("http://45.55.72.208/wadi/interface/post/test", {
+        arabic: $scope.campaign.arabic,
+        english: $scope.campaign.english
+      }).success(function(data) {
+        alert("Testing campaign has been scheduled successfully");
+        return $log.info("Got result from test message: " + JSON.stringify(data));
+      });
+    };
     return $scope.reset = function() {
       $scope.selectedMulti = _.mapObject($scope.selectedMulti, function() {
         return {

@@ -117,6 +117,16 @@ angular.module('Wadi.controllers.form', [])
         templateUrl: 'templates/modal_submission.html'
       )
 
+  $scope.testMessage = () ->
+    if not confirm("Are you sure you want to send test messages now?")
+      return
+
+    $http.post("http://45.55.72.208/wadi/interface/post/test", {
+      arabic: $scope.campaign.arabic
+      english: $scope.campaign.english
+    }).success (data) ->
+      alert "Testing campaign has been scheduled successfully"
+      $log.info "Got result from test message: "+JSON.stringify(data)
 
   $scope.reset = () ->
     $scope.selectedMulti = _.mapObject($scope.selectedMulti, () -> { value: [], co_type: 'required' })
