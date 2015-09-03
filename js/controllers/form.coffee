@@ -48,7 +48,7 @@ angular.module('Wadi.controllers.form', [])
   # ------------------------------------- #
   $scope.getMessage = () ->
     dfilter = $filter('date')
-    dt = $scope.campaign.start_date   # todo
+    dt = $scope.campaign.start_date
     tm = $scope.campaign.time
     start_day = dfilter(dt)
     end_day = dfilter($scope.campaign.end_date)
