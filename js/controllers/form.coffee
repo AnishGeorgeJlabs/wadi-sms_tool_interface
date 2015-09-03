@@ -48,21 +48,26 @@ angular.module('Wadi.controllers.form', [])
   # ------------------------------------- #
   $scope.getMessage = () ->
     dfilter = $filter('date')
-    dt = $scope.campaign.datetime
-    day = dfilter(dt)
+    dt = $scope.campaign.start_date   # todo
+    tm = $scope.campaign.time
+    start_day = dfilter(dt)
+    end_day = dfilter($scope.campaign.end_date)
 
     res = "The campaign will execute " +
     switch $scope.campaign.repeat
       when "Immediately" then "once, as soon as it is processed"
-      when "Once" then "on #{day}"
-      when "Hourly" then "every "+dfilter(dt, 'h')+" hours at "+dfilter(dt, 'm')+" minutes"
-      when "Daily" then "daily at "+dfilter(dt, 'hh:mm a')
+      when "Once" then "on #{start_day}"
+      when "Hourly" then "every "+dfilter(tm, 'h')+" hours at "+dfilter(tm, 'm')+" minutes"
+      when "Daily" then "daily at "+dfilter(tm, 'hh:mm a')
       when "Weekly" then "every "+dfilter(dt, 'EEEE')
       when "Fortnightly" then "every other "+dfilter(dt, 'EEEE')
       when "Monthly" then "every month on "+dfilter(dt, 'dd')
       else "soon"
     if $scope.campaign.repeat != 'Once' and $scope.campaign.repeat != 'Immediately'
-      res + " starting #{day}"
+      res += " starting #{start_day}"
+      if $scope.campaign.end_date
+        res += " and will go on till #{end_day}"
+      res
     else
       res
 
@@ -73,7 +78,9 @@ angular.module('Wadi.controllers.form', [])
     text:
       arabic: ''
       english: ''
-    datetime: null
+    start_date: null
+    end_date: null
+    time: null
     repeat: ''
 
   $scope.misc =
@@ -90,13 +97,16 @@ angular.module('Wadi.controllers.form', [])
     resR = cleanObj($scope.selectedRange)
     target_config = _.extend({}, resS, resM, resR)
 
-    dt = moment($scope.campaign.datetime).format("MM/DD/YYYY HH:mm").split(" ")
-    $scope.campaign.date = dt[0]
-    $scope.campaign.time = dt[1]
+    campaign_config = _.mapObject($scope.campaign, (val, key) ->
+      if _.contains(['start_date', 'end_date', 'time'], key)
+        return parseInt(moment(val).format("x"))
+      else
+        return val
+    )
 
     result =
       target_config: target_config
-      campaign_config: $scope.campaign
+      campaign_config: campaign_config
       debug: $scope.misc.debug
       name: $scope.misc.name
       description: $scope.misc.description

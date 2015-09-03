@@ -74,21 +74,39 @@ form.form-horizontal(ng-submit="submit()")
           h4.panel-title Execution Timings (Riyadh timezone)
         .panel-body
           .form-group
-            label.control-label.col-sm-4 Start Date Time
-            .col-sm-8
-              input.form-control(
-                type='datetime-local'
-                ng-model='campaign.datetime'
-                required
-              )
-          .form-group
             label.control-label.col-sm-4 Repetition
             .col-sm-8
               select.form-control(
-                ng-model='campaign.repeat'
-                ng-options="rep for rep in config.repeat"
+              ng-model='campaign.repeat'
+              ng-options="rep for rep in config.repeat"
               )
-        .panel-footer(ng-show="campaign.datetime || campaign.repeat == 'Immediately'")
+          .form-group
+            label.control-label.col-sm-4 Start Date
+            .col-sm-8
+              input.form-control(
+                type='date'
+                ng-model='campaign.start_date'
+                required
+                ng-disabled="campaign.repeat == 'Immediately'"
+              )
+          .form-group
+            label.control-label.col-sm-4 End Date (optional)
+            .col-sm-8
+              input.form-control(
+                type='date'
+                ng-model='campaign.end_date'
+                ng-disabled="campaign.repeat == 'Immediately' || campaign.repeat == 'Once'"
+              )
+          .form-group
+            label.control-label.col-sm-4 Time
+            .col-sm-8
+              input.form-control(
+                type='time'
+                ng-model='campaign.time'
+                required
+                ng-disabled="campaign.repeat == 'Immediately'"
+              )
+        .panel-footer(ng-show="(campaign.start_date && campaign.time) || campaign.repeat == 'Immediately'")
           | {{ getMessage() }}
 
       // Debugging console

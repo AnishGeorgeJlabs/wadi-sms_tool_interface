@@ -75,20 +75,22 @@
       });
     };
     $scope.getMessage = function() {
-      var day, dfilter, dt, res;
+      var dfilter, dt, end_day, res, start_day, tm;
       dfilter = $filter('date');
-      dt = $scope.campaign.datetime;
-      day = dfilter(dt);
+      dt = $scope.campaign.start_date;
+      tm = $scope.campaign.time;
+      start_day = dfilter(dt);
+      end_day = dfilter($scope.campaign.end_date);
       res = "The campaign will execute " + (function() {
         switch ($scope.campaign.repeat) {
           case "Immediately":
             return "once, as soon as it is processed";
           case "Once":
-            return "on " + day;
+            return "on " + start_day;
           case "Hourly":
-            return "every " + dfilter(dt, 'h') + " hours at " + dfilter(dt, 'm') + " minutes";
+            return "every " + dfilter(tm, 'h') + " hours at " + dfilter(tm, 'm') + " minutes";
           case "Daily":
-            return "daily at " + dfilter(dt, 'hh:mm a');
+            return "daily at " + dfilter(tm, 'hh:mm a');
           case "Weekly":
             return "every " + dfilter(dt, 'EEEE');
           case "Fortnightly":
@@ -100,7 +102,11 @@
         }
       })();
       if ($scope.campaign.repeat !== 'Once' && $scope.campaign.repeat !== 'Immediately') {
-        return res + (" starting " + day);
+        res += " starting " + start_day;
+        if ($scope.campaign.end_date) {
+          res += " and will go on till " + end_day;
+        }
+        return res;
       } else {
         return res;
       }
@@ -111,7 +117,9 @@
         arabic: '',
         english: ''
       },
-      datetime: null,
+      start_date: null,
+      end_date: null,
+      time: null,
       repeat: ''
     };
     $scope.misc = {
@@ -120,7 +128,7 @@
       debug: false
     };
     $scope.submit = function() {
-      var dt, resM, resR, resS, result, target_config;
+      var campaign_config, resM, resR, resS, result, target_config;
       if (!confirm("Are you sure you want to submit?")) {
         return;
       }
@@ -129,12 +137,16 @@
       resS = cleanObj($scope.selectedSingle);
       resR = cleanObj($scope.selectedRange);
       target_config = _.extend({}, resS, resM, resR);
-      dt = moment($scope.campaign.datetime).format("MM/DD/YYYY HH:mm").split(" ");
-      $scope.campaign.date = dt[0];
-      $scope.campaign.time = dt[1];
+      campaign_config = _.mapObject($scope.campaign, function(val, key) {
+        if (_.contains(['start_date', 'end_date', 'time'], key)) {
+          return parseInt(moment(val).format("x"));
+        } else {
+          return val;
+        }
+      });
       result = {
         target_config: target_config,
-        campaign_config: $scope.campaign,
+        campaign_config: campaign_config,
         debug: $scope.misc.debug,
         name: $scope.misc.name,
         description: $scope.misc.description
