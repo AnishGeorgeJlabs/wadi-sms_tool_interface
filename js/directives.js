@@ -12,7 +12,7 @@
       scope: {
         model: '=model'
       },
-      templateUrl: './templates/dir_co_type.html'
+      templateUrl: './templates/directives/dir_co_type.html'
     };
   }).directive('wdRangeInput', function() {
     return {
@@ -22,7 +22,7 @@
         model: '=model',
         showCoType: '=showCoType'
       },
-      templateUrl: './templates/dir_range.html',
+      templateUrl: './templates/directives/dir_range.html',
       replace: true,
       controller: function($scope, $log) {
         var compileResult;
@@ -81,7 +81,7 @@
         outputModel: '=outputModel',
         singleSelect: '=singleSelect'
       },
-      templateUrl: './templates/dir_select.html',
+      templateUrl: './templates/directives/dir_select.html',
       replace: true,
       controller: function($scope, $log) {
         $scope.options = [

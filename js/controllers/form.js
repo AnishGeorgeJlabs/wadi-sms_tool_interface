@@ -151,7 +151,7 @@
               return $modalInstance.dismiss('ok');
             };
           },
-          templateUrl: 'templates/modal_submission.html'
+          templateUrl: 'templates/modals/modal_submission.html'
         });
       });
     };

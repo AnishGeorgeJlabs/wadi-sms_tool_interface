@@ -114,7 +114,7 @@ angular.module('Wadi.controllers.form', [])
           $scope.sheet_link = wdLinks.scheduling_sheet
           $scope.close = () ->
             $modalInstance.dismiss('ok')
-        templateUrl: 'templates/modal_submission.html'
+        templateUrl: 'templates/modals/modal_submission.html'
       )
 
   $scope.testMessage = () ->
