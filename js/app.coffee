@@ -14,7 +14,7 @@ angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 
     controller: 'LoginCtrl'
   )
   .state('form',
-    templateUrl: './templates/view_main.html'
+    templateUrl: './templates/view_form.html'
     controller: 'FormCtrl'
     url: '/form'
   )

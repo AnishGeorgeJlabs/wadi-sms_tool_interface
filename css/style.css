@@ -3,7 +3,10 @@ body {
 }
 
 .control-label {
-    font-weight: normal !important;
+    font-weight: normal;
+}
+.control-label.strong {
+    font-weight: 700;
 }
 
 .no-gutter {

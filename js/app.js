@@ -11,7 +11,7 @@
       templateUrl: './templates/view_login.html',
       controller: 'LoginCtrl'
     }).state('form', {
-      templateUrl: './templates/view_main.html',
+      templateUrl: './templates/view_form.html',
       controller: 'FormCtrl',
       url: '/form'
     }).state('dashboard', {
