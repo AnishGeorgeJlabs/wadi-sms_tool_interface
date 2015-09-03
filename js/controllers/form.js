@@ -163,6 +163,7 @@
         arabic: $scope.campaign.arabic,
         english: $scope.campaign.english
       }).success(function(data) {
+        alert("Testing campaign has been scheduled successfully");
         return $log.info("Got result from test message: " + JSON.stringify(data));
       });
     };

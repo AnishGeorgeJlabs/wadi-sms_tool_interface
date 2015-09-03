@@ -125,6 +125,7 @@ angular.module('Wadi.controllers.form', [])
       arabic: $scope.campaign.arabic
       english: $scope.campaign.english
     }).success (data) ->
+      alert "Testing campaign has been scheduled successfully"
       $log.info "Got result from test message: "+JSON.stringify(data)
 
   $scope.reset = () ->
