@@ -3,7 +3,7 @@
 ###
 
 angular.module('Wadi.controllers.dashboard', [])
-.controller 'DashboardCtrl', ($scope, $state, $log, $http) ->
+.controller 'DashboardCtrl', ($scope, $state, $log, $http, $interval) ->
   if not $scope.$parent.checkLogin()
     $state.go 'login'
 
@@ -33,11 +33,22 @@ angular.module('Wadi.controllers.dashboard', [])
 
   # store_data(sampleData)
 
-  $http.get 'http://45.55.72.208/wadi/interface/jobs'
-  .success (data) ->
-    if data.success
-      store_data(data.data)
-    else
-      $log.warning "Problem fetching data: "+JSON.stringify(data)
+  refresh = () ->
+    $http.get 'http://45.55.72.208/wadi/interface/jobs'
+    .success (data) ->
+      if data.success
+        store_data(data.data)
+      else
+        $log.warning "Problem fetching data: "+JSON.stringify(data)
+
+  refresh()
+
+  periodicRefresh = $interval( () ->
+    refresh()
+  , 10000)
+
+  $scope.$on("$destroy", () ->
+    $interval.cancel(periodicRefresh)
+  )
 
 
