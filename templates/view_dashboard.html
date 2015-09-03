@@ -28,8 +28,12 @@
           </div>
           <div class="col-sm-2 col-xs-4">
             <ul class="list-unstyled">
-              <li ng-if="job.count"><span class="glyphicon glyphicon-user">&nbsp</span>{{ job.count }}</li>
-              <li ng-if="job.file"><a ng-href="{{ job.file }}" target="_blank"><span class="glyphicon glyphicon-cloud-download">&nbsp</span>Data</a></li>
+              <li ng-if="job.count">
+                <h5><i class="fa-fw fa fa-users fa-lg">&nbsp</i>{{ job.count }}</h5>
+              </li>
+              <li ng-if="job.file">
+                <h5><a ng-href="{{ job.file }}" target="_blank"><i class="fa-fw fa fa-database fa-lg">&nbsp</i>Data</a></h5>
+              </li>
             </ul>
           </div>
         </div>

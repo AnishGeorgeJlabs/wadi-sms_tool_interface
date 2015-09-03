@@ -28,12 +28,14 @@
           .col-sm-2.col-xs-4
             ul.list-unstyled
               li(ng-if='job.count')
-                span.glyphicon.glyphicon-user &nbsp
-                | {{ job.count }}
+                h5
+                  i.fa-fw.fa.fa-users.fa-lg &nbsp
+                  | {{ job.count }}
               li(ng-if='job.file')
-                a(ng-href="{{ job.file }}", target='_blank')
-                  span.glyphicon.glyphicon-cloud-download &nbsp
-                  | Data
+                h5
+                  a(ng-href="{{ job.file }}", target='_blank')
+                    i.fa-fw.fa.fa-database.fa-lg &nbsp
+                    | Data
       //
         ul.list-group
           li.list-group-item
