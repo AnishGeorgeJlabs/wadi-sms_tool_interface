@@ -1,5 +1,5 @@
 
-<form ng-submit="submit()" class="form-horizontal">
+<form ng-submit="submit()" name="jobForm" novalidate="novalidate" class="form-horizontal">
   <!-- Page header and name configuration-->
   <div class="row">
     <div class="page-header">
@@ -47,7 +47,7 @@
             <label class="control-label col-sm-2">Arabic</label>
             <div class="col-sm-10">
               <div class="input-group">
-                <input type="text" dir="rtl" name="Arabic" ng-model="campaign.text.arabic" ng-disabled="selectedSingle.language.value &amp;&amp; selectedSingle.language.value != 'Arabic'" required="required" class="form-control"/>
+                <input type="text" dir="rtl" name="arabic" ng-model="campaign.text.arabic" ng-disabled="selectedSingle.language.value &amp;&amp; selectedSingle.language.value != 'Arabic'" required="required" class="form-control"/>
                 <div class="input-group-addon">{{ campaign.text.arabic.length }}</div>
               </div>
             </div>
@@ -57,7 +57,7 @@
             <label class="control-label col-sm-2">English</label>
             <div class="col-sm-10">
               <div class="input-group">
-                <input type="text" name="English" ng-model="campaign.text.english" ng-disabled="selectedSingle.language.value &amp;&amp; selectedSingle.language.value != 'English'" required="required" class="form-control"/>
+                <input type="text" name="english" ng-model="campaign.text.english" ng-disabled="selectedSingle.language.value &amp;&amp; selectedSingle.language.value != 'English'" required="required" class="form-control"/>
                 <div class="input-group-addon">{{ campaign.text.english.length }}</div>
               </div>
             </div>
@@ -79,19 +79,19 @@
           <div class="form-group">
             <label class="control-label col-sm-4">Start Date</label>
             <div class="col-sm-8">
-              <input type="date" ng-model="campaign.start_date" required="required" ng-disabled="campaign.repeat == 'Immediately'" class="form-control"/>
+              <input type="date" name="start_date" ng-model="campaign.start_date" ng-required="campaign.repeat != 'Immediately'" ng-disabled="campaign.repeat == 'Immediately'" class="form-control"/>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-4">End Date (optional)</label>
             <div class="col-sm-8">
-              <input type="date" ng-model="campaign.end_date" ng-disabled="campaign.repeat == 'Immediately' || campaign.repeat == 'Once'" class="form-control"/>
+              <input type="date" ng-model="campaign.end_date" min="{{ campaign.start_date }}" ng-disabled="campaign.repeat == 'Immediately' || campaign.repeat == 'Once'" class="form-control"/>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-4">Time</label>
             <div class="col-sm-8">
-              <input type="time" ng-model="campaign.time" required="required" ng-disabled="campaign.repeat == 'Immediately'" class="form-control"/>
+              <input type="time" name="time" ng-model="campaign.time" ng-required="campaign.repeat != 'Immediately'" ng-disabled="campaign.repeat == 'Immediately'" class="form-control"/>
             </div>
           </div>
         </div>

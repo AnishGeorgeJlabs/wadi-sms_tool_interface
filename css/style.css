@@ -24,3 +24,7 @@ body {
 .multiSelect > button {
     width: 100%;
 }
+
+.ng-invalid.ng-touched {
+    border-color: darkred;
+}

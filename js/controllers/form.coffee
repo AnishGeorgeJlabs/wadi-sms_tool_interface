@@ -91,6 +91,16 @@ angular.module('Wadi.controllers.form', [])
   $scope.submit = () ->
     if not confirm("Are you sure you want to submit?")
       return
+    if $scope.jobForm.$invalid
+      alert "The form is invalid"
+      _.each(['english', 'arabic', 'start_date', 'time'], (key) ->
+        if $scope.jobForm[key].$invalid
+          $scope.jobForm[key].$setTouched()
+      )
+      return
+    else
+      alert "The form is valid"
+      return
     $scope.submitting = true
     resM = cleanObj($scope.selectedMulti)
     resS = cleanObj($scope.selectedSingle)
