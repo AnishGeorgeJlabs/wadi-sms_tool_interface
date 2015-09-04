@@ -71,6 +71,9 @@ angular.module('Wadi.controllers.form', [])
     else
       res
 
+  $scope.minEndDate = () ->
+    moment($scope.campaign.start_date).add(1, 'd').format('YYYY-MM-DD')
+
   $scope.config =
     repeat = []
 
@@ -89,17 +92,14 @@ angular.module('Wadi.controllers.form', [])
     debug: false
 
   $scope.submit = () ->
-    if not confirm("Are you sure you want to submit?")
-      return
     if $scope.jobForm.$invalid
-      alert "The form is invalid"
-      _.each(['english', 'arabic', 'start_date', 'time'], (key) ->
+      _.each(['english', 'arabic', 'start_date', 'time', 'end_date'], (key) ->
         if $scope.jobForm[key].$invalid
           $scope.jobForm[key].$setTouched()
       )
       return
-    else
-      alert "The form is valid"
+
+    if not confirm("Are you sure you want to submit?")
       return
     $scope.submitting = true
     resM = cleanObj($scope.selectedMulti)

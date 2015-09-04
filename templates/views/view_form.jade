@@ -93,9 +93,9 @@ form.form-horizontal(ng-submit="submit()" name='jobForm' novalidate)
             label.control-label.col-sm-4 End Date (optional)
             .col-sm-8
               input.form-control(
-                type='date'
+                type='date' name='end_date'
                 ng-model='campaign.end_date'
-                min='{{ campaign.start_date }}'
+                ng-min='minEndDate()'
                 ng-disabled="campaign.repeat == 'Immediately' || campaign.repeat == 'Once'"
               )
           .form-group

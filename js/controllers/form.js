@@ -111,6 +111,9 @@
         return res;
       }
     };
+    $scope.minEndDate = function() {
+      return moment($scope.campaign.start_date).add(1, 'd').format('YYYY-MM-DD');
+    };
     $scope.config = repeat = [];
     $scope.campaign = {
       text: {
@@ -129,19 +132,15 @@
     };
     $scope.submit = function() {
       var campaign_config, resM, resR, resS, result, target_config;
-      if (!confirm("Are you sure you want to submit?")) {
-        return;
-      }
       if ($scope.jobForm.$invalid) {
-        alert("The form is invalid");
-        _.each(['english', 'arabic', 'start_date', 'time'], function(key) {
+        _.each(['english', 'arabic', 'start_date', 'time', 'end_date'], function(key) {
           if ($scope.jobForm[key].$invalid) {
             return $scope.jobForm[key].$setTouched();
           }
         });
         return;
-      } else {
-        alert("The form is valid");
+      }
+      if (!confirm("Are you sure you want to submit?")) {
         return;
       }
       $scope.submitting = true;
