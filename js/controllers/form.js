@@ -183,8 +183,8 @@
         return;
       }
       return $http.post("http://45.55.72.208/wadi/interface/post/test", {
-        arabic: $scope.campaign.arabic,
-        english: $scope.campaign.english
+        arabic: $scope.campaign.text.arabic,
+        english: $scope.campaign.text.english
       }).success(function(data) {
         alert("Testing campaign has been scheduled successfully");
         return $log.info("Got result from test message: " + JSON.stringify(data));

@@ -142,8 +142,8 @@ angular.module('Wadi.controllers.form', [])
       return
 
     $http.post("http://45.55.72.208/wadi/interface/post/test", {
-      arabic: $scope.campaign.arabic
-      english: $scope.campaign.english
+      arabic: $scope.campaign.text.arabic
+      english: $scope.campaign.text.english
     }).success (data) ->
       alert "Testing campaign has been scheduled successfully"
       $log.info "Got result from test message: "+JSON.stringify(data)
