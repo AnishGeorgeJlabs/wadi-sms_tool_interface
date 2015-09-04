@@ -1,11 +1,12 @@
 .row
-  .page-header
-    h3 This page is a work in progress
+  .page-header.text-center
+    h3 Dashboard
+      small Work in progress
 .row
   .col-md-offset-2.col-md-8
     .panel.panel-default(ng-repeat="job in data")
       .panel-heading
-        div.pull-right.text-info
+        .pull-right.text-info
           | {{ job.status }} &nbsp
           span.badge {{ job.t_id }}
         h3.panel-title {{ job.name }}
@@ -39,6 +40,13 @@
                   a(ng-href="{{ job.file }}", target='_blank')
                     i.fa-fw.fa.fa-database.fa-lg &nbsp
                     | Data
+      .panel-footer.text-right(ng-if='job.status != "Cancel" && job.status != "Pending"')
+        button.btn.btn-sm.btn-danger(
+          ng-click="cancelJob(job._id, job.t_id)"
+        )
+          span.glyphicon.glyphicon-trash &nbsp
+          | Cancel Job
+
       //
         ul.list-group
           li.list-group-item

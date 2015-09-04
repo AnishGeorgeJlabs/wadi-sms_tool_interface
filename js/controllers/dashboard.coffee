@@ -51,4 +51,23 @@ angular.module('Wadi.controllers.dashboard', [])
     $interval.cancel(periodicRefresh)
   )
 
+  $scope.cancelJob = (oid, t_id) ->
+    if not t_id
+      message = "the given job?"
+    else
+      message = "Job #{t_id}?"
+    if not confirm("Are you sure you want to cancel "+message)
+      return
+
+    obj = {
+      id: oid
+    }
+    if t_id != undefined
+      obj.t_id = t_id
+
+    $log.debug "About to post: "+JSON.stringify(obj)
+    $http.post(wdInterfaceApi.cancel_job, obj)
+    .success (data) ->
+      $log.info "Job canceled successfully: "+JSON.stringify(data)
+
 

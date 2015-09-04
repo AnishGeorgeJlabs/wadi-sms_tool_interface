@@ -48,9 +48,30 @@
     periodicRefresh = $interval(function() {
       return refresh();
     }, 10000);
-    return $scope.$on("$destroy", function() {
+    $scope.$on("$destroy", function() {
       return $interval.cancel(periodicRefresh);
     });
+    return $scope.cancelJob = function(oid, t_id) {
+      var message, obj;
+      if (!t_id) {
+        message = "the given job?";
+      } else {
+        message = "Job " + t_id + "?";
+      }
+      if (!confirm("Are you sure you want to cancel " + message)) {
+        return;
+      }
+      obj = {
+        id: oid
+      };
+      if (t_id !== void 0) {
+        obj.t_id = t_id;
+      }
+      $log.debug("About to post: " + JSON.stringify(obj));
+      return $http.post(wdInterfaceApi.cancel_job, obj).success(function(data) {
+        return $log.info("Job canceled successfully: " + JSON.stringify(data));
+      });
+    };
   });
 
 }).call(this);
