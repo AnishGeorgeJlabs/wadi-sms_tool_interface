@@ -2,14 +2,14 @@
   Block list View form
 ###
 angular.module('Wadi.controllers.block_list', [])
-.controller 'BlockListCtrl', ($log, $scope, $state, Upload, $timeout, $http) ->
+.controller 'BlockListCtrl', ($log, $scope, $state, Upload, $timeout, $http, wdBlockApi) ->
   if not $scope.$parent.checkLogin()
     $state.go 'login'
 
   $scope.uploading = false
   $scope.report = {}
 
-  $http.get "http://45.55.72.208/wadi/block_list/count"
+  $http.get wdBlockApi.count
   .success (data) ->
     if data.success
       $scope.report.total_blocked =
@@ -37,7 +37,7 @@ angular.module('Wadi.controllers.block_list', [])
   $scope.upload = (file) ->
     $scope.uploading = true
     Upload.upload(
-      url: 'http://45.55.72.208/wadi/block_list/upload'
+      url: wdBlockApi.upload
       file: file
     ).success (data) ->
       $log.info "Got result: "+JSON.stringify(data)

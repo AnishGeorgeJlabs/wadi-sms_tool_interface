@@ -1,5 +1,5 @@
 angular.module('Wadi.controllers.main', [])
-.controller 'MainCtrl', ($scope, $state, $http, $log, wdLinks) ->
+.controller 'MainCtrl', ($scope, $state, $http, $log, wdLinks, wdInterfaceApi) ->
   $log.debug "Main executed"
   $state.go('login')
 
@@ -12,7 +12,7 @@ angular.module('Wadi.controllers.main', [])
 
   $scope.login = (username, pass) ->
     $log.debug "Got submission #{username}, #{pass}"
-    $http.post "http://45.55.72.208/wadi/interface/login", {
+    $http.post wdInterfaceApi.login, {
       username: username,
       password: pass
     }
@@ -44,14 +44,14 @@ angular.module('Wadi.controllers.main', [])
     $scope.data.username = ''
     $scope.data.password = ''
 
-.controller 'TestCtrl', ($scope, $state, $log, wdLinks, $modal, Upload) ->
+.controller 'TestCtrl', ($scope, $state, $log, wdLinks, $modal, Upload, wdBlockApi) ->
   $scope.submit = () ->
     if $scope.file && !$scope.file.$error
       $scope.upload($scope.file)
 
   $scope.upload = (file) ->
     Upload.upload({
-      url: 'http://45.55.72.208/wadi/block_list/upload'
+      url: wdBlockApi.upload
       file: file
     }).progress((evt) ->
       progPerc = parseInt(100.0 * evt.loaded / evt.total )

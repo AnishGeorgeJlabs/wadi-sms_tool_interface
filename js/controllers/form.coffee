@@ -2,7 +2,7 @@
   Just the form controller
 ###
 angular.module('Wadi.controllers.form', [])
-.controller 'FormCtrl', ($scope, $state, $log, $http, $modal, $filter) ->
+.controller 'FormCtrl', ($scope, $state, $log, $http, $modal, $filter, wdInterfaceApi) ->
   $scope.checkLogin = () ->
     $log.info "Checking login status at FormCtrl"
     if not $scope.$parent.checkLogin()
@@ -11,7 +11,7 @@ angular.module('Wadi.controllers.form', [])
 
   $scope.submitting = false
 
-  $http.get 'http://45.55.72.208/wadi/interface/form'
+  $http.get wdInterfaceApi.form
   .success (data) ->
     $scope.loading = false
     configureForm(data)
@@ -124,7 +124,7 @@ angular.module('Wadi.controllers.form', [])
     $log.info "Final submission: "+JSON.stringify(result)
 
 
-    $http.post('http://45.55.72.208/wadi/interface/post', result)
+    $http.post(wdInterfaceApi.new_job, result)
     .success (res) ->
       $log.debug "Submission result: "+JSON.stringify(res)
       $scope.submitting = false
@@ -141,7 +141,7 @@ angular.module('Wadi.controllers.form', [])
     if not confirm("Are you sure you want to send test messages now?")
       return
 
-    $http.post("http://45.55.72.208/wadi/interface/post/test", {
+    $http.post(wdInterfaceApi.test_message, {
       arabic: $scope.campaign.text.arabic
       english: $scope.campaign.text.english
     }).success (data) ->

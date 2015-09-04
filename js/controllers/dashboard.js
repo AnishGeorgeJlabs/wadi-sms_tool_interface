@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http, $interval) {
+  angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http, $interval, wdInterfaceApi) {
     var periodicRefresh, refresh, sampleData, store_data;
     if (!$scope.$parent.checkLogin()) {
       $state.go('login');
@@ -36,7 +36,7 @@
       });
     };
     refresh = function() {
-      return $http.get('http://45.55.72.208/wadi/interface/jobs').success(function(data) {
+      return $http.get(wdInterfaceApi.jobs).success(function(data) {
         if (data.success) {
           return store_data(data.data);
         } else {

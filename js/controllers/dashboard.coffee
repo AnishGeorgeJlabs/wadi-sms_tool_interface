@@ -3,7 +3,7 @@
 ###
 
 angular.module('Wadi.controllers.dashboard', [])
-.controller 'DashboardCtrl', ($scope, $state, $log, $http, $interval) ->
+.controller 'DashboardCtrl', ($scope, $state, $log, $http, $interval, wdInterfaceApi) ->
   if not $scope.$parent.checkLogin()
     $state.go 'login'
 
@@ -34,7 +34,7 @@ angular.module('Wadi.controllers.dashboard', [])
   # store_data(sampleData)
 
   refresh = () ->
-    $http.get 'http://45.55.72.208/wadi/interface/jobs'
+    $http.get wdInterfaceApi.jobs
     .success (data) ->
       if data.success
         store_data(data.data)

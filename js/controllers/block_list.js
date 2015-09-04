@@ -5,13 +5,13 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.block_list', []).controller('BlockListCtrl', function($log, $scope, $state, Upload, $timeout, $http) {
+  angular.module('Wadi.controllers.block_list', []).controller('BlockListCtrl', function($log, $scope, $state, Upload, $timeout, $http, wdBlockApi) {
     if (!$scope.$parent.checkLogin()) {
       $state.go('login');
     }
     $scope.uploading = false;
     $scope.report = {};
-    $http.get("http://45.55.72.208/wadi/block_list/count").success(function(data) {
+    $http.get(wdBlockApi.count).success(function(data) {
       if (data.success) {
         return $scope.report.total_blocked = {
           email: data.email,
@@ -39,7 +39,7 @@
     return $scope.upload = function(file) {
       $scope.uploading = true;
       return Upload.upload({
-        url: 'http://45.55.72.208/wadi/block_list/upload',
+        url: wdBlockApi.upload,
         file: file
       }).success(function(data) {
         $log.info("Got result: " + JSON.stringify(data));

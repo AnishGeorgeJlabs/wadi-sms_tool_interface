@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.form', []).controller('FormCtrl', function($scope, $state, $log, $http, $modal, $filter) {
+  angular.module('Wadi.controllers.form', []).controller('FormCtrl', function($scope, $state, $log, $http, $modal, $filter, wdInterfaceApi) {
     var cleanObj, configureForm, repeat;
     $scope.checkLogin = function() {
       $log.info("Checking login status at FormCtrl");
@@ -15,7 +15,7 @@
     };
     $scope.checkLogin();
     $scope.submitting = false;
-    $http.get('http://45.55.72.208/wadi/interface/form').success(function(data) {
+    $http.get(wdInterfaceApi.form).success(function(data) {
       $scope.loading = false;
       return configureForm(data);
     });
@@ -163,7 +163,7 @@
         description: $scope.misc.description
       };
       $log.info("Final submission: " + JSON.stringify(result));
-      return $http.post('http://45.55.72.208/wadi/interface/post', result).success(function(res) {
+      return $http.post(wdInterfaceApi.new_job, result).success(function(res) {
         $log.debug("Submission result: " + JSON.stringify(res));
         $scope.submitting = false;
         return $modal.open({
@@ -182,7 +182,7 @@
       if (!confirm("Are you sure you want to send test messages now?")) {
         return;
       }
-      return $http.post("http://45.55.72.208/wadi/interface/post/test", {
+      return $http.post(wdInterfaceApi.test_message, {
         arabic: $scope.campaign.text.arabic,
         english: $scope.campaign.text.english
       }).success(function(data) {
