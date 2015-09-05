@@ -42,14 +42,13 @@
       $scope.data.username = '';
       return $scope.data.password = '';
     };
-  }).controller('TestCtrl', function($scope, $state, $log, wdLinks, $modal, Upload, wdBlockApi, testFn) {
+  }).controller('TestCtrl', function($scope, $state, wdConfirm, $log, wdLinks, $modal, Upload, wdBlockApi, testFn) {
     $scope.submit = function() {
       if ($scope.file && !$scope.file.$error) {
         return $scope.upload($scope.file);
       }
     };
-    testFn();
-    return $scope.upload = function(file) {
+    $scope.upload = function(file) {
       return Upload.upload({
         url: wdBlockApi.upload,
         file: file
@@ -59,6 +58,11 @@
         return $log.info("Progress: " + progPerc + "% " + evt.config.file.name);
       }).success(function(data) {
         return $log.info("Got result: " + JSON.stringify(data));
+      });
+    };
+    return $scope.openConfirm = function() {
+      return wdConfirm("Test send", "Can you get this correctly?").result.then(function(res) {
+        return $log.debug("Modal result: " + res);
       });
     };
   });

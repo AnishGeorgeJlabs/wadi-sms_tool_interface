@@ -3,7 +3,7 @@
 ###
 
 angular.module('Wadi.controllers.dashboard', [])
-.controller 'DashboardCtrl', ($scope, $state, $log, $http, $interval, wdInterfaceApi) ->
+.controller 'DashboardCtrl', ($scope, $state, $log, $http, $interval, wdInterfaceApi, wdConfirm) ->
   if not $scope.$parent.checkLogin()
     $state.go 'login'
 
@@ -51,13 +51,20 @@ angular.module('Wadi.controllers.dashboard', [])
     $interval.cancel(periodicRefresh)
   )
 
-  $scope.cancelJob = (oid, t_id) ->
+  $scope.confirmAndCancelJob = (oid, t_id) ->
     if not t_id
       message = "the given job?"
     else
       message = "Job #{t_id}?"
-    if not confirm("Are you sure you want to cancel "+message)
-      return
+
+    full_message = "Are you sure you want to cancel #{message}? This is an irreversible action!"
+    wdConfirm("Confirm cancellation", full_message)
+    .result.then (res) ->
+      if res
+        $scope.cancelJob(oid, t_id)
+
+
+  $scope.cancelJob = (oid, t_id) ->
 
     obj = {
       id: oid

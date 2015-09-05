@@ -42,7 +42,7 @@
                     | Data
       .panel-footer.text-right(ng-if='job.status != "Cancel" && job.status != "Pending"')
         button.btn.btn-sm.btn-danger(
-          ng-click="cancelJob(job._id, job.t_id)"
+          ng-click="confirmAndCancelJob(job._id, job.t_id)"
         )
           span.glyphicon.glyphicon-trash &nbsp
           | Cancel Job

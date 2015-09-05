@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http, $interval, wdInterfaceApi) {
+  angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http, $interval, wdInterfaceApi, wdConfirm) {
     var periodicRefresh, refresh, sampleData, store_data;
     if (!$scope.$parent.checkLogin()) {
       $state.go('login');
@@ -51,16 +51,22 @@
     $scope.$on("$destroy", function() {
       return $interval.cancel(periodicRefresh);
     });
-    return $scope.cancelJob = function(oid, t_id) {
-      var message, obj;
+    $scope.confirmAndCancelJob = function(oid, t_id) {
+      var full_message, message;
       if (!t_id) {
         message = "the given job?";
       } else {
         message = "Job " + t_id + "?";
       }
-      if (!confirm("Are you sure you want to cancel " + message)) {
-        return;
-      }
+      full_message = "Are you sure you want to cancel " + message + "? This is an irreversible action!";
+      return wdConfirm("Confirm cancellation", full_message).result.then(function(res) {
+        if (res) {
+          return $scope.cancelJob(oid, t_id);
+        }
+      });
+    };
+    return $scope.cancelJob = function(oid, t_id) {
+      var obj;
       obj = {
         id: oid
       };

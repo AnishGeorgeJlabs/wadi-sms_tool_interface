@@ -4,13 +4,15 @@ angular.module('Wadi.services', [])
     $log.debug "Test function executed" # Okay, works
 
 .factory 'wdConfirm', ($modal) ->
-  (message) ->
+  (title, message, sz) ->
+    if sz
+      size = sz
+    else
+      size = 'sm'
     $modal.open(
       templateUrl: 'templates/modals/modal_confirm.html'
-      controller: ($scope, $modalInstance) ->
+      size: size
+      controller: ($scope) ->
         $scope.message = message
-        $scope.cancel = () ->
-          $modalInstance.dismiss('cancel')
-        $scope.ok = () ->
-          $modalInstance.ok('ok')   # Todo
+        $scope.title = title
     )

@@ -5,17 +5,19 @@
       return $log.debug("Test function executed");
     };
   }).factory('wdConfirm', function($modal) {
-    return function(message) {
+    return function(title, message, sz) {
+      var size;
+      if (sz) {
+        size = sz;
+      } else {
+        size = 'sm';
+      }
       return $modal.open({
         templateUrl: 'templates/modals/modal_confirm.html',
-        controller: function($scope, $modalInstance) {
+        size: size,
+        controller: function($scope) {
           $scope.message = message;
-          $scope.cancel = function() {
-            return $modalInstance.dismiss('cancel');
-          };
-          return $scope.ok = function() {
-            return $modalInstance.ok('ok');
-          };
+          return $scope.title = title;
         }
       });
     };

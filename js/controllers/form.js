@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.form', []).controller('FormCtrl', function($scope, $state, $log, $http, $modal, $filter, wdInterfaceApi) {
+  angular.module('Wadi.controllers.form', []).controller('FormCtrl', function($scope, $state, $log, $http, $modal, $filter, wdInterfaceApi, wdConfirm) {
     var cleanObj, configureForm, repeat;
     $scope.checkLogin = function() {
       $log.info("Checking login status at FormCtrl");
@@ -130,8 +130,7 @@
       description: '',
       debug: false
     };
-    $scope.submit = function() {
-      var campaign_config, resM, resR, resS, result, target_config;
+    $scope.confirmAndSubmit = function() {
       if ($scope.jobForm.$invalid) {
         _.each(['english', 'arabic', 'start_date', 'time', 'end_date'], function(key) {
           if ($scope.jobForm[key].$invalid) {
@@ -140,9 +139,14 @@
         });
         return;
       }
-      if (!confirm("Are you sure you want to submit?")) {
-        return;
-      }
+      return wdConfirm("Confirm submission", "Are you sure you want to submit this form?").result.then(function(res) {
+        if (res) {
+          return $scope.submit();
+        }
+      });
+    };
+    $scope.submit = function() {
+      var campaign_config, resM, resR, resS, result, target_config;
       $scope.submitting = true;
       resM = cleanObj($scope.selectedMulti);
       resS = cleanObj($scope.selectedSingle);
@@ -178,10 +182,16 @@
         });
       });
     };
+    $scope.confirmAndTestMessage = function() {
+      var full_message;
+      full_message = "Are you sure you want to send test messages to the selected numbers now?\n\nThe arabic sms content is: " + $scope.campaign.text.arabic + ".\n\nThe english sms content is: " + $scope.campaign.text.english + ".\n";
+      return wdConfirm("Confirm test messaging", full_message, 'md').result.then(function(res) {
+        if (res) {
+          return $scope.testMessage();
+        }
+      });
+    };
     $scope.testMessage = function() {
-      if (!confirm("Are you sure you want to send test messages now?")) {
-        return;
-      }
       return $http.post(wdInterfaceApi.test_message, {
         arabic: $scope.campaign.text.arabic,
         english: $scope.campaign.text.english

@@ -44,11 +44,12 @@ angular.module('Wadi.controllers.main', [])
     $scope.data.username = ''
     $scope.data.password = ''
 
-.controller 'TestCtrl', ($scope, $state, $log, wdLinks, $modal, Upload, wdBlockApi, testFn) ->
+.controller 'TestCtrl', ($scope, $state,
+                         wdConfirm,
+                         $log, wdLinks, $modal, Upload, wdBlockApi, testFn) ->
   $scope.submit = () ->
     if $scope.file && !$scope.file.$error
       $scope.upload($scope.file)
-  testFn()
 
   $scope.upload = (file) ->
     Upload.upload({
@@ -59,3 +60,8 @@ angular.module('Wadi.controllers.main', [])
       $log.info "Progress: #{progPerc}% #{evt.config.file.name}"
     ).success (data) ->
       $log.info "Got result: "+JSON.stringify(data)
+
+  $scope.openConfirm = () ->
+    wdConfirm("Test send", "Can you get this correctly?")
+    .result.then (res) ->
+      $log.debug "Modal result: #{res}"

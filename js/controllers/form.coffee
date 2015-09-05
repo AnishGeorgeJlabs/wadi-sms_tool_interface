@@ -2,7 +2,7 @@
   Just the form controller
 ###
 angular.module('Wadi.controllers.form', [])
-.controller 'FormCtrl', ($scope, $state, $log, $http, $modal, $filter, wdInterfaceApi) ->
+.controller 'FormCtrl', ($scope, $state, $log, $http, $modal, $filter, wdInterfaceApi, wdConfirm) ->
   $scope.checkLogin = () ->
     $log.info "Checking login status at FormCtrl"
     if not $scope.$parent.checkLogin()
@@ -91,7 +91,7 @@ angular.module('Wadi.controllers.form', [])
     description: ''
     debug: false
 
-  $scope.submit = () ->
+  $scope.confirmAndSubmit = () ->
     if $scope.jobForm.$invalid
       _.each(['english', 'arabic', 'start_date', 'time', 'end_date'], (key) ->
         if $scope.jobForm[key].$invalid
@@ -99,8 +99,13 @@ angular.module('Wadi.controllers.form', [])
       )
       return
 
-    if not confirm("Are you sure you want to submit?")
-      return
+    wdConfirm("Confirm submission", "Are you sure you want to submit this form?")
+    .result.then (res) ->
+      if res
+        $scope.submit()
+
+
+  $scope.submit = () ->
     $scope.submitting = true
     resM = cleanObj($scope.selectedMulti)
     resS = cleanObj($scope.selectedSingle)
@@ -137,10 +142,18 @@ angular.module('Wadi.controllers.form', [])
         templateUrl: 'templates/modals/modal_submission.html'
       )
 
-  $scope.testMessage = () ->
-    if not confirm("Are you sure you want to send test messages now?")
-      return
+  $scope.confirmAndTestMessage = () ->
+    full_message =
+    """
+    Are you sure you want to send test messages to the selected numbers now?\n
+    The arabic sms content is: #{$scope.campaign.text.arabic}.\n
+    The english sms content is: #{$scope.campaign.text.english}.\n
+    """
+    wdConfirm("Confirm test messaging", full_message, 'md')
+    .result.then (res) ->
+      $scope.testMessage() if res
 
+  $scope.testMessage = () ->
     $http.post(wdInterfaceApi.test_message, {
       arabic: $scope.campaign.text.arabic
       english: $scope.campaign.text.english

@@ -1,4 +1,4 @@
-form.form-horizontal(ng-submit="submit()" name='jobForm' novalidate)
+form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
 
   // Page header and name configuration
   .row
@@ -36,7 +36,7 @@ form.form-horizontal(ng-submit="submit()" name='jobForm' novalidate)
         .panel-heading
           h4.panel-title SMS content
             a.pull-right(
-                ng-click="testMessage()"
+                ng-click="confirmAndTestMessage()"
                 ng-if="campaign.text.arabic || campaign.text.english"
             )
               i.fa.fa-paper-plane

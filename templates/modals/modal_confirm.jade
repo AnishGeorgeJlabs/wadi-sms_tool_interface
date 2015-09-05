@@ -3,5 +3,6 @@
 .modal-body
   p {{ message }}
 .modal-footer
-  button.btn.btn-default(ng-click="cancel()") Cancel
-  button.btn.btn-primary(ng-click="ok()") Ok
+  .btn-group.btn-group-justified
+    a.btn.btn-warning.btn-sm(role='button' ng-click="$close(false)") Cancel
+    a.btn.btn-primary.btn-sm(role='button' ng-click="$close(true)") Ok

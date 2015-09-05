@@ -41,7 +41,7 @@
         </div>
       </div>
       <div ng-if="job.status != &quot;Cancel&quot; &amp;&amp; job.status != &quot;Pending&quot;" class="panel-footer text-right">
-        <button ng-click="cancelJob(job._id, job.t_id)" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash">&nbsp</span>Cancel Job</button>
+        <button ng-click="confirmAndCancelJob(job._id, job.t_id)" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash">&nbsp</span>Cancel Job</button>
       </div>
       <!--
       ul.list-group
