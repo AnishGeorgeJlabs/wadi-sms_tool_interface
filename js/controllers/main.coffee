@@ -44,10 +44,11 @@ angular.module('Wadi.controllers.main', [])
     $scope.data.username = ''
     $scope.data.password = ''
 
-.controller 'TestCtrl', ($scope, $state, $log, wdLinks, $modal, Upload, wdBlockApi) ->
+.controller 'TestCtrl', ($scope, $state, $log, wdLinks, $modal, Upload, wdBlockApi, testFn) ->
   $scope.submit = () ->
     if $scope.file && !$scope.file.$error
       $scope.upload($scope.file)
+  testFn()
 
   $scope.upload = (file) ->
     Upload.upload({

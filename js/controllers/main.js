@@ -42,12 +42,13 @@
       $scope.data.username = '';
       return $scope.data.password = '';
     };
-  }).controller('TestCtrl', function($scope, $state, $log, wdLinks, $modal, Upload, wdBlockApi) {
+  }).controller('TestCtrl', function($scope, $state, $log, wdLinks, $modal, Upload, wdBlockApi, testFn) {
     $scope.submit = function() {
       if ($scope.file && !$scope.file.$error) {
         return $scope.upload($scope.file);
       }
     };
+    testFn();
     return $scope.upload = function(file) {
       return Upload.upload({
         url: wdBlockApi.upload,

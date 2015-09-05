@@ -4,7 +4,7 @@
 
 angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload'
                         'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.controllers.block_list', 'Wadi.controllers.dashboard'
-                        'Wadi.directives', 'Wadi.constants'])
+                        'Wadi.directives', 'Wadi.constants', 'Wadi.services'])
 
 .config ($stateProvider, $urlRouterProvider, uiSelectConfig) ->
   uiSelectConfig.theme = 'bootstrap'
