@@ -46,7 +46,7 @@ angular.module('Wadi.controllers.main', [])
 
 .controller 'TestCtrl', ($scope, $state,
                          wdConfirm,
-                         $log, wdLinks, $modal, Upload, wdBlockApi, testFn) ->
+                         $log, wdLinks, $modal, Upload, wdBlockApi, wdSegment) ->
   $scope.submit = () ->
     if $scope.file && !$scope.file.$error
       $scope.upload($scope.file)
@@ -65,3 +65,8 @@ angular.module('Wadi.controllers.main', [])
     wdConfirm("Test send", "Can you get this correctly?")
     .then (res) ->
       $log.debug "Modal result: #{res}"
+
+  $scope.openStatic = () ->
+    wdSegment(
+      {id: {$oid: "blah blah"}, count: 34152, t_id: 60}
+    , true)

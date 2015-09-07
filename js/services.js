@@ -22,12 +22,69 @@
       }).result;
     };
   }).factory('wdSegment', function($modal) {
-    return function() {
+    return function(job, debug) {
       return $modal.open({
         templateUrl: 'templates/modals/modal_segment_job.html',
         backdrop: 'static',
-        keyboard: false
+        size: 'lg',
+        keyboard: false,
+        resolve: {
+          job: function() {
+            return job;
+          },
+          debug: function() {
+            if (debug) {
+              return debug;
+            } else {
+              return false;
+            }
+          }
+        },
+        controller: 'wdSegmentCtrl'
       });
+    };
+  }).controller('wdSegmentCtrl', function($scope, wdInterfaceApi, wdConfirm, $http, $log, job, debug) {
+    var submit;
+    $log.debug("Job : " + JSON.stringify(job));
+    $scope.id = job.id.$oid;
+    $scope.t_id = job.t_id;
+    $scope.total = job.count;
+    $scope.data = [];
+    $scope.addSegment = function() {
+      return $scope.data.push({
+        english: '',
+        arabic: '',
+        date: ''
+      });
+    };
+    $scope.removeSegment = function() {
+      return $scope.data.pop();
+    };
+    $scope.addSegment();
+    $scope.confirmAndSubmit = function() {
+      return wdConfirm("Confirm form submission", "Are you sure you want to create these segments?").then(function(res) {
+        if (res) {
+          return submit();
+        }
+      });
+    };
+    $scope.currentValid = function() {
+      return _.reduce($scope.data, function(res, obj) {
+        return res && obj.english !== '' && obj.arabic !== '' && obj.date !== '';
+      }, true);
+    };
+    return submit = function() {
+      var segments;
+      segments = _.map($scope.data, function(obj) {
+        return _.mapObject(obj, function(v, k) {
+          if (k === 'date') {
+            return parseInt(moment(v).format('x'));
+          } else {
+            return v;
+          }
+        });
+      });
+      return wdInterfaceApi.new_segment;
     };
   });
 

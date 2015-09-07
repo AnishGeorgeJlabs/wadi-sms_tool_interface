@@ -9,6 +9,7 @@ angular.module('Wadi.constants', [])
 }
 .constant 'wdInterfaceApi', {
   new_job: base_api_url+"job/new"
+  new_segment: base_api_url+"job/segment/new"
   test_message: base_api_url+"job/testing_message"
   cancel_job: base_api_url+"job/cancel"
   jobs: base_api_url+"jobs"

@@ -3,8 +3,62 @@
   <h4>Create your job segments</h4>
 </div>
 <div class="modal-body">
-  <p>blah</p>
+  <!-- give a normal 12 grid column-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-push-6 col-sm-6">
+        <!-- Hack-->
+        <fieldset>
+          <legend class="text-center">Details</legend>
+        </fieldset>
+        <dl class="dl-horizontal">
+          <dt>Job ID</dt>
+          <dd>{{ t_id }}</dd>
+          <dt>Total customers</dt>
+          <dd>{{ total }}</dd>
+          <dt>Customers per segment</dt>
+          <dd>About {{ total / data.length | number : 0 }}</dd>
+        </dl>
+      </div>
+      <div class="col-sm-6 col-sm-pull-6">
+        <form name="segmentForm" class="form-horizontal">
+          <fieldset ng-repeat="segment in data">
+            <legend>Segment {{ $index + 1 }}</legend>
+            <div class="form-group-sm">
+              <div class="row">
+                <label class="control-label col-sm-2">Date</label>
+                <div class="col-sm-10">
+                  <input type="datetime-local" ng-model="segment.date" required="required" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group-sm">
+              <div class="row">
+                <label class="control-label col-sm-2">Arabic</label>
+                <div class="col-sm-8">
+                  <input type="text" ng-model="segment.arabic" required="required" class="form-control"/>
+                </div>
+                <label class="control-label col-sm-2">{{ segment.arabic.length }}</label>
+              </div>
+            </div>
+            <div class="form-group-sm">
+              <div class="row">
+                <label class="control-label col-sm-2">English</label>
+                <div class="col-xs-8 col-sm-8">
+                  <input type="text" ng-model="segment.english" required="required" class="form-control"/>
+                </div>
+                <label class="control-label col-sm-2 col-xs-4">{{ segment.english.length }}</label>
+              </div>
+            </div>
+            <hr/>
+          </fieldset>
+        </form>
+        <div class="text-center"><a ng-click="addSegment()" ng-if="currentValid()" class="text-success"><i class="fa fa-plus-square fa-3x"></i></a>&nbsp<a ng-click="removeSegment()" ng-if="data.length &gt; 1" class="text-danger"><i class="fa fa-minus-square fa-3x"></i></a></div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
-  <button ng-click="$close(true)" class="btn btn-primary">Close Me!</button>
+  <button ng-click="$close(false)" class="btn btn-warning">Cancel</button>
+  <button ng-click="confirmAndSubmit()" ng-disabled="!currentValid()" class="btn btn-primary">Submit Segments</button>
 </div>
