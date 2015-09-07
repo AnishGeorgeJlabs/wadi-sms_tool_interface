@@ -3,7 +3,7 @@
 ###
 
 angular.module('Wadi.controllers.dashboard', [])
-.controller 'DashboardCtrl', ($scope, $state, $log, $http, $interval, wdInterfaceApi, wdConfirm) ->
+.controller 'DashboardCtrl', ($scope, $state, $log, $http, $interval, wdInterfaceApi, wdConfirm, wdSegment) ->
   if not $scope.$parent.checkLogin()
     $state.go 'login'
 
@@ -77,4 +77,9 @@ angular.module('Wadi.controllers.dashboard', [])
     .success (data) ->
       $log.info "Job canceled successfully: "+JSON.stringify(data)
 
+  $scope.segment = (job) ->
+    wdSegment(job)
+    .then (res) ->
+      if res
+        alert "Successfully processed your request"
 

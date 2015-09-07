@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http, $interval, wdInterfaceApi, wdConfirm) {
+  angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http, $interval, wdInterfaceApi, wdConfirm, wdSegment) {
     var periodicRefresh, refresh, sampleData, store_data;
     if (!$scope.$parent.checkLogin()) {
       $state.go('login');
@@ -65,7 +65,7 @@
         }
       });
     };
-    return $scope.cancelJob = function(oid, t_id) {
+    $scope.cancelJob = function(oid, t_id) {
       var obj;
       obj = {
         id: oid
@@ -76,6 +76,13 @@
       $log.debug("About to post: " + JSON.stringify(obj));
       return $http.post(wdInterfaceApi.cancel_job, obj).success(function(data) {
         return $log.info("Job canceled successfully: " + JSON.stringify(data));
+      });
+    };
+    return $scope.segment = function(job) {
+      return wdSegment(job).then(function(res) {
+        if (res) {
+          return alert("Successfully processed your request");
+        }
       });
     };
   });

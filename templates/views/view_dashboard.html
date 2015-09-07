@@ -8,7 +8,7 @@
   <div class="col-md-offset-2 col-md-8">
     <div ng-repeat="job in data" class="panel panel-default">
       <div class="panel-heading">
-        <div class="pull-right text-info">{{ job.status }} &nbsp<span class="badge">{{ job.t_id }}</span></div>
+        <div class="pull-right text-info"><i ng-if="job.segmented" class="fa fa-wrench"></i>&nbsp {{ job.status }} &nbsp<span class="badge">{{ job.t_id }}</span></div>
         <h3 class="panel-title">{{ job.name }}</h3>
       </div>
       <div class="panel-body">
@@ -41,7 +41,8 @@
         </div>
       </div>
       <div ng-if="job.status != &quot;Cancel&quot; &amp;&amp; job.status != &quot;Pending&quot;" class="panel-footer text-right">
-        <button ng-click="confirmAndCancelJob(job._id, job.t_id)" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash">&nbsp</span>Cancel Job</button>
+        <button ng-if="job.segmented &amp;&amp; (job.status == 'Data Loaded' || job.status == 'Done')" ng-click="segment(job)" class="btn btn-sm btn-primary">Segment</button>
+        <button ng-click="confirmAndCancelJob(job._id, job.t_id)" ng-if="job.status != 'Done'" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash">&nbsp</span>Cancel Job</button>
       </div>
       <!--
       ul.list-group

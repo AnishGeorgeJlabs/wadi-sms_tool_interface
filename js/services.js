@@ -41,12 +41,12 @@
           }
         },
         controller: 'wdSegmentCtrl'
-      });
+      }).result;
     };
   }).controller('wdSegmentCtrl', function($scope, wdInterfaceApi, wdConfirm, $http, $log, job, debug) {
     var submit;
     $log.debug("Job : " + JSON.stringify(job));
-    $scope.id = job.id.$oid;
+    $scope.id = job._id;
     $scope.t_id = job.t_id;
     $scope.total = job.count;
     $scope.data = [];
@@ -93,7 +93,7 @@
       };
       $log.debug("About to send: " + JSON.stringify(res));
       return $http.post(wdInterfaceApi.new_segment, res).success(function(res) {
-        $log.info("Got result: " + res);
+        $log.info("Got result: " + (JSON.stringify(res)));
         return $scope.$close(true);
       });
     };

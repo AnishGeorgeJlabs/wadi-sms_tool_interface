@@ -7,7 +7,8 @@
     .panel.panel-default(ng-repeat="job in data")
       .panel-heading
         .pull-right.text-info
-          | {{ job.status }} &nbsp
+          i.fa.fa-wrench(ng-if='job.segmented')
+          | &nbsp {{ job.status }} &nbsp
           span.badge {{ job.t_id }}
         h3.panel-title {{ job.name }}
       .panel-body
@@ -41,8 +42,14 @@
                     i.fa-fw.fa.fa-database.fa-lg &nbsp
                     | Data
       .panel-footer.text-right(ng-if='job.status != "Cancel" && job.status != "Pending"')
+        button.btn.btn-sm.btn-primary(
+          ng-if="job.segmented && (job.status == 'Data Loaded' || job.status == 'Done')"
+          ng-click="segment(job)"
+        )
+          | Segment
         button.btn.btn-sm.btn-danger(
           ng-click="confirmAndCancelJob(job._id, job.t_id)"
+          ng-if="job.status != 'Done'"
         )
           span.glyphicon.glyphicon-trash &nbsp
           | Cancel Job

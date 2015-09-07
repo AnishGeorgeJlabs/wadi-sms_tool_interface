@@ -34,14 +34,14 @@ angular.module('Wadi.services', [])
             false
       }
       controller: 'wdSegmentCtrl'
-    )
+    ).result
 
 .controller 'wdSegmentCtrl', ($scope, wdInterfaceApi, wdConfirm, $http
                               $log,
                               job, debug) ->
   $log.debug "Job : "+JSON.stringify(job)
 
-  $scope.id = job.id.$oid
+  $scope.id = job._id
   $scope.t_id = job.t_id
   $scope.total = job.count
 
@@ -82,8 +82,9 @@ angular.module('Wadi.services', [])
       t_id: $scope.t_id
       total: $scope.total
       segments: segments
+
     $log.debug "About to send: "+JSON.stringify(res)
     $http.post(wdInterfaceApi.new_segment,res)
     .success (res) ->
-      $log.info "Got result: #{res}"
+      $log.info "Got result: #{JSON.stringify(res)}"
       $scope.$close(true)
