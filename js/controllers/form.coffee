@@ -72,7 +72,8 @@ angular.module('Wadi.controllers.form', [])
       res
 
   $scope.minEndDate = () ->
-    moment($scope.campaign.start_date).add(1, 'd').format('YYYY-MM-DD')
+    # moment($scope.campaign.start_date).add(1, 'd').format('YYYY-MM-DD')
+    $scope.campaign.end_date
 
   $scope.config =
     repeat = []
@@ -99,7 +100,7 @@ angular.module('Wadi.controllers.form', [])
       )
       return
 
-    wdConfirm("Confirm submission", "Are you sure you want to submit this form?")
+    wdConfirm("Confirm submission", "Are you sure you want to submit this Job?")
     .result.then (res) ->
       if res
         $scope.submit()

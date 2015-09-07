@@ -112,7 +112,7 @@
       }
     };
     $scope.minEndDate = function() {
-      return moment($scope.campaign.start_date).add(1, 'd').format('YYYY-MM-DD');
+      return $scope.campaign.end_date;
     };
     $scope.config = repeat = [];
     $scope.campaign = {
@@ -139,7 +139,7 @@
         });
         return;
       }
-      return wdConfirm("Confirm submission", "Are you sure you want to submit this form?").result.then(function(res) {
+      return wdConfirm("Confirm submission", "Are you sure you want to submit this Job?").result.then(function(res) {
         if (res) {
           return $scope.submit();
         }
