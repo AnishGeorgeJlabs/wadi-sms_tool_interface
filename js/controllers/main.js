@@ -61,7 +61,7 @@
       });
     };
     return $scope.openConfirm = function() {
-      return wdConfirm("Test send", "Can you get this correctly?").result.then(function(res) {
+      return wdConfirm("Test send", "Can you get this correctly?").then(function(res) {
         return $log.debug("Modal result: " + res);
       });
     };

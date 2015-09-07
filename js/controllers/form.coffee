@@ -101,7 +101,7 @@ angular.module('Wadi.controllers.form', [])
       return
 
     wdConfirm("Confirm submission", "Are you sure you want to submit this Job?")
-    .result.then (res) ->
+    .then (res) ->
       if res
         $scope.submit()
 
@@ -151,7 +151,7 @@ angular.module('Wadi.controllers.form', [])
     The english sms content is: #{$scope.campaign.text.english}.\n
     """
     wdConfirm("Confirm test messaging", full_message, 'md')
-    .result.then (res) ->
+    .then (res) ->
       $scope.testMessage() if res
 
   $scope.testMessage = () ->

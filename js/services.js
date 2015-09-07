@@ -19,6 +19,14 @@
           $scope.message = message;
           return $scope.title = title;
         }
+      }).result;
+    };
+  }).factory('wdSegment', function($modal) {
+    return function() {
+      return $modal.open({
+        templateUrl: 'templates/modals/modal_segment_job.html',
+        backdrop: 'static',
+        keyboard: false
       });
     };
   });

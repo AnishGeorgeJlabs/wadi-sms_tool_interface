@@ -59,7 +59,7 @@ angular.module('Wadi.controllers.dashboard', [])
 
     full_message = "Are you sure you want to cancel #{message}? This is an irreversible action!"
     wdConfirm("Confirm cancellation", full_message)
-    .result.then (res) ->
+    .then (res) ->
       if res
         $scope.cancelJob(oid, t_id)
 

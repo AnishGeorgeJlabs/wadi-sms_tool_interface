@@ -139,7 +139,7 @@
         });
         return;
       }
-      return wdConfirm("Confirm submission", "Are you sure you want to submit this Job?").result.then(function(res) {
+      return wdConfirm("Confirm submission", "Are you sure you want to submit this Job?").then(function(res) {
         if (res) {
           return $scope.submit();
         }
@@ -185,7 +185,7 @@
     $scope.confirmAndTestMessage = function() {
       var full_message;
       full_message = "Are you sure you want to send test messages to the selected numbers now?\n\nThe arabic sms content is: " + $scope.campaign.text.arabic + ".\n\nThe english sms content is: " + $scope.campaign.text.english + ".\n";
-      return wdConfirm("Confirm test messaging", full_message, 'md').result.then(function(res) {
+      return wdConfirm("Confirm test messaging", full_message, 'md').then(function(res) {
         if (res) {
           return $scope.testMessage();
         }

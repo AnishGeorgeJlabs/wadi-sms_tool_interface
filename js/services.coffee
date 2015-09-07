@@ -15,4 +15,12 @@ angular.module('Wadi.services', [])
       controller: ($scope) ->
         $scope.message = message
         $scope.title = title
+    ).result
+
+.factory 'wdSegment', ($modal) ->
+  () ->
+    $modal.open(
+      templateUrl: 'templates/modals/modal_segment_job.html'
+      backdrop: 'static'
+      keyboard: false
     )

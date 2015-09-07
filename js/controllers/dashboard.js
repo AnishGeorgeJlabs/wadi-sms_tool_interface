@@ -59,7 +59,7 @@
         message = "Job " + t_id + "?";
       }
       full_message = "Are you sure you want to cancel " + message + "? This is an irreversible action!";
-      return wdConfirm("Confirm cancellation", full_message).result.then(function(res) {
+      return wdConfirm("Confirm cancellation", full_message).then(function(res) {
         if (res) {
           return $scope.cancelJob(oid, t_id);
         }

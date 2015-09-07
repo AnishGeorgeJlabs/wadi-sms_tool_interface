@@ -63,5 +63,5 @@ angular.module('Wadi.controllers.main', [])
 
   $scope.openConfirm = () ->
     wdConfirm("Test send", "Can you get this correctly?")
-    .result.then (res) ->
+    .then (res) ->
       $log.debug "Modal result: #{res}"
