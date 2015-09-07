@@ -128,7 +128,8 @@
     $scope.misc = {
       name: 'Untitled',
       description: '',
-      debug: false
+      debug: false,
+      segmented: false
     };
     $scope.confirmAndSubmit = function() {
       if ($scope.jobForm.$invalid) {
@@ -163,6 +164,7 @@
         target_config: target_config,
         campaign_config: campaign_config,
         debug: $scope.misc.debug,
+        segmented: $scope.misc.segmented,
         name: $scope.misc.name,
         description: $scope.misc.description
       };

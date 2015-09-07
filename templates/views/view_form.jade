@@ -4,7 +4,7 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
   .row
     .page-header
       h3.text-center New Campaign
-    .col-md-10
+    .col-md-8
       .form-group
         label.control-label.col-sm-2.strong Name
         .col-sm-10
@@ -13,7 +13,7 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
         label.control-label.col-sm-2.strong Description
         .col-sm-10
           textarea.form-control(ng-model="misc.description")
-    .col-md-2
+    .col-md-4
       .form-group-lg
         .checkbox
           label
@@ -21,6 +21,13 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
             strong Debugging Mode
             br
             small will not execute campaign at all, no entry in sheet
+      .form-group-lg
+        .checkbox
+          label
+            input(type='checkbox' ng-model='misc.segmented')
+            strong Segmented Job
+            br
+            small Will not send any sms now
 
 
   // Main forms
@@ -69,7 +76,7 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
                 .input-group-addon {{ campaign.text.english.length }}
 
       // Timing
-      .panel.panel-default
+      .panel.panel-default(ng-hide="misc.segmented")
         .panel-heading
           h4.panel-title Execution Timings (Riyadh timezone)
         .panel-body
@@ -86,7 +93,7 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
               input.form-control(
                 type='date' name='start_date'
                 ng-model='campaign.start_date'
-                ng-required="campaign.repeat != 'Immediately'"
+                ng-required="!misc.segmented && campaign.repeat != 'Immediately'"
                 ng-disabled="campaign.repeat == 'Immediately'"
               )
           .form-group
@@ -104,7 +111,7 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
               input.form-control(
                 type='time' name='time'
                 ng-model='campaign.time'
-                ng-required="campaign.repeat != 'Immediately'"
+                ng-required="!misc.segmented && campaign.repeat != 'Immediately'"
                 ng-disabled="campaign.repeat == 'Immediately'"
               )
         .panel-footer(ng-show="(campaign.start_date && campaign.time) || campaign.repeat == 'Immediately'")

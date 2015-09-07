@@ -91,6 +91,7 @@ angular.module('Wadi.controllers.form', [])
     name: 'Untitled'
     description: ''
     debug: false
+    segmented: false
 
   $scope.confirmAndSubmit = () ->
     if $scope.jobForm.$invalid
@@ -124,6 +125,7 @@ angular.module('Wadi.controllers.form', [])
       target_config: target_config
       campaign_config: campaign_config
       debug: $scope.misc.debug
+      segmented: $scope.misc.segmented
       name: $scope.misc.name
       description: $scope.misc.description
 
