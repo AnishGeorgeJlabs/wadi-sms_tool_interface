@@ -74,7 +74,7 @@
       }, true);
     };
     return submit = function() {
-      var segments;
+      var res, segments;
       segments = _.map($scope.data, function(obj) {
         return _.mapObject(obj, function(v, k) {
           if (k === 'date') {
@@ -84,7 +84,18 @@
           }
         });
       });
-      return wdInterfaceApi.new_segment;
+      res = {
+        debug: debug,
+        ref_job: $scope.id,
+        t_id: $scope.t_id,
+        total: $scope.total,
+        segments: segments
+      };
+      $log.debug("About to send: " + JSON.stringify(res));
+      return $http.post(wdInterfaceApi.new_segment, res).success(function(res) {
+        $log.info("Got result: " + res);
+        return $scope.$close(true);
+      });
     };
   });
 

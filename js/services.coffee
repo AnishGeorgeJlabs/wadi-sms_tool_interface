@@ -76,4 +76,14 @@ angular.module('Wadi.services', [])
           v
       )
     )
-    wdInterfaceApi.new_segment
+    res =
+      debug: debug
+      ref_job: $scope.id
+      t_id: $scope.t_id
+      total: $scope.total
+      segments: segments
+    $log.debug "About to send: "+JSON.stringify(res)
+    $http.post(wdInterfaceApi.new_segment,res)
+    .success (res) ->
+      $log.info "Got result: #{res}"
+      $scope.$close(true)
