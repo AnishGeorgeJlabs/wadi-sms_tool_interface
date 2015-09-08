@@ -78,6 +78,7 @@
     $scope.id = job._id;
     $scope.t_id = job.t_id;
     $scope.total = job.count;
+    $scope.submitting = false;
     $scope.data = [];
     $scope.addSegment = function() {
       return $scope.data.push({
@@ -104,6 +105,7 @@
     };
     return submit = function() {
       var res, segments;
+      $scope.submitting = true;
       segments = _.map($scope.data, function(obj) {
         return _.mapObject(obj, function(v, k) {
           if (k === 'date') {
@@ -123,6 +125,7 @@
       $log.debug("About to send: " + JSON.stringify(res));
       return $http.post(wdInterfaceApi.new_segment, res).success(function(res) {
         $log.info("Got result: " + (JSON.stringify(res)));
+        $scope.submitting = false;
         return $scope.$close(true);
       });
     };

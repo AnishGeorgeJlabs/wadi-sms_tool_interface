@@ -60,5 +60,5 @@
 </div>
 <div class="modal-footer">
   <button ng-click="$close(false)" class="btn btn-warning">Cancel</button>
-  <button ng-click="confirmAndSubmit()" ng-disabled="!currentValid()" class="btn btn-primary">Submit Segments</button>
+  <button ng-click="confirmAndSubmit()" ng-disabled="!currentValid() || submitting" class="btn btn-primary">Submit Segments</button>
 </div>

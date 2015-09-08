@@ -69,6 +69,8 @@ angular.module('Wadi.services', [])
   $scope.t_id = job.t_id
   $scope.total = job.count
 
+  $scope.submitting = false
+
   $scope.data = []
   $scope.addSegment = () ->
     $scope.data.push(
@@ -92,6 +94,7 @@ angular.module('Wadi.services', [])
     , true)
 
   submit = () ->
+    $scope.submitting = true
     segments = _.map($scope.data, (obj) ->
       _.mapObject(obj, (v,k) ->
         if k == 'date'
@@ -111,4 +114,5 @@ angular.module('Wadi.services', [])
     $http.post(wdInterfaceApi.new_segment,res)
     .success (res) ->
       $log.info "Got result: #{JSON.stringify(res)}"
+      $scope.submitting = false
       $scope.$close(true)

@@ -50,4 +50,4 @@
 
 .modal-footer
   button.btn.btn-warning(ng-click="$close(false)") Cancel
-  button.btn.btn-primary(ng-click="confirmAndSubmit()" ng-disabled="!currentValid()") Submit Segments
+  button.btn.btn-primary(ng-click="confirmAndSubmit()" ng-disabled="!currentValid() || submitting") Submit Segments
