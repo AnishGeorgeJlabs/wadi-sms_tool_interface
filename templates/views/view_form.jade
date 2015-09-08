@@ -21,13 +21,6 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
             strong Debugging Mode
             br
             small will not execute campaign at all, no entry in sheet
-      .form-group-lg
-        .checkbox
-          label
-            input(type='checkbox' ng-model='misc.segmented')
-            strong Segmented Job
-            br
-            small Will not send any sms now
 
 
   // Main forms
@@ -38,8 +31,17 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
       .page-header
         h3.text-center Configure Campaign
 
+      .form-group-lg
+        .checkbox
+          label
+            input(type='checkbox' ng-model='misc.segmented')
+            strong Segmented Job
+            br
+            small Will not send any sms now
+            hr
+
       // Sms content
-      .panel.panel-primary
+      .panel.panel-primary(ng-hide='misc.segmented')
         .panel-heading
           h4.panel-title SMS content
             a.pull-right(
@@ -58,7 +60,7 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
                     type='text' dir='rtl' name='arabic'
                     ng-model="campaign.text.arabic"
                     ng-disabled="selectedSingle.language.value && selectedSingle.language.value != 'Arabic'"
-                    required
+                    ng-required="!misc.segmented"
                 )
                 .input-group-addon {{ campaign.text.arabic.length }}
 
@@ -71,7 +73,7 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
                 type='text' name='english'
                 ng-model="campaign.text.english"
                 ng-disabled="selectedSingle.language.value && selectedSingle.language.value != 'English'"
-                required
+                ng-required="!misc.segmented"
                 )
                 .input-group-addon {{ campaign.text.english.length }}
 
