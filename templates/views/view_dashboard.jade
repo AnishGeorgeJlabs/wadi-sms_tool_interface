@@ -3,8 +3,16 @@
     h3 Dashboard
       small Work in progress
 .row
+  ul.nav.nav-tabs.nav-justified
+    li(ng-class="{'active': isTab('jobs')}")
+      a(ng-click="changeTabTo('jobs')") Main Jobs
+    li(ng-class="{'active': isTab('segments')}")
+      a(ng-click="changeTabTo('segments')") Segments
+  br
+
+.row(ng-show="isTab('jobs')")
   .col-md-offset-2.col-md-8
-    .panel.panel-default(ng-repeat="job in data")
+    .panel.panel-default(ng-repeat="job in job_data")
       .panel-heading
         .pull-right.text-info
           i.fa.fa-wrench(ng-if='job.segmented')
@@ -22,8 +30,8 @@
               dt Job entry date
               dd {{ job.timestamp | date }}
 
-              dt Execution Start date
-              dd {{ job.start_date | date }}
+              dt(ng-if='job.start_date') Execution Start date
+              dd(ng-if='job.start_date') {{ job.start_date | date }}
 
               dt(ng-if='job.end_date') Execution Termination
               dd(ng-if='job.end_date') {{ job.end_date | date }}
@@ -60,3 +68,38 @@
             strong Repetition type: &nbsp
             | {{ job.repeat }}
 
+.row(ng-show="isTab('segments')")
+  .col-md-offset-2.col-md-8
+    .panel.panel-default(ng-repeat="job in segment_data")
+      .panel-heading
+        .pull-right.text-info
+          span.badge {{ job.t_id }}
+        h3.panel-title {{ job.name }} :: {{ job.timestamp | date : 'MMM d yyyy, hh:mm a' }}
+      .panel-body
+        .row
+          .col-sm-10.col-xs-8
+            p.text-muted {{ job.description }}
+          .col-sm-2.col-xs-4.text-right
+            ul.list-unstyled(ng-if='job.count')
+              li
+                i.fa.fa-fw.fa-users &nbsp
+                | {{ job.count }}
+              li
+                i.fa.fa-fw.fa-user &nbsp
+                i.fa.fa-fw.fa-clone &nbsp
+                | {{ job.count / job.segments.length | number : 0 }}
+        .row
+          .col-xs-offset-1.col-xs-10
+            accordion
+              accordion-group(
+                ng-repeat="seg in job.segments"
+              )
+                accordion-heading
+                  | {{ seg.num }}: {{ seg.date | date : 'MMM d yyyy, hh:mm a' }}
+                  span.pull-right {{ seg.status }}
+                dl.dl-horizontal
+                  dt Arabic content
+                  dd {{ seg.arabic }}
+
+                  dt Englsih content
+                  dd {{ seg.english }}

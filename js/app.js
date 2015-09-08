@@ -5,9 +5,9 @@
  */
 
 (function() {
-  angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload', 'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.controllers.block_list', 'Wadi.controllers.dashboard', 'Wadi.directives', 'Wadi.constants', 'Wadi.services']).config(function($stateProvider, $urlRouterProvider, uiSelectConfig) {
+  angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload', 'ngAnimate', 'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.controllers.block_list', 'Wadi.controllers.dashboard', 'Wadi.directives', 'Wadi.constants', 'Wadi.services']).config(function($stateProvider, $urlRouterProvider, uiSelectConfig, $provide) {
     uiSelectConfig.theme = 'bootstrap';
-    return $stateProvider.state('login', {
+    $stateProvider.state('login', {
       templateUrl: './templates/views/view_login.html',
       controller: 'LoginCtrl'
     }).state('form', {
@@ -26,6 +26,12 @@
       templateUrl: './templates/views/view_test.html',
       controller: 'TestCtrl',
       url: '/test'
+    });
+    return $provide.decorator('accordionGroupDirective', function($delegate) {
+      var directive;
+      directive = $delegate[0];
+      directive.templateUrl = "./templates/directives/my_accordion.html";
+      return $delegate;
     });
   });
 

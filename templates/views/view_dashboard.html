@@ -5,8 +5,14 @@
   </div>
 </div>
 <div class="row">
+  <ul class="nav nav-tabs nav-justified">
+    <li ng-class="{'active': isTab('jobs')}"><a ng-click="changeTabTo('jobs')">Main Jobs</a></li>
+    <li ng-class="{'active': isTab('segments')}"><a ng-click="changeTabTo('segments')">Segments</a></li>
+  </ul><br/>
+</div>
+<div ng-show="isTab('jobs')" class="row">
   <div class="col-md-offset-2 col-md-8">
-    <div ng-repeat="job in data" class="panel panel-default">
+    <div ng-repeat="job in job_data" class="panel panel-default">
       <div class="panel-heading">
         <div class="pull-right text-info"><i ng-if="job.segmented" class="fa fa-wrench"></i>&nbsp {{ job.status }} &nbsp<span class="badge">{{ job.t_id }}</span></div>
         <h3 class="panel-title">{{ job.name }}</h3>
@@ -20,8 +26,8 @@
               <dd ng-if="job.repeat">{{ job.repeat }}</dd>
               <dt>Job entry date</dt>
               <dd>{{ job.timestamp | date }}</dd>
-              <dt>Execution Start date</dt>
-              <dd>{{ job.start_date | date }}</dd>
+              <dt ng-if="job.start_date">Execution Start date</dt>
+              <dd ng-if="job.start_date">{{ job.start_date | date }}</dd>
               <dt ng-if="job.end_date">Execution Termination</dt>
               <dd ng-if="job.end_date">{{ job.end_date | date }}</dd>
               <dt ng-if="job.time">Time</dt>
@@ -49,7 +55,46 @@
         li.list-group-item
           strong Repetition type: &nbsp
           | {{ job.repeat }}
+      
       -->
+    </div>
+  </div>
+</div>
+<div ng-show="isTab('segments')" class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <div ng-repeat="job in segment_data" class="panel panel-default">
+      <div class="panel-heading">
+        <div class="pull-right text-info"><span class="badge">{{ job.t_id }}</span></div>
+        <h3 class="panel-title">{{ job.name }} :: {{ job.timestamp | date : 'MMM d yyyy, hh:mm a' }}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-10 col-xs-8">
+            <p class="text-muted">{{ job.description }}</p>
+          </div>
+          <div class="col-sm-2 col-xs-4 text-right">
+            <ul ng-if="job.count" class="list-unstyled">
+              <li><i class="fa fa-fw fa-users">&nbsp</i>{{ job.count }}</li>
+              <li><i class="fa fa-fw fa-user">&nbsp</i><i class="fa fa-fw fa-clone">&nbsp</i>{{ job.count / job.segments.length | number : 0 }}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-offset-1 col-xs-10">
+            <accordion>
+              <accordion-group ng-repeat="seg in job.segments">
+                <accordion-heading>{{ seg.num }}: {{ seg.date | date : 'MMM d yyyy, hh:mm a' }}<span class="pull-right">{{ seg.status }}</span></accordion-heading>
+                <dl class="dl-horizontal">
+                  <dt>Arabic content</dt>
+                  <dd>{{ seg.arabic }}</dd>
+                  <dt>Englsih content</dt>
+                  <dd>{{ seg.english }}</dd>
+                </dl>
+              </accordion-group>
+            </accordion>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -2,11 +2,11 @@
   Wadi sms tool web interface
 ###
 
-angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload'
+angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload', 'ngAnimate',
                         'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.controllers.block_list', 'Wadi.controllers.dashboard'
                         'Wadi.directives', 'Wadi.constants', 'Wadi.services'])
 
-.config ($stateProvider, $urlRouterProvider, uiSelectConfig) ->
+.config ($stateProvider, $urlRouterProvider, uiSelectConfig, $provide) ->
   uiSelectConfig.theme = 'bootstrap'
   $stateProvider
   .state('login',
@@ -32,4 +32,10 @@ angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 
     templateUrl: './templates/views/view_test.html'
     controller: 'TestCtrl'
     url: '/test'
+  )
+
+  $provide.decorator('accordionGroupDirective', ($delegate) ->
+    directive = $delegate[0]
+    directive.templateUrl = "./templates/directives/my_accordion.html"
+    $delegate
   )

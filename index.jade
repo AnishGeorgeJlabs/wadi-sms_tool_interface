@@ -7,7 +7,7 @@ html(ng-app='Wadi')
     - var files1 = ['jquery/dist/jquery.min.js', 'angularjs/angular.min.js', 'bootstrap/dist/js/bootstrap.min.js']
     - var files2 = ['angular-ui-router/release/angular-ui-router.min.js', 'blueimp-md5/js/md5.min.js', 'toastr/toastr.min.js']
     - var files3 = ['underscore/underscore-min.js', 'moment/moment.js', 'isteven-angular-multiselect/isteven-multi-select.js', 'ng-file-upload/ng-file-upload.min.js']
-    - var files4 = ['angular-ui-select/dist/select.min.js', 'angular-sanitize/angular-sanitize.min.js', 'angular-bootstrap/ui-bootstrap-tpls.min.js']
+    - var files4 = ['angular-animate/angular-animate.min.js', 'angular-ui-select/dist/select.min.js', 'angular-sanitize/angular-sanitize.min.js', 'angular-bootstrap/ui-bootstrap-tpls.min.js']
     - var files = files1.concat(files2, files3, files4)
     each file in files
       script(src='bower_components/'+file)
@@ -22,6 +22,7 @@ html(ng-app='Wadi')
     // link(href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/lumen/bootstrap.min.css", rel="stylesheet")
     link(href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/sandstone/bootstrap.min.css", rel="stylesheet")
     link(href='bower_components/angular-ui-select/dist/select.min.css' rel='stylesheet')
+    //link(href='bower_components/angular-bootstrap/ui-boostrap.csp.css' rel='stylesheet')
     link(href='bower_components/isteven-angular-multiselect/isteven-multi-select.css' rel='stylesheet')
     link(href='bower_components/toastr/toastr.min.css' rel='stylesheet')
     link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet')

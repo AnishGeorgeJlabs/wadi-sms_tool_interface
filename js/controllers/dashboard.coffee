@@ -7,29 +7,30 @@ angular.module('Wadi.controllers.dashboard', [])
   if not $scope.$parent.checkLogin()
     $state.go 'login'
 
-  sampleData = [
-    {
-      name: "Sample Job"
-      status: "Data Loaded"
-      t_id: 35
-      count: 610
-      file: "http://jlabs.co/downloadcsv.php?file=res_56.csv"
-      _id:
-        $oid: "55e5587e21aaec7ec1b48247"
-      description: "This is a long sample description for the job. It has many additional information, which we are not interested in"
-      timestamp:
-        $date: 1441113558632
-      start_date: "09/01/2015"
-      repeat: "Hourly"
-    }
-  ]
+  $scope.tab = 'jobs'
 
-  store_data = (dt) ->
-    $scope.data = _.map(dt, (obj) ->
+  $scope.changeTabTo = (tb) ->
+    $scope.tab = tb
+
+  $scope.isTab = (tb) ->
+    $scope.tab == tb
+
+
+
+  store_job_data = (dt) ->
+    $scope.job_data = _.map(dt, (obj) ->
       obj._id = obj._id.$oid
       obj.timestamp = obj.timestamp.$date
       obj
     )
+
+  store_segment_data = (dt) ->
+    $scope.segment_data = _.map(dt, (obj) ->
+      obj.ref_job = obj.ref_job.$oid
+      obj.timestamp = obj.timestamp.$date
+      obj
+    )
+    # $log.info "Segment data: "+JSON.stringify($scope.segment_data)
 
   # store_data(sampleData)
 
@@ -37,9 +38,17 @@ angular.module('Wadi.controllers.dashboard', [])
     $http.get wdInterfaceApi.jobs
     .success (data) ->
       if data.success
-        store_data(data.data)
+        store_job_data(data.data)
       else
         $log.warning "Problem fetching data: "+JSON.stringify(data)
+
+    $http.get wdInterfaceApi.segment_jobs
+    .success (data) ->
+      if data.success
+        store_segment_data(data.data)
+      else
+        $log.warning "Problem fetching segment data: "+JSON.stringify(data)
+
 
   refresh()
 

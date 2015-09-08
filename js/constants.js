@@ -17,6 +17,7 @@
     test_message: base_api_url + "job/testing_message",
     cancel_job: base_api_url + "job/cancel",
     jobs: base_api_url + "jobs",
+    segment_jobs: base_api_url + "job/segments",
     form: base_api_url + "form",
     login: base_api_url + "login"
   }).constant('wdBlockApi', {
