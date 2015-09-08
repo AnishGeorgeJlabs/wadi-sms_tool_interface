@@ -17,6 +17,30 @@ angular.module('Wadi.services', [])
         $scope.title = title
     ).result
 
+.factory 'wdToast', () ->
+  if !window.toastr
+    (title, message) ->
+      alert title + ":  " + message
+  else
+    toastr.options =
+      closeButton: true
+      debug: false
+      positionClass: "toast-bottom-full-width"
+      preventDuplicate: true
+      onclick: null
+      showDuration: 300
+      hideDuration: 1000
+      timeout: 4000
+      extendedTimeOut: 0
+      showEasing: "swing"
+      hideEasing: "linear"
+      showMethod: "fadeIn"
+      hideMethod: "fadeOut"
+
+    (title, message, style="success") ->
+      toastr[style](message, title)
+      return true       # So that we do not return DOM element and angular doesn't complain
+
 .factory 'wdSegment', ($modal) ->
   (job, debug) ->
     $modal.open(

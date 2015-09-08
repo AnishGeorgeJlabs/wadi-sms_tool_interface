@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http, $interval, wdInterfaceApi, wdConfirm, wdSegment) {
+  angular.module('Wadi.controllers.dashboard', []).controller('DashboardCtrl', function($scope, $state, $log, $http, $interval, wdInterfaceApi, wdConfirm, wdSegment, wdToast) {
     var periodicRefresh, refresh, sampleData, store_data;
     if (!$scope.$parent.checkLogin()) {
       $state.go('login');
@@ -81,7 +81,7 @@
     return $scope.segment = function(job) {
       return wdSegment(job).then(function(res) {
         if (res) {
-          return alert("Successfully processed your request");
+          return wdToast("Success", "Successfully processed your request for segmentation, you should see the results in the sheet shortly", "success");
         }
       });
     };

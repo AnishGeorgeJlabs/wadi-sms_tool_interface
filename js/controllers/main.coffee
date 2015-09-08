@@ -46,7 +46,7 @@ angular.module('Wadi.controllers.main', [])
 
 .controller 'TestCtrl', ($scope, $state,
                          wdConfirm,
-                         $log, wdLinks, $modal, Upload, wdBlockApi, wdSegment) ->
+                         $log, wdToast, wdLinks, $modal, Upload, wdBlockApi, wdSegment) ->
   $scope.submit = () ->
     if $scope.file && !$scope.file.$error
       $scope.upload($scope.file)
@@ -70,3 +70,6 @@ angular.module('Wadi.controllers.main', [])
     wdSegment(
       {id: {$oid: "blah blah"}, count: 34152, t_id: 60}
     , true)
+
+  $scope.toast = () ->
+    wdToast("Title", "message", "info")

@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.form', []).controller('FormCtrl', function($scope, $state, $log, $http, $modal, $filter, wdInterfaceApi, wdConfirm) {
+  angular.module('Wadi.controllers.form', []).controller('FormCtrl', function($scope, $state, $log, $http, $modal, $filter, wdInterfaceApi, wdConfirm, wdToast) {
     var cleanObj, configureForm, repeat;
     $scope.checkLogin = function() {
       $log.info("Checking login status at FormCtrl");
@@ -198,8 +198,11 @@
         arabic: $scope.campaign.text.arabic,
         english: $scope.campaign.text.english
       }).success(function(data) {
-        alert("Testing campaign has been scheduled successfully");
-        return $log.info("Got result from test message: " + JSON.stringify(data));
+        if (data.success) {
+          return wdToast("Success", "Testing campaign has been scheduled successfully", "success");
+        } else {
+          return wdToast("Error on testing campaign", "Details: " + data.error, "error");
+        }
       });
     };
     return $scope.reset = function() {

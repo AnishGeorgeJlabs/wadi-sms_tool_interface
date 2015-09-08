@@ -42,7 +42,7 @@
       $scope.data.username = '';
       return $scope.data.password = '';
     };
-  }).controller('TestCtrl', function($scope, $state, wdConfirm, $log, wdLinks, $modal, Upload, wdBlockApi, wdSegment) {
+  }).controller('TestCtrl', function($scope, $state, wdConfirm, $log, wdToast, wdLinks, $modal, Upload, wdBlockApi, wdSegment) {
     $scope.submit = function() {
       if ($scope.file && !$scope.file.$error) {
         return $scope.upload($scope.file);
@@ -65,7 +65,7 @@
         return $log.debug("Modal result: " + res);
       });
     };
-    return $scope.openStatic = function() {
+    $scope.openStatic = function() {
       return wdSegment({
         id: {
           $oid: "blah blah"
@@ -73,6 +73,9 @@
         count: 34152,
         t_id: 60
       }, true);
+    };
+    return $scope.toast = function() {
+      return wdToast("Title", "message", "info");
     };
   });
 

@@ -2,7 +2,7 @@
   Just the form controller
 ###
 angular.module('Wadi.controllers.form', [])
-.controller 'FormCtrl', ($scope, $state, $log, $http, $modal, $filter, wdInterfaceApi, wdConfirm) ->
+.controller 'FormCtrl', ($scope, $state, $log, $http, $modal, $filter, wdInterfaceApi, wdConfirm, wdToast) ->
   $scope.checkLogin = () ->
     $log.info "Checking login status at FormCtrl"
     if not $scope.$parent.checkLogin()
@@ -161,8 +161,10 @@ angular.module('Wadi.controllers.form', [])
       arabic: $scope.campaign.text.arabic
       english: $scope.campaign.text.english
     }).success (data) ->
-      alert "Testing campaign has been scheduled successfully"
-      $log.info "Got result from test message: "+JSON.stringify(data)
+      if data.success
+        wdToast("Success", "Testing campaign has been scheduled successfully", "success")
+      else
+        wdToast("Error on testing campaign", "Details: "+data.error, "error")
 
   $scope.reset = () ->
     $scope.selectedMulti = _.mapObject($scope.selectedMulti, () -> { value: [], co_type: 'required' })

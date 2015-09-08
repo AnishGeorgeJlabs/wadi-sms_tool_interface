@@ -21,6 +21,35 @@
         }
       }).result;
     };
+  }).factory('wdToast', function() {
+    if (!window.toastr) {
+      return function(title, message) {
+        return alert(title + ":  " + message);
+      };
+    } else {
+      toastr.options = {
+        closeButton: true,
+        debug: false,
+        positionClass: "toast-bottom-full-width",
+        preventDuplicate: true,
+        onclick: null,
+        showDuration: 300,
+        hideDuration: 1000,
+        timeout: 4000,
+        extendedTimeOut: 0,
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+      };
+      return function(title, message, style) {
+        if (style == null) {
+          style = "success";
+        }
+        toastr[style](message, title);
+        return true;
+      };
+    }
   }).factory('wdSegment', function($modal) {
     return function(job, debug) {
       return $modal.open({

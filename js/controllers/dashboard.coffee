@@ -3,7 +3,7 @@
 ###
 
 angular.module('Wadi.controllers.dashboard', [])
-.controller 'DashboardCtrl', ($scope, $state, $log, $http, $interval, wdInterfaceApi, wdConfirm, wdSegment) ->
+.controller 'DashboardCtrl', ($scope, $state, $log, $http, $interval, wdInterfaceApi, wdConfirm, wdSegment, wdToast) ->
   if not $scope.$parent.checkLogin()
     $state.go 'login'
 
@@ -81,5 +81,6 @@ angular.module('Wadi.controllers.dashboard', [])
     wdSegment(job)
     .then (res) ->
       if res
-        alert "Successfully processed your request"
+        wdToast("Success",
+          "Successfully processed your request for segmentation, you should see the results in the sheet shortly", "success")
 

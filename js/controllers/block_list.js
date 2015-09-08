@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi.controllers.block_list', []).controller('BlockListCtrl', function($log, $scope, $state, Upload, $timeout, $http, wdBlockApi) {
+  angular.module('Wadi.controllers.block_list', []).controller('BlockListCtrl', function($log, $scope, $state, Upload, $timeout, $http, wdBlockApi, wdToast) {
     if (!$scope.$parent.checkLogin()) {
       $state.go('login');
     }
@@ -45,7 +45,7 @@
         $log.info("Got result: " + JSON.stringify(data));
         $scope.uploading = false;
         if (data.success) {
-          $scope.message = "Block list processed successfully";
+          wdToast("Block List added", "The block list was processed succfully and the given data added to the server", "success");
           $scope.report = {};
           if (data.blocked) {
             $scope.report.blocked = data.blocked;
@@ -54,7 +54,7 @@
             $scope.report.total_blocked = data.total_blocked;
           }
         } else {
-          $scope.message = "There was a problem processing the request, please check your file contents";
+          wdToast("Block List failed", "There was a problem processing the request, please check your file contents", "error");
         }
         return $timeout(function() {
           return $scope.message = null;
