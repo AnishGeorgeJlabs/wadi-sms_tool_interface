@@ -30,7 +30,7 @@ angular.module('Wadi.controllers.form', [])
     for data in mainData
       if data.type == 'single'
         $scope.single[data.operation] = {name: data.pretty, values: data.values, co_type: data.co_type }
-        $scope.selectedSingle[data.operation] = { value: '', co_type: 'required' }
+        $scope.selectedSingle[data.operation] = { value: data.values[0], co_type: 'required' }
       else if data.type == 'multi'
         $scope.multi[data.operation] = {name: data.pretty, values: data.values, co_type: data.co_type }
         $scope.selectedMulti[data.operation] = { value: [], co_type: 'required' }
@@ -168,5 +168,5 @@ angular.module('Wadi.controllers.form', [])
 
   $scope.reset = () ->
     $scope.selectedMulti = _.mapObject($scope.selectedMulti, () -> { value: [], co_type: 'required' })
-    $scope.selectedSingle = _.mapObject($scope.selectedSingle, () -> { value: '', co_type: 'required' })
+    $scope.selectedSingle = _.mapObject($scope.selectedSingle, (v, k) -> { value: $scope.single[k].values[0], co_type: 'required' })
     $scope.selectedRange = _.mapObject($scope.selectedRange, () -> { value: '', co_type: 'required' })

@@ -38,7 +38,7 @@
             co_type: data.co_type
           };
           results.push($scope.selectedSingle[data.operation] = {
-            value: '',
+            value: data.values[0],
             co_type: 'required'
           });
         } else if (data.type === 'multi') {
@@ -212,9 +212,9 @@
           co_type: 'required'
         };
       });
-      $scope.selectedSingle = _.mapObject($scope.selectedSingle, function() {
+      $scope.selectedSingle = _.mapObject($scope.selectedSingle, function(v, k) {
         return {
-          value: '',
+          value: $scope.single[k].values[0],
           co_type: 'required'
         };
       });

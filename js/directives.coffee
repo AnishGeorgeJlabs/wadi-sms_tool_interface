@@ -76,10 +76,12 @@ angular.module('Wadi.directives', [])
       (nVal, oVal) ->
         $scope.options = _.map(nVal.values, (v) ->
           res = {name: v}
-          if _.contains($scope.outputModel.value, v)
+          if ($scope.singleSelect and $scope.outputModel.value == v) or _.contains($scope.outputModel.value, v)
             res.selected = true
           res
         )
+        if $scope.singleSelect and $scope.options.length > 0
+          $scope.options[0].selected = true
     )
 
     $scope.$watchCollection(
@@ -102,6 +104,7 @@ angular.module('Wadi.directives', [])
             nValues = [nVal.value]
           else
             nValues = nVal.value
+
           _.each($scope.options, (v, k) ->
             v.selected = _.contains(nValues, v.name)
           )

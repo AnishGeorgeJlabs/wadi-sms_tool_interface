@@ -59,7 +59,7 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
                 input.form-control(
                     type='text' dir='rtl' name='arabic'
                     ng-model="campaign.text.arabic"
-                    ng-disabled="selectedSingle.language.value && selectedSingle.language.value != 'Arabic'"
+                    ng-disabled="selectedSingle.language.value && selectedSingle.language.value == 'English'"
                     ng-required="!misc.segmented"
                 )
                 .input-group-addon {{ campaign.text.arabic.length }}
@@ -72,7 +72,7 @@ form.form-horizontal(ng-submit="confirmAndSubmit()" name='jobForm' novalidate)
                 input.form-control(
                 type='text' name='english'
                 ng-model="campaign.text.english"
-                ng-disabled="selectedSingle.language.value && selectedSingle.language.value != 'English'"
+                ng-disabled="selectedSingle.language.value && selectedSingle.language.value == 'Arabic'"
                 ng-required="!misc.segmented"
                 )
                 .input-group-addon {{ campaign.text.english.length }}

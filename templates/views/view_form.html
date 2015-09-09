@@ -55,7 +55,7 @@
             <label class="control-label col-sm-2">Arabic</label>
             <div class="col-sm-10">
               <div class="input-group">
-                <input type="text" dir="rtl" name="arabic" ng-model="campaign.text.arabic" ng-disabled="selectedSingle.language.value &amp;&amp; selectedSingle.language.value != 'Arabic'" ng-required="!misc.segmented" class="form-control"/>
+                <input type="text" dir="rtl" name="arabic" ng-model="campaign.text.arabic" ng-disabled="selectedSingle.language.value &amp;&amp; selectedSingle.language.value == 'English'" ng-required="!misc.segmented" class="form-control"/>
                 <div class="input-group-addon">{{ campaign.text.arabic.length }}</div>
               </div>
             </div>
@@ -65,7 +65,7 @@
             <label class="control-label col-sm-2">English</label>
             <div class="col-sm-10">
               <div class="input-group">
-                <input type="text" name="english" ng-model="campaign.text.english" ng-disabled="selectedSingle.language.value &amp;&amp; selectedSingle.language.value != 'English'" ng-required="!misc.segmented" class="form-control"/>
+                <input type="text" name="english" ng-model="campaign.text.english" ng-disabled="selectedSingle.language.value &amp;&amp; selectedSingle.language.value == 'Arabic'" ng-required="!misc.segmented" class="form-control"/>
                 <div class="input-group-addon">{{ campaign.text.english.length }}</div>
               </div>
             </div>

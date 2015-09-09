@@ -90,16 +90,19 @@
           }
         ];
         $scope.$watchCollection('inputModel', function(nVal, oVal) {
-          return $scope.options = _.map(nVal.values, function(v) {
+          $scope.options = _.map(nVal.values, function(v) {
             var res;
             res = {
               name: v
             };
-            if (_.contains($scope.outputModel.value, v)) {
+            if (($scope.singleSelect && $scope.outputModel.value === v) || _.contains($scope.outputModel.value, v)) {
               res.selected = true;
             }
             return res;
           });
+          if ($scope.singleSelect && $scope.options.length > 0) {
+            return $scope.options[0].selected = true;
+          }
         });
         $scope.$watchCollection('selected', function(nVal, oVal) {
           var res;
