@@ -10,6 +10,7 @@
     <li ng-class="{'active': isTab('segments')}"><a ng-click="changeTabTo('segments')">Segments</a></li>
   </ul><br/>
 </div>
+<!-- MAIN JOBS-->
 <div ng-show="isTab('jobs')" class="row">
   <div class="col-md-offset-2 col-md-8">
     <div ng-repeat="job in job_data" class="panel panel-default">
@@ -60,6 +61,7 @@
     </div>
   </div>
 </div>
+<!-- SEGMENTS-->
 <div ng-show="isTab('segments')" class="row">
   <div class="col-md-offset-2 col-md-8">
     <div ng-repeat="job in segment_data" class="panel panel-default">
@@ -83,7 +85,7 @@
           <div class="col-xs-offset-1 col-xs-10">
             <accordion>
               <accordion-group ng-repeat="seg in job.segments">
-                <accordion-heading>{{ seg.num }}: {{ seg.date | date : 'MMM d yyyy, hh:mm a' }}<span class="pull-right">{{ seg.status }}</span></accordion-heading>
+                <accordion-heading><span class="text-info"><strong>SEG {{seg.num}} ::&nbsp</strong></span>{{ seg.date | date : 'MMM d yyyy, hh:mm a' }}<span class="pull-right">{{ seg.status }}</span></accordion-heading>
                 <dl class="dl-horizontal">
                   <dt>Arabic content</dt>
                   <dd>{{ seg.arabic }}</dd>

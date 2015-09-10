@@ -10,6 +10,7 @@
       a(ng-click="changeTabTo('segments')") Segments
   br
 
+// MAIN JOBS
 .row(ng-show="isTab('jobs')")
   .col-md-offset-2.col-md-8
     .panel.panel-default(ng-repeat="job in job_data")
@@ -68,6 +69,7 @@
             strong Repetition type: &nbsp
             | {{ job.repeat }}
 
+// SEGMENTS
 .row(ng-show="isTab('segments')")
   .col-md-offset-2.col-md-8
     .panel.panel-default(ng-repeat="job in segment_data")
@@ -95,7 +97,9 @@
                 ng-repeat="seg in job.segments"
               )
                 accordion-heading
-                  | {{ seg.num }}: {{ seg.date | date : 'MMM d yyyy, hh:mm a' }}
+                  span.text-info
+                    strong SEG {{seg.num}} ::&nbsp
+                  |{{ seg.date | date : 'MMM d yyyy, hh:mm a' }}
                   span.pull-right {{ seg.status }}
                 dl.dl-horizontal
                   dt Arabic content
