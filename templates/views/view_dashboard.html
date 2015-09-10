@@ -37,7 +37,7 @@
           <div class="col-sm-2 col-xs-4">
             <ul class="list-unstyled">
               <li ng-if="job.count">
-                <h5><i class="fa-fw fa fa-users fa-lg">&nbsp</i>{{ job.count }}</h5>
+                <h5><i class="fa-fw fa fa-users fa-lg">&nbsp</i>{{ job.count | number : 0 }}</h5>
               </li>
               <li ng-if="job.file">
                 <h5><a ng-href="{{ job.file }}" target="_blank"><i class="fa-fw fa fa-database fa-lg">&nbsp</i>Data</a></h5>
@@ -74,7 +74,7 @@
           </div>
           <div class="col-sm-2 col-xs-4 text-right">
             <ul ng-if="job.count" class="list-unstyled">
-              <li><i class="fa fa-fw fa-users">&nbsp</i>{{ job.count }}</li>
+              <li><i class="fa fa-fw fa-users">&nbsp</i>{{ job.count | number : 0 }}</li>
               <li><i class="fa fa-fw fa-user">&nbsp</i><i class="fa fa-fw fa-clone">&nbsp</i>{{ job.count / job.segments.length | number : 0 }}</li>
             </ul>
           </div>

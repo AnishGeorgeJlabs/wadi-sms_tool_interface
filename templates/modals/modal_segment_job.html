@@ -15,7 +15,7 @@
           <dt>Job ID</dt>
           <dd>{{ t_id }}</dd>
           <dt>Total customers</dt>
-          <dd>{{ total }}</dd>
+          <dd>{{ total | number : 0}}</dd>
           <dt>Customers per segment</dt>
           <dd>About {{ total / data.length | number : 0 }}</dd>
         </dl>

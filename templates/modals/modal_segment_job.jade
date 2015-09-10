@@ -13,7 +13,7 @@
           dd {{ t_id }}
 
           dt Total customers
-          dd {{ total }}
+          dd {{ total | number : 0}}
 
           dt Customers per segment
           dd About {{ total / data.length | number : 0 }}

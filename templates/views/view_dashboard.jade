@@ -43,7 +43,7 @@
               li(ng-if='job.count')
                 h5
                   i.fa-fw.fa.fa-users.fa-lg &nbsp
-                  | {{ job.count }}
+                  | {{ job.count | number : 0 }}
               li(ng-if='job.file')
                 h5
                   a(ng-href="{{ job.file }}", target='_blank')
@@ -83,7 +83,7 @@
             ul.list-unstyled(ng-if='job.count')
               li
                 i.fa.fa-fw.fa-users &nbsp
-                | {{ job.count }}
+                | {{ job.count | number : 0 }}
               li
                 i.fa.fa-fw.fa-user &nbsp
                 i.fa.fa-fw.fa-clone &nbsp
