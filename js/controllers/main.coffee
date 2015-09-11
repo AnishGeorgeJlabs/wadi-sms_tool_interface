@@ -73,3 +73,17 @@ angular.module('Wadi.controllers.main', [])
 
   $scope.toast = () ->
     wdToast("Title", "message", "info")
+
+  $scope.hierInput = {
+    name: ''
+    pName: 'Select Category'
+    co_type: 'both'
+    valueObj: {
+      Electronics: ['Electroni Accessories', 'Some other Subcat']
+      Fashion: ['Vero Moda', 'Another Fashion brand', 'Some damn hot shoes']
+      Home: ['Home Decor', 'Furniture', 'Bed', 'Sofas']
+    }
+  }
+  $scope.hierOutput = {
+    value: [], co_type: 'required'
+  }

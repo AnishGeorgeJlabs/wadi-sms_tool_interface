@@ -23,9 +23,11 @@
     $scope.multi = {};
     $scope.single = {};
     $scope.range = {};
+    $scope.hierarchy = {};
     $scope.selectedMulti = {};
     $scope.selectedSingle = {};
     $scope.selectedRange = {};
+    $scope.selectedHierarchy = {};
     configureForm = function(mainData) {
       var data, i, len, results;
       results = [];
@@ -58,6 +60,17 @@
           };
           results.push($scope.selectedRange[data.operation] = {
             value: '',
+            co_type: 'required'
+          });
+        } else if (data.type === 'hierarchy') {
+          $scope.hierarchy[data.operation] = {
+            pName: data.pretty,
+            name: '',
+            co_type: data.co_type,
+            valueObj: data.valueObj
+          };
+          results.push($scope.selectedHierarchy[data.operation] = {
+            value: [],
             co_type: 'required'
           });
         } else if (data.type === 'config') {
@@ -153,13 +166,16 @@
       resS = cleanObj($scope.selectedSingle);
       resR = cleanObj($scope.selectedRange);
       target_config = _.extend({}, resS, resM, resR);
-      campaign_config = _.mapObject($scope.campaign, function(val, key) {
-        if (_.contains(['start_date', 'end_date', 'time'], key)) {
+      campaign_config = _.chain($scope.campaign).pick(function(v) {
+        return v !== null && v !== '';
+      }).mapObject(function(val, key) {
+        if (_(['start_date', 'end_date', 'time']).contains(key)) {
           return parseInt(moment(val).format("x"));
         } else {
           return val;
         }
-      });
+      }).value();
+      $log.debug("Final Campaign config: " + JSON.stringify(campaign_config));
       result = {
         target_config: target_config,
         campaign_config: campaign_config,

@@ -1,0 +1,17 @@
+<div>
+
+  <div class="form-group">
+    <label class="col-sm-3 col-xs-12 control-label">{{  inputModel.pName }}</label>
+    <div class="col-sm-6 col-xs-9 no-right-gutter">
+      <select class="form-control"
+              ng-options="key for (key, value) in inputModel.valueObj"
+              ng-model="selectedOpt"></select>
+    </div>
+  </div>
+
+  <wd-select
+      input-model="dynamicInput"
+      output-model="outputModel"
+      single-select="false"
+      ></wd-select>
+</div>

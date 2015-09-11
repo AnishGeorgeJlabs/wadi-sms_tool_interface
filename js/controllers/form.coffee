@@ -21,10 +21,12 @@ angular.module('Wadi.controllers.form', [])
   $scope.multi = {}
   $scope.single = {}
   $scope.range = {}
+  $scope.hierarchy = {}
 
   $scope.selectedMulti = {}
   $scope.selectedSingle = {}
   $scope.selectedRange = {}
+  $scope.selectedHierarchy = {}
 
   configureForm = (mainData) ->
     for data in mainData
@@ -37,6 +39,9 @@ angular.module('Wadi.controllers.form', [])
       else if data.type == 'range'
         $scope.range[data.operation] = {name: data.pretty, co_type: data.co_type}
         $scope.selectedRange[data.operation] = { value: '', co_type: 'required' }
+      else if data.type == 'hierarchy'
+        $scope.hierarchy[data.operation] = {pName: data.pretty, name: '', co_type: data.co_type, valueObj: data.valueObj }
+        $scope.selectedHierarchy[data.operation] = { value: [], co_type: 'required'}
       else if data.type == 'config'
         $scope.config.repeat = data.repeat
         $scope.campaign.repeat = data.repeat[0]
@@ -114,12 +119,18 @@ angular.module('Wadi.controllers.form', [])
     resR = cleanObj($scope.selectedRange)
     target_config = _.extend({}, resS, resM, resR)
 
-    campaign_config = _.mapObject($scope.campaign, (val, key) ->
-      if _.contains(['start_date', 'end_date', 'time'], key)
-        return parseInt(moment(val).format("x"))
-      else
-        return val
-    )
+    campaign_config = _.chain($scope.campaign)
+      .pick( (v) ->
+        v != null and v != ''
+      )
+      .mapObject( (val, key) ->
+        if _(['start_date', 'end_date', 'time']).contains(key)
+          return parseInt(moment(val).format("x"))
+        else
+          return val
+      ).value()
+
+    $log.debug "Final Campaign config: "+JSON.stringify(campaign_config)
 
     result =
       target_config: target_config
