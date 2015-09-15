@@ -3,7 +3,7 @@
 ###
 
 angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload', 'ngAnimate',
-                        'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.controllers.block_list', 'Wadi.controllers.dashboard'
+                        'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.controllers.block_list', 'Wadi.controllers.dashboard', 'Wadi.controllers.segments',
                         'Wadi.directives', 'Wadi.constants', 'Wadi.services'])
 
 .config ($stateProvider, $urlRouterProvider, uiSelectConfig, $provide) ->

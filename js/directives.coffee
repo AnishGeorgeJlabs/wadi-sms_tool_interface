@@ -59,33 +59,6 @@ angular.module('Wadi.directives', [])
       if $scope.data.max == null
         $scope.data.max = $scope.data.min + 1
 
-.directive 'wdHierachySelect', () ->
-  restrict: 'E'
-  scope:
-    inputModel: '=inputModel'
-    outputModel: '=outputModel'
-  templateUrl: './templates/directives/dir_hierarchy_select.html'
-  controller: ($scope, $log) ->
-    $scope.dynamicInput = {}
-    updateInput = () ->
-      $scope.dynamicInput = {
-        name: $scope.inputModel.name
-        values: $scope.inputModel.valueObj[$scope.selectedOpt]
-        co_type: $scope.inputModel.co_type
-      }
-    updateInput()
-
-    $scope.$watchCollection(
-      'inputModel',
-      (nVal, oVal) ->
-        updateInput()
-    )
-    $scope.$watch(
-      'selectedOpt',
-      () ->
-        updateInput()
-    )
-
 .directive 'wdSelect', () ->
   restrict: 'E'
   scope:
@@ -136,3 +109,31 @@ angular.module('Wadi.directives', [])
             v.selected = _.contains(nValues, v.name)
           )
     )
+###
+.directive 'wdHierachySelect', () ->
+  restrict: 'E'
+  scope:
+    inputModel: '=inputModel'
+    outputModel: '=outputModel'
+  templateUrl: './templates/directives/dir_hierarchy_select.html'
+  controller: ($scope, $log) ->
+    $scope.dynamicInput = {}
+    updateInput = () ->
+      $scope.dynamicInput = {
+        name: $scope.inputModel.name
+        values: $scope.inputModel.valueObj[$scope.selectedOpt]
+        co_type: $scope.inputModel.co_type
+      }
+    updateInput()
+
+    $scope.$watchCollection(
+      'inputModel',
+      (nVal, oVal) ->
+        updateInput()
+    )
+    $scope.$watch(
+      'selectedOpt',
+      () ->
+        updateInput()
+    )
+###

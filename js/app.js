@@ -5,7 +5,7 @@
  */
 
 (function() {
-  angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload', 'ngAnimate', 'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.controllers.block_list', 'Wadi.controllers.dashboard', 'Wadi.directives', 'Wadi.constants', 'Wadi.services']).config(function($stateProvider, $urlRouterProvider, uiSelectConfig, $provide) {
+  angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 'isteven-multi-select', 'ngFileUpload', 'ngAnimate', 'Wadi.controllers.form', 'Wadi.controllers.main', 'Wadi.controllers.block_list', 'Wadi.controllers.dashboard', 'Wadi.controllers.segments', 'Wadi.directives', 'Wadi.constants', 'Wadi.services']).config(function($stateProvider, $urlRouterProvider, uiSelectConfig, $provide) {
     uiSelectConfig.theme = 'bootstrap';
     $stateProvider.state('login', {
       templateUrl: './templates/views/view_login.html',

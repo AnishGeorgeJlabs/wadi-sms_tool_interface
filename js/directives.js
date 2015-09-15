@@ -73,33 +73,6 @@
         };
       }
     };
-  }).directive('wdHierachySelect', function() {
-    return {
-      restrict: 'E',
-      scope: {
-        inputModel: '=inputModel',
-        outputModel: '=outputModel'
-      },
-      templateUrl: './templates/directives/dir_hierarchy_select.html',
-      controller: function($scope, $log) {
-        var updateInput;
-        $scope.dynamicInput = {};
-        updateInput = function() {
-          return $scope.dynamicInput = {
-            name: $scope.inputModel.name,
-            values: $scope.inputModel.valueObj[$scope.selectedOpt],
-            co_type: $scope.inputModel.co_type
-          };
-        };
-        updateInput();
-        $scope.$watchCollection('inputModel', function(nVal, oVal) {
-          return updateInput();
-        });
-        return $scope.$watch('selectedOpt', function() {
-          return updateInput();
-        });
-      }
-    };
   }).directive('wdSelect', function() {
     return {
       restrict: 'E',
@@ -158,6 +131,36 @@
       }
     };
   });
+
+
+  /*
+  .directive 'wdHierachySelect', () ->
+    restrict: 'E'
+    scope:
+      inputModel: '=inputModel'
+      outputModel: '=outputModel'
+    templateUrl: './templates/directives/dir_hierarchy_select.html'
+    controller: ($scope, $log) ->
+      $scope.dynamicInput = {}
+      updateInput = () ->
+        $scope.dynamicInput = {
+          name: $scope.inputModel.name
+          values: $scope.inputModel.valueObj[$scope.selectedOpt]
+          co_type: $scope.inputModel.co_type
+        }
+      updateInput()
+  
+      $scope.$watchCollection(
+        'inputModel',
+        (nVal, oVal) ->
+          updateInput()
+      )
+      $scope.$watch(
+        'selectedOpt',
+        () ->
+          updateInput()
+      )
+   */
 
 }).call(this);
 

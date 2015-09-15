@@ -42,54 +42,28 @@
       $scope.data.username = '';
       return $scope.data.password = '';
     };
-  }).controller('TestCtrl', function($scope, $state, wdConfirm, $log, wdToast, wdLinks, $modal, Upload, wdBlockApi, wdSegment) {
-    $scope.submit = function() {
-      if ($scope.file && !$scope.file.$error) {
-        return $scope.upload($scope.file);
-      }
-    };
-    $scope.upload = function(file) {
-      return Upload.upload({
-        url: wdBlockApi.upload,
-        file: file
-      }).progress(function(evt) {
-        var progPerc;
-        progPerc = parseInt(100.0 * evt.loaded / evt.total);
-        return $log.info("Progress: " + progPerc + "% " + evt.config.file.name);
-      }).success(function(data) {
-        return $log.info("Got result: " + JSON.stringify(data));
-      });
-    };
-    $scope.openConfirm = function() {
-      return wdConfirm("Test send", "Can you get this correctly?").then(function(res) {
-        return $log.debug("Modal result: " + res);
-      });
-    };
-    $scope.openStatic = function() {
-      return wdSegment({
-        id: {
-          $oid: "blah blah"
+  }).controller('TestCtrl', function($scope, $modal, $log) {
+    return $scope.openModal = function() {
+      $log.debug("AccessingopenModal");
+      return $modal.open({
+        templateUrl: 'templates/modals/modal_external_segment.html',
+        backdrop: 'static',
+        size: 'lg',
+        keyboard: false,
+        resolve: {
+          options: function() {
+            return {
+              showDetails: false,
+              is_new: false,
+              total: 14100
+            };
+          },
+          segments: function() {
+            return [5, 6];
+          }
         },
-        count: 34152,
-        t_id: 60
-      }, true);
-    };
-    $scope.toast = function() {
-      return wdToast("Title", "message", "info");
-    };
-    $scope.hierInput = {
-      name: '',
-      pName: 'Select Category',
-      co_type: 'both',
-      valueObj: {
-        Electronics: ['Electroni Accessories', 'Some other Subcat'],
-        Fashion: ['Vero Moda', 'Another Fashion brand', 'Some damn hot shoes'],
-        Home: ['Home Decor', 'Furniture', 'Bed', 'Sofas']
-      }
-    };
-    return $scope.hierOutput = {
-      value: [],
-      co_type: 'required'
+        controller: 'wdExternalSegmentCtrl'
+      });
     };
   });
 

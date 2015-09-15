@@ -44,46 +44,21 @@ angular.module('Wadi.controllers.main', [])
     $scope.data.username = ''
     $scope.data.password = ''
 
-.controller 'TestCtrl', ($scope, $state,
-                         wdConfirm,
-                         $log, wdToast, wdLinks, $modal, Upload, wdBlockApi, wdSegment) ->
-  $scope.submit = () ->
-    if $scope.file && !$scope.file.$error
-      $scope.upload($scope.file)
+.controller 'TestCtrl', ($scope, $modal, $log) ->
 
-  $scope.upload = (file) ->
-    Upload.upload({
-      url: wdBlockApi.upload
-      file: file
-    }).progress((evt) ->
-      progPerc = parseInt(100.0 * evt.loaded / evt.total )
-      $log.info "Progress: #{progPerc}% #{evt.config.file.name}"
-    ).success (data) ->
-      $log.info "Got result: "+JSON.stringify(data)
-
-  $scope.openConfirm = () ->
-    wdConfirm("Test send", "Can you get this correctly?")
-    .then (res) ->
-      $log.debug "Modal result: #{res}"
-
-  $scope.openStatic = () ->
-    wdSegment(
-      {id: {$oid: "blah blah"}, count: 34152, t_id: 60}
-    , true)
-
-  $scope.toast = () ->
-    wdToast("Title", "message", "info")
-
-  $scope.hierInput = {
-    name: ''
-    pName: 'Select Category'
-    co_type: 'both'
-    valueObj: {
-      Electronics: ['Electroni Accessories', 'Some other Subcat']
-      Fashion: ['Vero Moda', 'Another Fashion brand', 'Some damn hot shoes']
-      Home: ['Home Decor', 'Furniture', 'Bed', 'Sofas']
-    }
-  }
-  $scope.hierOutput = {
-    value: [], co_type: 'required'
-  }
+  $scope.openModal = () ->
+    $log.debug "AccessingopenModal"
+    $modal.open(
+      templateUrl: 'templates/modals/modal_external_segment.html'
+      backdrop: 'static'
+      size: 'lg'
+      keyboard: false
+      resolve: {
+        options: () ->
+          showDetails: false
+          is_new: false
+          total: 14100
+        segments: () -> [5,6]
+      }
+      controller: 'wdExternalSegmentCtrl'
+    )

@@ -1,0 +1,65 @@
+.modal-header
+  h3 Create Job for external database
+.modal-body
+  .container-fluid
+
+    // Details pane, only if we are creating new segments
+    .row(ng-if="showDetails")
+      .col-xs-12.col-sm-offset-2.col-sm-8
+        h4.text-center Details
+        div
+          label Total unsegmented customers:
+          span &nbsp {{ total | number : 0 }}
+        div
+          label Customers per segment:
+          span &nbsp About {{ total / data.length | number : 0 }}
+
+        //
+          dl.dl-horizontal
+            dt Total unsegmented customers
+            dd {{ total | number : 0 }}
+
+            dt Customers per segment
+            dd About {{ total / data.length | number : 0 }}
+
+    // Basic form
+    .row
+      form.form-horizontal(name='externalSegmentForm')
+        .panel.panel-default(ng-repeat="segment in data")
+          .panel-heading
+            h4.panel-title Segment {{ segment.segment_number }}
+          .panel-body
+            .form-group
+              label.control-label.col-sm-2 Date
+              .col-sm-4.col-xs-12
+                input.form-control(type='datetime-local' ng-model='segment.date' required)
+            .form-group
+              label.control-label.col-sm-2 Arabic
+              .col-sm-10
+                .input-group
+                  input.form-control(type='text' ng-model='segment.arabic' ng-required='segment.language != "English"')
+                  span.input-group-addon {{ segment.arabic.length | number : 0 }}
+            .form-group
+              label.control-label.col-sm-2 English
+              .col-sm-10
+                .input-group
+                  input.form-control(type='text' ng-model='segment.english' ng-required='segment.language != "Arabic"')
+                  span.input-group-addon {{ segment.english.length | number : 0 }}
+            .from-group
+              label.control-label.col-sm-2 Language
+              .col-sm-4
+                select.form-control(ng-model='segment.language' ng-options='x for x in ["Both", "English", "Arabic"]')
+              label.control-label.col-sm-2 Country
+              .col-sm-4
+                select.form-control(ng-model='segment.country' ng-options='x for x in ["Both", "KSA", "UAE"]')
+
+    .row.text-center(ng-if='is_new')
+      a(ng-click='removeSegment()' ng-if='data.length > 1').text-danger
+        i.fa.fa-minus-square.fa-3x
+      |&nbsp
+      a(ng-click='addSegment()' ng-if='externalSegmentForm.$valid').text-success
+        i.fa.fa-plus-square.fa-3x
+
+.modal-footer
+  button.btn.btn-warning(ng-click='$close(false)') Cancel
+  button.btn.btn-primary(ng-click='confirmAndSubmit()' ng-disabled='externalSegmentForm.$invalid || submitting') Submit
