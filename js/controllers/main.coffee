@@ -58,7 +58,7 @@ angular.module('Wadi.controllers.main', [])
           showDetails: false
           is_new: false
           total: 14100
-        segments: () -> [5,6]
+        segments: () -> [1,2]
       }
       controller: 'wdExternalSegmentCtrl'
     )

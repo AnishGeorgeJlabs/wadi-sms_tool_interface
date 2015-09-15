@@ -18,6 +18,7 @@
     cancel_job: base_api_url + "job/cancel",
     jobs: base_api_url + "jobs",
     segment_jobs: base_api_url + "job/segments",
+    segment_jobs_external: base + "external_data",
     form: base_api_url + "form",
     login: base_api_url + "login"
   }).constant('wdBlockApi', {

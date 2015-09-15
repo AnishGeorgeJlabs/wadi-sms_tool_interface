@@ -56,10 +56,11 @@ angular.module('Wadi.controllers.segments', [])
       $scope.submitting = false
       $scope.$close(true)
 
-.controller 'wdExternalSegmentCtrl', ($scope, $log, wdInterfaceApi, options, segments) ->
+.controller 'wdExternalSegmentCtrl', ($scope, $log, wdInterfaceApi, $http, wdConfirm, options, segments) ->
   $scope.showDetails = options.showDetails
   $scope.is_new = options.is_new
   $scope.data = []
+  $scope.debug = true
 
   counter = 1
   $scope.addSegment = (snum) ->
@@ -88,4 +89,29 @@ angular.module('Wadi.controllers.segments', [])
   $scope.removeSegment = () ->
     $scope.data.pop()
   $scope.confirmAndSubmit = () ->
+    wdConfirm("Confirm form submission", "Are you sure you want to create these segments?")
+    .then (res) ->
+      submit() if res
+
+  submit = () ->
     $log.debug "Submitting with segments: "+JSON.stringify($scope.data)
+    $scope.submitting = true
+    segments = _.map($scope.data, (obj) ->
+      _.mapObject(obj, (v,k) ->
+        if k == 'date'
+          parseInt(moment(v).format('x'))
+        else
+          v
+      )
+    )
+    res =
+      debug: $scope.debug
+      is_new: $scope.is_new
+      segments: segments
+
+    $log.debug "About to send: "+JSON.stringify(res)
+    $http.post(wdInterfaceApi.segment_jobs_external,res)
+    .success (res) ->
+      $log.info "Got result: #{JSON.stringify(res)}"
+      $scope.submitting = false
+      $scope.$close(true)

@@ -59,7 +59,7 @@
             };
           },
           segments: function() {
-            return [5, 6];
+            return [1, 2];
           }
         },
         controller: 'wdExternalSegmentCtrl'
