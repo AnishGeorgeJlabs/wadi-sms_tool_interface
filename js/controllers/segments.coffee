@@ -62,7 +62,10 @@ angular.module('Wadi.controllers.segments', [])
   $scope.data = []
   $scope.debug = true
 
-  counter = 1
+  if options.init_seg
+    counter = options.init_seg
+  else
+    counter = 1
   $scope.addSegment = (snum) ->
     if snum
       seg_num = snum
@@ -71,6 +74,7 @@ angular.module('Wadi.controllers.segments', [])
       counter += 1
     $scope.data.push({
       segment_number: seg_num
+      name: ''
       arabic: ''
       english: ''
       date: null
@@ -123,12 +127,3 @@ angular.module('Wadi.controllers.segments', [])
         $log.info "Error: "+ JSON.stringify(response)
         $scope.$close(false)
     )
-    ###
-    .success (res) ->
-      $log.info "Got result: #{JSON.stringify(res)}"
-      $scope.submitting = false
-      $scope.$close(true)
-    .failure (res) ->
-      $scope.$close(false)
-    j
-###

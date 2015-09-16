@@ -47,6 +47,10 @@
                                      ng-disabled='segment.no_job')
               fieldset(ng-disabled='segment.no_job')
                 .form-group
+                  label.control-label.col-sm-2 Name (optional)
+                  .col-sm-10
+                    input.form-control(type='text' ng-model='segment.name')
+                .form-group
                   label.control-label.col-sm-2 Arabic
                   .col-sm-10
                     .input-group

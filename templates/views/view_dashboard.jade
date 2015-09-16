@@ -1,14 +1,14 @@
 .row
   .page-header.text-center
-    h3 Dashboard
-      small Work in progress
+    h2 Dashboard
+      small &nbsp for internal database jobs only
 .row
-  ul.nav.nav-tabs.nav-justified
-    li(ng-class="{'active': isTab('jobs')}")
-      a(ng-click="changeTabTo('jobs')") Main Jobs
-    li(ng-class="{'active': isTab('segments')}")
-      a(ng-click="changeTabTo('segments')") Segments
-  br
+  .col-sm-offset-2.col-sm-8
+    ul.nav.nav-pills.nav-justified
+      li(ng-class="{'active': isTab('jobs')}")
+        a(ng-click="changeTabTo('jobs')") Main Jobs
+      li(ng-class="{'active': isTab('segments')}")
+        a(ng-click="changeTabTo('segments')") Segments
 
 // MAIN JOBS
 .row(ng-show="isTab('jobs')")

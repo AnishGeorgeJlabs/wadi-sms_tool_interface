@@ -10,12 +10,12 @@ body {
 }
 
 .no-gutter {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .no-right-gutter {
-    padding-right: 0px !important;
+    padding-right: 0 !important;
 }
 .control-label.text-center {
     text-align: center !important;
@@ -27,4 +27,7 @@ body {
 
 .ng-invalid.ng-touched {
     border-color: darkred;
+}
+ul.nav-justified {
+    margin-bottom: 20px !important;
 }

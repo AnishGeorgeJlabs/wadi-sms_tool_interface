@@ -30,7 +30,9 @@
         ng-repeat="job in main_job.jobs"
       )
         accordion-heading
-          span {{ $index + 1 }} :: {{ job.date | date }}
+          span {{ $index + 1 }} :: {{ job.date | date : 'MMM d, y h:mm a' }}
+          span(ng-if='job.name').text-primary
+            strong &nbsp&nbsp | {{ job.name }}
           span.pull-right.text-info {{ job.status }}
         .row
           .col-sm-7

@@ -82,12 +82,16 @@
       controller: 'wdExternalSegmentCtrl'
     };
     return {
-      new_segments: function(count) {
+      new_segments: function(count, init_seg) {
+        if (init_seg == null) {
+          init_seg = 1;
+        }
         basicOptions.resolve = {
           options: function() {
             return {
               showDetails: true,
               is_new: true,
+              init_seg: init_seg,
               total: count
             };
           },

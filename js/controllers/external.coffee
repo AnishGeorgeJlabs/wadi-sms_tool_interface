@@ -1,5 +1,7 @@
 angular.module('Wadi.controllers.external', [])
-.controller 'ExternalDataCtrl', ($scope, wdInterfaceApi, $interval, $http, wdExternalSegment, wdToast) ->
+.controller 'ExternalDataCtrl', ($state, $scope, wdInterfaceApi, $interval, $http, wdExternalSegment, wdToast) ->
+  if not $scope.$parent.checkLogin()
+    $state.go('login')
   $scope.data = []
   $scope.unsegmented_count = 0
 
@@ -22,7 +24,8 @@ angular.module('Wadi.controllers.external', [])
   )
 
   $scope.createSegments = () ->
-    wdExternalSegment.new_segments($scope.unsegmented_count)
+    init_seg = _.last($scope.data).segment_number + 1
+    wdExternalSegment.new_segments($scope.unsegmented_count, init_seg)
     .then (res) ->
       if res
         wdToast "Segmentation Request", "Your segmentation request has been processed successfully", 'success'

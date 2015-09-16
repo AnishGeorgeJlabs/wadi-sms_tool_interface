@@ -63,7 +63,11 @@
     $scope.is_new = options.is_new;
     $scope.data = [];
     $scope.debug = true;
-    counter = 1;
+    if (options.init_seg) {
+      counter = options.init_seg;
+    } else {
+      counter = 1;
+    }
     $scope.addSegment = function(snum) {
       var seg_num;
       if (snum) {
@@ -74,6 +78,7 @@
       }
       return $scope.data.push({
         segment_number: seg_num,
+        name: '',
         arabic: '',
         english: '',
         date: null,
@@ -133,16 +138,6 @@
         $log.info("Error: " + JSON.stringify(response));
         return $scope.$close(false);
       });
-
-      /*
-      .success (res) ->
-        $log.info "Got result: #{JSON.stringify(res)}"
-        $scope.submitting = false
-        $scope.$close(true)
-      .failure (res) ->
-        $scope.$close(false)
-      j
-       */
     };
   });
 

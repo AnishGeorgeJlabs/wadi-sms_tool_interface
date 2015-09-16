@@ -69,11 +69,12 @@ angular.module('Wadi.services', [])
     controller: 'wdExternalSegmentCtrl'
 
   return {
-    new_segments: (count) ->
+    new_segments: (count, init_seg=1) ->
       basicOptions.resolve = {
         options: () ->
           showDetails: true
           is_new: true
+          init_seg: init_seg
           total: count
         segments: () -> []
       }

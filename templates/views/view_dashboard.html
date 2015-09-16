@@ -1,14 +1,16 @@
 
 <div class="row">
   <div class="page-header text-center">
-    <h3>Dashboard<small>Work in progress</small></h3>
+    <h2>Dashboard<small>&nbsp for internal database jobs only</small></h2>
   </div>
 </div>
 <div class="row">
-  <ul class="nav nav-tabs nav-justified">
-    <li ng-class="{'active': isTab('jobs')}"><a ng-click="changeTabTo('jobs')">Main Jobs</a></li>
-    <li ng-class="{'active': isTab('segments')}"><a ng-click="changeTabTo('segments')">Segments</a></li>
-  </ul><br/>
+  <div class="col-sm-offset-2 col-sm-8">
+    <ul class="nav nav-pills nav-justified">
+      <li ng-class="{'active': isTab('jobs')}"><a ng-click="changeTabTo('jobs')">Main Jobs</a></li>
+      <li ng-class="{'active': isTab('segments')}"><a ng-click="changeTabTo('segments')">Segments</a></li>
+    </ul>
+  </div>
 </div>
 <!-- MAIN JOBS-->
 <div ng-show="isTab('jobs')" class="row">
