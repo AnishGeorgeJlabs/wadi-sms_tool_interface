@@ -28,36 +28,48 @@
         form.form-horizontal(name='externalSegmentForm')
           .panel.panel-default(ng-repeat="segment in data")
             .panel-heading
-              h4.panel-title Segment {{ segment.segment_number }}
+              h4
+                small Segment
+                span.text-info &nbsp {{ segment.segment_number }}
             .panel-body
               .form-group
-                label.control-label.col-sm-2 Date
-                .col-sm-4.col-xs-12
-                  input.form-control(type='datetime-local' ng-model='segment.date' required)
-              .form-group
-                label.control-label.col-sm-2 Arabic
-                .col-sm-10
-                  .input-group
-                    input.form-control(type='text' ng-model='segment.arabic' dir='rtl'
-                                        ng-required='segment.language != "English"'
-                                        ng-disabled='segment.language == "English"')
-                    span.input-group-addon {{ segment.arabic.length | number : 0 }}
-              .form-group
-                label.control-label.col-sm-2 English
-                .col-sm-10
-                  .input-group
-                    input.form-control(type='text' ng-model='segment.english'
-                                        ng-required='segment.language != "Arabic"'
-                                        ng-disabled='segment.language == "Arabic"')
-                    span.input-group-addon {{ segment.english.length | number : 0 }}
-              .from-group
-                label.control-label.col-sm-2 Language
-                .col-sm-4
-                  select.form-control(ng-model='segment.language' ng-options='x for x in ["Both", "English", "Arabic"]')
-                label.control-label.col-sm-2 Country
-                .col-sm-4
-                  select.form-control(ng-model='segment.country' ng-options='x for x in ["Both", "KSA", "UAE"]')
+                .col-sm-offset-2.col-sm-4
+                  .checkbox(ng-if='is_new')
+                    label
+                      input(type="checkbox" ng-model='segment.no_job')
+                      | Don't Schedule Job
 
+                label.control-label.col-sm-1 Date
+                .col-sm-5.col-xs-12
+                  input.form-control(type='datetime-local' ng-model='segment.date'
+                                     ng-required='!segment.no_job'
+                                     ng-disabled='segment.no_job')
+              fieldset(ng-disabled='segment.no_job')
+                .form-group
+                  label.control-label.col-sm-2 Arabic
+                  .col-sm-10
+                    .input-group
+                      input.form-control(type='text' ng-model='segment.arabic' dir='rtl'
+                                          ng-required='!segment.no_job && segment.language != "English"'
+                                          ng-disabled='segment.language == "English"')
+                      span.input-group-addon {{ segment.arabic.length | number : 0 }}
+                .form-group
+                  label.control-label.col-sm-2 English
+                  .col-sm-10
+                    .input-group
+                      input.form-control(type='text' ng-model='segment.english'
+                                          ng-required='!segment.no_job && segment.language != "Arabic"'
+                                          ng-disabled='segment.language == "Arabic"')
+                      span.input-group-addon {{ segment.english.length | number : 0 }}
+                .form-group
+                  label.control-label.col-sm-2 Language
+                  .col-sm-4
+                    select.form-control(ng-model='segment.language' ng-options='x for x in ["Both", "English", "Arabic"]')
+                  label.control-label.col-sm-2 Country
+                  .col-sm-4
+                    select.form-control(ng-model='segment.country' ng-options='x for x in ["Both", "KSA", "UAE"]')
+
+    // + - buttons
     .row.text-center(ng-if='is_new')
       a(ng-click='removeSegment()' ng-if='data.length > 1').text-danger
         i.fa.fa-minus-square.fa-3x

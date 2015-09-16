@@ -110,8 +110,11 @@ angular.module('Wadi.controllers.segments', [])
       segments: segments
 
     $log.debug "About to send: "+JSON.stringify(res)
+    ###
     $http.post(wdInterfaceApi.segment_jobs_external,res)
     .success (res) ->
       $log.info "Got result: #{JSON.stringify(res)}"
       $scope.submitting = false
       $scope.$close(true)
+
+    ###

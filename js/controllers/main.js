@@ -53,8 +53,8 @@
         resolve: {
           options: function() {
             return {
-              showDetails: false,
-              is_new: false,
+              showDetails: true,
+              is_new: true,
               total: 14100
             };
           },

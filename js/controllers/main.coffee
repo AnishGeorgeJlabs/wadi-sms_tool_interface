@@ -55,8 +55,8 @@ angular.module('Wadi.controllers.main', [])
       keyboard: false
       resolve: {
         options: () ->
-          showDetails: false
-          is_new: false
+          showDetails: true
+          is_new: true
           total: 14100
         segments: () -> [1,2]
       }
