@@ -72,6 +72,46 @@
         controller: 'wdSegmentCtrl'
       }).result;
     };
+  }).factory('wdExternalSegment', function($modal) {
+    var basicOptions;
+    basicOptions = {
+      templateUrl: 'templates/modals/modal_external_segment.html',
+      backdrop: 'static',
+      size: 'lg',
+      keyboard: false,
+      controller: 'wdExternalSegmentCtrl'
+    };
+    return {
+      new_segments: function(count) {
+        basicOptions.resolve = {
+          options: function() {
+            return {
+              showDetails: true,
+              is_new: true,
+              total: count
+            };
+          },
+          segments: function() {
+            return [];
+          }
+        };
+        return $modal.open(basicOptions).result;
+      },
+      old_segment: function(seg_num) {
+        basicOptions.resolve = {
+          options: function() {
+            return {
+              showDetails: false,
+              is_new: false
+            };
+          },
+          segments: function() {
+            return [seg_num];
+          }
+        };
+        return $modal.open(basicOptions).result;
+      }
+    };
   });
 
 }).call(this);

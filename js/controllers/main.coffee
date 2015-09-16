@@ -44,8 +44,11 @@ angular.module('Wadi.controllers.main', [])
     $scope.data.username = ''
     $scope.data.password = ''
 
-.controller 'TestCtrl', ($scope, $modal, $log) ->
+.controller 'TestCtrl', ($scope, $modal, $log, wdExternalSegment) ->
 
+  $scope.openModal = () ->
+    wdExternalSegment.new_segments(4)
+  ###
   $scope.openModal = () ->
     $log.debug "AccessingopenModal"
     $modal.open(
@@ -62,3 +65,5 @@ angular.module('Wadi.controllers.main', [])
       }
       controller: 'wdExternalSegmentCtrl'
     )
+
+  ###

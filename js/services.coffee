@@ -60,3 +60,31 @@ angular.module('Wadi.services', [])
       controller: 'wdSegmentCtrl'
     ).result
 
+.factory 'wdExternalSegment', ($modal) ->
+  basicOptions =
+    templateUrl: 'templates/modals/modal_external_segment.html'
+    backdrop: 'static'
+    size: 'lg'
+    keyboard: false
+    controller: 'wdExternalSegmentCtrl'
+
+  return {
+    new_segments: (count) ->
+      basicOptions.resolve = {
+        options: () ->
+          showDetails: true
+          is_new: true
+          total: count
+        segments: () -> []
+      }
+      $modal.open(basicOptions).result
+
+    old_segment: (seg_num) ->
+      basicOptions.resolve = {
+        options: () ->
+          showDetails: false
+          is_new: false
+        segments: () -> [seg_num]
+      }
+      $modal.open(basicOptions).result
+  }

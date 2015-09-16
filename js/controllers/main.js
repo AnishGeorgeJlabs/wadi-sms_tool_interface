@@ -42,29 +42,29 @@
       $scope.data.username = '';
       return $scope.data.password = '';
     };
-  }).controller('TestCtrl', function($scope, $modal, $log) {
+  }).controller('TestCtrl', function($scope, $modal, $log, wdExternalSegment) {
     return $scope.openModal = function() {
-      $log.debug("AccessingopenModal");
-      return $modal.open({
-        templateUrl: 'templates/modals/modal_external_segment.html',
-        backdrop: 'static',
-        size: 'lg',
-        keyboard: false,
-        resolve: {
-          options: function() {
-            return {
-              showDetails: true,
-              is_new: true,
-              total: 14100
-            };
-          },
-          segments: function() {
-            return [1, 2];
-          }
-        },
-        controller: 'wdExternalSegmentCtrl'
-      });
+      return wdExternalSegment.new_segments(4);
     };
+
+    /*
+    $scope.openModal = () ->
+      $log.debug "AccessingopenModal"
+      $modal.open(
+        templateUrl: 'templates/modals/modal_external_segment.html'
+        backdrop: 'static'
+        size: 'lg'
+        keyboard: false
+        resolve: {
+          options: () ->
+            showDetails: true
+            is_new: true
+            total: 14100
+          segments: () -> [1,2]
+        }
+        controller: 'wdExternalSegmentCtrl'
+      )
+     */
   });
 
 }).call(this);

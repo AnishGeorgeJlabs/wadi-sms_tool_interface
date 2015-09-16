@@ -5,8 +5,8 @@
 
     // Details pane, only if we are creating new segments
     .row(ng-if="showDetails")
-      .col-xs-12.col-sm-offset-2.col-sm-8
-        h4.text-center Details
+      .col-xs-12.col-sm-offset-2.col-sm-8.text-center
+        h4 Details
         div
           label Total unsegmented customers:
           span &nbsp {{ total | number : 0 }}
@@ -34,13 +34,13 @@
                 span.text-info &nbsp {{ segment.segment_number }}
             .panel-body
               .form-group
-                .col-sm-offset-2.col-sm-4
-                  .checkbox(ng-if='is_new')
+                .col-sm-offset-2.col-sm-4(ng-if='is_new')
+                  .checkbox
                     label
                       input(type="checkbox" ng-model='segment.no_job')
                       | Don't Schedule Job
 
-                label.control-label.col-sm-1 Date
+                label.control-label(ng-class="{'col-sm-1': is_new, 'col-sm-2': !is_new}") Date
                 .col-sm-5.col-xs-12
                   input.form-control(type='datetime-local' ng-model='segment.date'
                                      ng-required='!segment.no_job'
