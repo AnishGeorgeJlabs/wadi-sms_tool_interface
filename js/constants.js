@@ -19,6 +19,7 @@
     jobs: base_api_url + "jobs",
     segment_jobs: base_api_url + "job/segments",
     segment_jobs_external: base_api_url + "external_segments",
+    external_data_counts: base + "external_data/count",
     form: base_api_url + "form",
     login: base_api_url + "login"
   }).constant('wdBlockApi', {

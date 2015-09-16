@@ -1,0 +1,44 @@
+.row
+  .page-header
+    h2.text-center Jobs for External Database
+
+// For the LIST
+.row(ng-repeat='main_job in data')
+  h2.text-center
+    small Segment #
+    | {{ main_job.segment_number }}
+  .col-sm-4.col-xs-12
+    h4
+      i.fa.fa-user.fa-lg.fa-fw
+      | &nbsp customer count: {{ main_job.total }}
+
+    button.btn.btn-primary
+      i.fa.fa-paper-plane.fa-2x.fa-fw
+      | &nbsp Schedule a job
+  .col-sm-8.col-xs-12
+    .alert.alert-warning(ng-if='main_job.jobs.length == 0')
+      | No past jobs scheduled for this segment of customers
+    accordion(ng-if='main_job.jobs.length > 0')
+      accordion-group(
+        ng-repeat="job in main_job.jobs"
+      )
+        accordion-heading
+          span {{ $index + 1 }} :: {{ job.date | date }}
+          span.pull-right.text-info {{ job.status }}
+        .row
+          .col-sm-7
+            dl.dl-horizontal
+              dt(ng-if='job.arabic') Arabic content
+              dd(ng-if='job.arabic') {{ job.arabic }}
+
+              dt(ng-if='job.english') English content
+              dd(ng-if='job.english') {{ job.english }}
+          .col-sm-5
+            dl.dl-horizontal
+              dt Country
+              dd {{ job.country }}
+
+              dt Language
+              dd {{ job.language }}
+    hr
+
