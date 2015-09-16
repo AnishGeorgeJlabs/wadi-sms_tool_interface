@@ -60,7 +60,7 @@ angular.module('Wadi.controllers.segments', [])
   $scope.showDetails = options.showDetails
   $scope.is_new = options.is_new
   $scope.data = []
-  $scope.debug = true
+  $scope.debug = false
 
   if options.init_seg
     counter = options.init_seg
