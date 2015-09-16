@@ -56,12 +56,12 @@ html(ng-app='Wadi')
           #navCollapse.collapse.navbar-collapse(ng-if='checkLogin()')
             ul.nav.navbar-nav
               li(ng-class="{'active': isState('dashboard')}")
-                a(href="#" ng-click="goTo('dashboard')") Dashboard
-              li(ng-class="{'active': isState('form')}")
-                a(href='#' ng-click="goTo('form')") New Job
-              li(ng-class="{'active': isState('block_list')}")
-                a(href="#" ng-click="goTo('block_list')") Block List&nbsp
+                a(ui-sref="dashboard" ) Dashboard &nbsp
                   span.badge new!
+              li(ng-class="{'active': isState('form')}")
+                a(ui-sref="form") Internal Job
+              li(ng-class="{'active': isState('block_list')}")
+                a(ui-sref="block_list") Block List
             .btn-group.navbar-right(role='group')
               a.btn.btn-success.navbar-btn.navbar-btn(ng-href="{{sheet_link}}", target='_blank') Scheduling Sheet
               a.btn.btn-warning.navbar-btn.navbar-btn(ng-href="{{doc_link}}", target='_blank') Documentation

@@ -24,6 +24,7 @@
 
     // Basic form
     .row
+      h4.text-center(ng-if="showDetails") Create Segments
       .col-xs-12.col-sm-offset-1.col-sm-10
         form.form-horizontal(name='externalSegmentForm')
           .panel.panel-default(ng-repeat="segment in data")
