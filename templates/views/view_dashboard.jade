@@ -63,12 +63,6 @@
           span.glyphicon.glyphicon-trash &nbsp
           | Cancel Job
 
-      //
-        ul.list-group
-          li.list-group-item
-            strong Repetition type: &nbsp
-            | {{ job.repeat }}
-
 // SEGMENTS
 .row(ng-show="isTab('segments')")
   .col-md-offset-2.col-md-8
@@ -79,17 +73,16 @@
         h3.panel-title {{ job.name }} :: {{ job.timestamp | date : 'MMM d yyyy, hh:mm a' }}
       .panel-body
         .row
-          .col-sm-10.col-xs-8
+          .col-sm-8
             p.text-muted {{ job.description }}
-          .col-sm-2.col-xs-4.text-right
+          .col-sm-4.text-right
             ul.list-unstyled(ng-if='job.count')
               li
-                i.fa.fa-fw.fa-users &nbsp
-                | {{ job.count | number : 0 }}
+                strong {{ job.count | number : 0 }}
+                | &nbsp customers
               li
-                i.fa.fa-fw.fa-user &nbsp
-                i.fa.fa-fw.fa-clone &nbsp
-                | {{ job.count / job.segments.length | number : 0 }}
+                strong {{ job.count / job.segments.length | number : 0 }}
+                | &nbsp per segment
         .row
           .col-xs-offset-1.col-xs-10
             accordion

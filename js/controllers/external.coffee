@@ -1,5 +1,5 @@
 angular.module('Wadi.controllers.external', [])
-.controller 'ExternalDataCtrl', ($state, $scope, wdInterfaceApi, $interval, $http, wdExternalSegment, wdToast) ->
+.controller 'ExternalDataCtrl', ($state, $log, $scope, wdInterfaceApi, $interval, $http, wdExternalSegment, wdToast) ->
   if not $scope.$parent.checkLogin()
     $state.go('login')
   $scope.data = []

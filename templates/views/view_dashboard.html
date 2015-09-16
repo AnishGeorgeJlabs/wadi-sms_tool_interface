@@ -53,13 +53,6 @@
         <button ng-if="job.segmented &amp;&amp; (job.status == 'Data Loaded' || job.status == 'Done')" ng-click="segment(job)" class="btn btn-sm btn-primary">Segment</button>
         <button ng-click="confirmAndCancelJob(job._id, job.t_id)" ng-if="job.status != 'Done'" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash">&nbsp</span>Cancel Job</button>
       </div>
-      <!--
-      ul.list-group
-        li.list-group-item
-          strong Repetition type: &nbsp
-          | {{ job.repeat }}
-      
-      -->
     </div>
   </div>
 </div>
@@ -73,13 +66,13 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-sm-10 col-xs-8">
+          <div class="col-sm-8">
             <p class="text-muted">{{ job.description }}</p>
           </div>
-          <div class="col-sm-2 col-xs-4 text-right">
+          <div class="col-sm-4 text-right">
             <ul ng-if="job.count" class="list-unstyled">
-              <li><i class="fa fa-fw fa-users">&nbsp</i>{{ job.count | number : 0 }}</li>
-              <li><i class="fa fa-fw fa-user">&nbsp</i><i class="fa fa-fw fa-clone">&nbsp</i>{{ job.count / job.segments.length | number : 0 }}</li>
+              <li><strong>{{ job.count | number : 0 }}</strong>&nbsp customers</li>
+              <li><strong>{{ job.count / job.segments.length | number : 0 }}</strong>&nbsp per segment</li>
             </ul>
           </div>
         </div>
