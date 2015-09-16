@@ -75,9 +75,9 @@
       a(ng-click='removeSegment()' ng-if='data.length > 1').text-danger
         i.fa.fa-minus-square.fa-3x
       |&nbsp
-      a(ng-click='addSegment()' ng-if='externalSegmentForm.$valid').text-success
+      a(ng-click='addSegment()' ng-if='externalSegmentForm.$valid && total / (data.length+1) >= 1').text-success
         i.fa.fa-plus-square.fa-3x
 
 .modal-footer
-  button.btn.btn-warning(ng-click='$close(false)') Cancel
+  button.btn.btn-warning(ng-click='$dismiss("not used")') Cancel
   button.btn.btn-primary(ng-click='confirmAndSubmit()' ng-disabled='externalSegmentForm.$invalid || submitting') Submit

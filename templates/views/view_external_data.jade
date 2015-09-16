@@ -3,7 +3,7 @@
     h2.text-center Jobs for External Database
 
 .row.text-center(ng-if='unsegmented_count != 0')
-  a
+  a(ng-click='createSegments()')
     | &nbsp {{ unsegmented_count }} customers are unsegmented. Click here to segment them.
   hr
 
@@ -19,7 +19,7 @@
       i.fa.fa-user.fa-lg.fa-fw
       | &nbsp Total customers: {{ main_job.total }}
 
-    button.btn.btn-primary
+    button.btn.btn-primary(ng-click='scheduleJob(main_job.segment_number)')
       i.fa.fa-paper-plane.fa-2x.fa-fw
       | &nbsp Schedule a job
   .col-sm-8.col-xs-12

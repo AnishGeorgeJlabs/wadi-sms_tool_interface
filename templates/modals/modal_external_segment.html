@@ -82,10 +82,10 @@
       </div>
     </div>
     <!-- + - buttons-->
-    <div ng-if="is_new" class="row text-center"><a ng-click="removeSegment()" ng-if="data.length &gt; 1" class="text-danger"><i class="fa fa-minus-square fa-3x"></i></a>&nbsp<a ng-click="addSegment()" ng-if="externalSegmentForm.$valid" class="text-success"><i class="fa fa-plus-square fa-3x"></i></a></div>
+    <div ng-if="is_new" class="row text-center"><a ng-click="removeSegment()" ng-if="data.length &gt; 1" class="text-danger"><i class="fa fa-minus-square fa-3x"></i></a>&nbsp<a ng-click="addSegment()" ng-if="externalSegmentForm.$valid &amp;&amp; total / (data.length+1) &gt;= 1" class="text-success"><i class="fa fa-plus-square fa-3x"></i></a></div>
   </div>
 </div>
 <div class="modal-footer">
-  <button ng-click="$close(false)" class="btn btn-warning">Cancel</button>
+  <button ng-click="$dismiss(&quot;not used&quot;)" class="btn btn-warning">Cancel</button>
   <button ng-click="confirmAndSubmit()" ng-disabled="externalSegmentForm.$invalid || submitting" class="btn btn-primary">Submit</button>
 </div>

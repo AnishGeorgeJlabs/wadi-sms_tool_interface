@@ -121,11 +121,28 @@
         segments: segments
       };
       $log.debug("About to send: " + JSON.stringify(res));
-      return $http.post(wdInterfaceApi.segment_jobs_external, res).success(function(res) {
-        $log.info("Got result: " + (JSON.stringify(res)));
+      return $http.post(wdInterfaceApi.segment_jobs_external, res).then(function(response) {
+        $log.info("Got result: " + JSON.stringify(response.data));
         $scope.submitting = false;
-        return $scope.$close(true);
+        if (response.data.success) {
+          return $scope.$close(true);
+        } else {
+          return $scope.$close(false);
+        }
+      }, function(response) {
+        $log.info("Error: " + JSON.stringify(response));
+        return $scope.$close(false);
       });
+
+      /*
+      .success (res) ->
+        $log.info "Got result: #{JSON.stringify(res)}"
+        $scope.submitting = false
+        $scope.$close(true)
+      .failure (res) ->
+        $scope.$close(false)
+      j
+       */
     };
   });
 
