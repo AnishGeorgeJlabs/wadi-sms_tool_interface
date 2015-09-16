@@ -2,6 +2,13 @@
   .page-header
     h2.text-center Jobs for External Database
 
+.row.text-center(ng-if='unsegmented_count != 0')
+  a
+    | &nbsp {{ unsegmented_count }} customers are unsegmented. Click here to segment them.
+  hr
+
+
+
 // For the LIST
 .row(ng-repeat='main_job in data')
   h2.text-center
@@ -10,7 +17,7 @@
   .col-sm-4.col-xs-12
     h4
       i.fa.fa-user.fa-lg.fa-fw
-      | &nbsp customer count: {{ main_job.total }}
+      | &nbsp Total customers: {{ main_job.total }}
 
     button.btn.btn-primary
       i.fa.fa-paper-plane.fa-2x.fa-fw
