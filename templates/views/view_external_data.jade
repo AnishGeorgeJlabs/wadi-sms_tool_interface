@@ -10,7 +10,7 @@
 
 
 // For the LIST
-.row(ng-repeat='main_job in data')
+.row(ng-repeat-start='main_job in data')
   h2.text-center
     small Segment #
     | {{ main_job.segment_number }}
@@ -47,5 +47,7 @@
 
               dt Language
               dd {{ job.language }}
+.row(ng-repeat-end='')
+  .col-xs-12
     hr
 
