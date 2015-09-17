@@ -1,5 +1,5 @@
 angular.module('Wadi.controllers.external', [])
-.controller 'ExternalDataCtrl', ($state, $log, $scope, wdInterfaceApi, $interval, $http, wdExternalSegment, wdToast) ->
+.controller 'ExternalDataCtrl', ($state, $log, $scope, wdInterfaceApi, $interval, $http, wdExternalSegment, wdToast, wdConfirm) ->
   if not $scope.$parent.checkLogin()
     $state.go('login')
   $scope.data = []
@@ -40,3 +40,18 @@ angular.module('Wadi.controllers.external', [])
           wdToast "Job Scheduling", "The job has been successfully scheduled", 'success'
         else
           wdToast "Segmentation Request", "An Error has occurred during the request", 'error'
+
+  $scope.confirmAndCancelJob = (segment_number, job_number) ->
+    wdConfirm("Confirm cancellation", "Are you sure you want to cancel Segment ##{segment_number}, Job ##{job_number+1}?")
+    .then (res) ->
+      if res
+        cancelJob(segment_number, job_number)
+
+  cancelJob = (segment_number, job_number) ->
+    $http.post(wdInterfaceApi.cancel_job, {
+      segment_number: segment_number
+      job_number: job_number
+    }).success (data) ->
+      if data.success
+        wdToast("Cancellation", "The requested job has been cancelled successfully", "info")
+        refresh()

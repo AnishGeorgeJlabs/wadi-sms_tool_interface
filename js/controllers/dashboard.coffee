@@ -74,7 +74,6 @@ angular.module('Wadi.controllers.dashboard', [])
 
 
   $scope.cancelJob = (oid, t_id) ->
-
     obj = {
       id: oid
     }
@@ -84,7 +83,8 @@ angular.module('Wadi.controllers.dashboard', [])
     $log.debug "About to post: "+JSON.stringify(obj)
     $http.post(wdInterfaceApi.cancel_job, obj)
     .success (data) ->
-      $log.info "Job canceled successfully: "+JSON.stringify(data)
+      if data.success
+        wdToast("Job Cancellation", "The Job has been cancelled, the dashboard will refresh shortly", "info")
 
   $scope.segment = (job) ->
     wdSegment(job)

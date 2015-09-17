@@ -78,7 +78,9 @@
       }
       $log.debug("About to post: " + JSON.stringify(obj));
       return $http.post(wdInterfaceApi.cancel_job, obj).success(function(data) {
-        return $log.info("Job canceled successfully: " + JSON.stringify(data));
+        if (data.success) {
+          return wdToast("Job Cancellation", "The Job has been cancelled, the dashboard will refresh shortly", "info");
+        }
       });
     };
     return $scope.segment = function(job) {

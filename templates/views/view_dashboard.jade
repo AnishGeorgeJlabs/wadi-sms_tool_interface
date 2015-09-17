@@ -50,7 +50,7 @@
                   a(ng-href="{{ job.file }}", target='_blank')
                     i.fa-fw.fa.fa-database.fa-lg &nbsp
                     | Data
-      .panel-footer.text-right(ng-if='job.status != "Cancel" && job.status != "Pending"')
+      .panel-footer.text-right(ng-if='job.status != "Cancel" && job.status != "Cancelled" && job.status != "Pending"')
         button.btn.btn-sm.btn-primary(
           ng-if="job.segmented && (job.status == 'Data Loaded' || job.status == 'Done')"
           ng-click="segment(job)"

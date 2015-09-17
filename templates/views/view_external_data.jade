@@ -33,22 +33,30 @@
           span {{ $index + 1 }} :: {{ job.date | date : 'MMM d, y h:mm a' }}
           span(ng-if='job.name').text-primary
             strong &nbsp&nbsp | {{ job.name }}
-          span.pull-right.text-info {{ job.status }}
+          span.pull-right(ng-class="{'text-warning': job.status == 'Cancel' || job.status == 'Cancelled', " +
+          "'text-danger': job.status == 'Missed', 'text-success': job.status == 'Done' }"
+          )
+            | {{ job.status }}
         .row
-          .col-sm-7
+          .col-sm-7.col-xs-12
             dl.dl-horizontal
               dt(ng-if='job.arabic') Arabic content
               dd(ng-if='job.arabic') {{ job.arabic }}
 
               dt(ng-if='job.english') English content
               dd(ng-if='job.english') {{ job.english }}
-          .col-sm-5
+          .col-sm-4.col-xs-8
             dl.dl-horizontal
               dt Country
               dd {{ job.country }}
 
               dt Language
               dd {{ job.language }}
+          .col-sm-1.col-xs-4(ng-if='job.status == "Registered"')
+            a(ng-click='confirmAndCancelJob(main_job.segment_number, $index)')
+              span.fa-stack.fa-lg.text-danger
+                i.fa.fa-square-o.fa-stack-2x
+                i.fa.fa-trash.fa-stack-1x
 .row(ng-repeat-end='')
   .col-xs-12
     hr

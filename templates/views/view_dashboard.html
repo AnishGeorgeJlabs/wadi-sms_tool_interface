@@ -49,7 +49,7 @@
           </div>
         </div>
       </div>
-      <div ng-if="job.status != &quot;Cancel&quot; &amp;&amp; job.status != &quot;Pending&quot;" class="panel-footer text-right">
+      <div ng-if="job.status != &quot;Cancel&quot; &amp;&amp; job.status != &quot;Cancelled&quot; &amp;&amp; job.status != &quot;Pending&quot;" class="panel-footer text-right">
         <button ng-if="job.segmented &amp;&amp; (job.status == 'Data Loaded' || job.status == 'Done')" ng-click="segment(job)" class="btn btn-sm btn-primary">Segment</button>
         <button ng-click="confirmAndCancelJob(job._id, job.t_id)" ng-if="job.status != 'Done'" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash">&nbsp</span>Cancel Job</button>
       </div>
