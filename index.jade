@@ -42,19 +42,19 @@ html(ng-app='Wadi')
             button(type='button', data-toggle='collapse' data-target='#navCollapse' aria-expanded='false').navbar-toggle.collapsed.btn-default
               span.glyphicon.glyphicon-menu-hamburger
             a.navbar-brand(href='#') Wadi SMS Tool
-          .navbar-text(dropdown)
-            a.navbar-link(ng-if='checkLogin()' dropdown-toggle)
-              i.fa.fa-cog.fa-lg.fa-fw
-            ul.dropdown-menu
-              li.dropdown-header Logged in as {{ creds.username }}
-              li
-                a(ng-click='logout()')
-                  i.fa.fa-sign-out.fa-fw
-                  | Log out
-              li
-                a
-                  i.fa.fa-pencil-square-o.fa-fw
-                  | Change password
+            span.navbar-brand(dropdown)
+              a.navbar-link(ng-if='checkLogin()' dropdown-toggle)
+                i.fa.fa-cog.fa-lg.fa-fw
+              ul.dropdown-menu
+                li.dropdown-header Logged in as {{ creds.username }}
+                li
+                  a(ng-click='logout()')
+                    i.fa.fa-sign-out.fa-fw
+                    | Log out
+                li
+                  a
+                    i.fa.fa-pencil-square-o.fa-fw
+                    | Change password
 
           #navCollapse.collapse.navbar-collapse(ng-if='checkLogin()')
             ul.nav.navbar-nav
