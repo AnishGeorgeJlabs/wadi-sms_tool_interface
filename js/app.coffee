@@ -45,3 +45,4 @@ angular.module('Wadi', ['ui.router', 'ui.select', 'ui.bootstrap', 'ngSanitize', 
     directive.templateUrl = "./templates/directives/my_accordion.html"
     $delegate
   )
+

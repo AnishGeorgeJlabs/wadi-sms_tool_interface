@@ -4,6 +4,9 @@
     var isLoggedIn;
     $log.debug("Main executed");
     $state.go('login');
+    $scope.creds = {
+      username: ''
+    };
     isLoggedIn = false;
     $scope.checkLogin = function() {
       return isLoggedIn;
@@ -12,6 +15,7 @@
     $scope.doc_link = wdLinks.docs;
     $scope.login = function(username, pass) {
       $log.debug("Got submission " + username + ", " + pass);
+      $scope.creds.username = username;
       return $http.post(wdInterfaceApi.login, {
         username: username,
         password: pass
@@ -24,6 +28,10 @@
           return alert("Authentication failed");
         }
       });
+    };
+    $scope.logout = function() {
+      isLoggedIn = false;
+      return $state.go('login');
     };
     $scope.isState = function(statename) {
       return $state.is(statename);

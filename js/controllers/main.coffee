@@ -2,6 +2,8 @@ angular.module('Wadi.controllers.main', [])
 .controller 'MainCtrl', ($scope, $state, $http, $log, wdLinks, wdInterfaceApi) ->
   $log.debug "Main executed"
   $state.go('login')
+  $scope.creds =
+    username: ''
 
   isLoggedIn = false
 
@@ -12,6 +14,7 @@ angular.module('Wadi.controllers.main', [])
 
   $scope.login = (username, pass) ->
     $log.debug "Got submission #{username}, #{pass}"
+    $scope.creds.username = username
     $http.post wdInterfaceApi.login, {
       username: username,
       password: pass
@@ -23,6 +26,10 @@ angular.module('Wadi.controllers.main', [])
         $state.go('dashboard')
       else
         alert "Authentication failed"
+
+  $scope.logout = () ->
+    isLoggedIn = false
+    $state.go('login')
 
 
   $scope.isState = (statename) ->
