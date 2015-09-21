@@ -1,0 +1,35 @@
+
+<div class="modal-header">
+  <h3 class="modal-title">{{ title }}</h3>
+</div>
+<div class="modal-body">
+  <form name="chForm" class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-xs-4">Username</label>
+      <div class="col-xs-8">
+        <input ng-model="data.username" name="username" type="text" readonly="readonly" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">Old Password</label>
+      <div class="col-xs-8">
+        <input ng-model="data.old_pass" name="old_pass" type="password" required="required" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">New Password</label>
+      <div class="col-xs-8">
+        <input ng-model="data.new_pass" name="new_pass" type="password" required="required" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">Confirm new password</label>
+      <div class="col-xs-8">
+        <input ng-model="data.new_pass_rep" name="new_pass_rep" type="password" required="required" compare-to="data.new_pass" class="form-control"/>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <div class="btn-group btn-group-justified"><a role="button" ng-click="$dismiss()" class="btn btn-warning btn-sm">Cancel</a><a role="button" ng-click="submit()" ng-disabled="!chForm.$valid" class="btn btn-primary btn-sm">Submit</a></div>
+</div>

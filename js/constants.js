@@ -21,7 +21,8 @@
     segment_jobs_external: base_api_url + "external_segments",
     external_data_counts: base + "external_data/count",
     form: base_api_url + "form",
-    login: base_api_url + "login"
+    login: base_api_url + "login",
+    change_pass: base_api_url + "change_pass"
   }).constant('wdBlockApi', {
     upload: block_list_url + "upload",
     count: block_list_url + "count"

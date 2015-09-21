@@ -47,11 +47,11 @@
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <button type="button" data-toggle="collapse" data-target="#navCollapse" aria-expanded="false" class="navbar-toggle collapsed btn-default"><span class="glyphicon glyphicon-menu-hamburger"></span></button><a href="#" class="navbar-brand">Wadi SMS Tool</a><span dropdown class="navbar-brand"><a ng-if="checkLogin()" dropdown-toggle class="navbar-link"><i class="fa fa-cog fa-lg fa-fw"></i></a>
+            <button type="button" data-toggle="collapse" data-target="#navCollapse" aria-expanded="false" class="navbar-toggle collapsed btn-default"><span class="glyphicon glyphicon-menu-hamburger"></span></button><a href="#" class="navbar-brand">Wadi SMS Tool</a><span ng-controller="AccountDropDownCtrl" dropdown class="navbar-brand"><a ng-if="checkLogin()" dropdown-toggle class="navbar-link"><i class="fa fa-cog fa-lg fa-fw"></i></a>
               <ul class="dropdown-menu">
                 <li class="dropdown-header">Logged in as {{ creds.username }}</li>
                 <li><a ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i>Log out</a></li>
-                <li><a><i class="fa fa-pencil-square-o fa-fw"></i>Change password</a></li>
+                <li><a ng-click="changePass()"><i class="fa fa-pencil-square-o fa-fw"></i>Change password</a></li>
               </ul></span>
           </div>
           <div id="navCollapse" ng-if="checkLogin()" class="collapse navbar-collapse">

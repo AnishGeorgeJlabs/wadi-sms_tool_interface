@@ -9,6 +9,17 @@ angular.module('Wadi.directives', [])
     model: '=model'
   templateUrl: './templates/directives/dir_co_type.html'
 
+.directive 'compareTo', () ->
+  require: 'ngModel'
+  scope:
+    otherModelValue: '=compareTo'
+  link: (scope, element, attributes, ngModel) ->
+    ngModel.$validators.compareTo = (modelValue) ->
+      modelValue == scope.otherModelValue
+    scope.$watch('otherModelValue', () ->
+      ngModel.$validate()
+    )
+
 .directive 'wdRangeInput', () ->
   restrict: 'E'
   scope:

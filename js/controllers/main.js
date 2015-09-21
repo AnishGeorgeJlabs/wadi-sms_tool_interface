@@ -39,6 +39,49 @@
     return $scope.goTo = function(statename) {
       return $state.go(statename);
     };
+  }).controller('AccountDropDownCtrl', function($scope, $modal, $http, wdInterfaceApi, wdToast, $log) {
+    $scope.data = {
+      username: ''
+    };
+    return $scope.changePass = function() {
+      return $modal.open({
+        templateUrl: './templates/modals/modal_change_pass.html',
+        resolve: {
+          username: function() {
+            return $scope.$parent.creds.username;
+          }
+        },
+        controller: function($scope, $modalInstance, username) {
+          $scope.data = {
+            username: username,
+            old_pass: '',
+            new_pass: '',
+            new_pass_rep: ''
+          };
+          return $scope.submit = function() {
+            return $modalInstance.close({
+              username: $scope.data.username,
+              old_pass: md5($scope.data.old_pass),
+              new_pass: md5($scope.data.new_pass)
+            });
+          };
+        }
+      }).result.then((function(creds) {
+        return $http.post(wdInterfaceApi.change_pass, {
+          username: creds.username,
+          old_pass: creds.old_pass,
+          new_pass: creds.new_pass
+        }).success(function(data) {
+          $log.debug("Got data: " + JSON.stringify(data));
+          if (data.success) {
+            wdToast("Password change", "The password was changed successfully, please login", "success");
+            return $scope.$parent.goTo('login');
+          } else {
+            return wdToast("Password change", "Wrong username or password", "error");
+          }
+        });
+      }));
+    };
   }).controller('LoginCtrl', function($scope, $log) {
     $scope.data = {
       username: '',

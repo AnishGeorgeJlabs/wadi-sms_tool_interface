@@ -14,6 +14,21 @@
       },
       templateUrl: './templates/directives/dir_co_type.html'
     };
+  }).directive('compareTo', function() {
+    return {
+      require: 'ngModel',
+      scope: {
+        otherModelValue: '=compareTo'
+      },
+      link: function(scope, element, attributes, ngModel) {
+        ngModel.$validators.compareTo = function(modelValue) {
+          return modelValue === scope.otherModelValue;
+        };
+        return scope.$watch('otherModelValue', function() {
+          return ngModel.$validate();
+        });
+      }
+    };
   }).directive('wdRangeInput', function() {
     return {
       restrict: 'E',

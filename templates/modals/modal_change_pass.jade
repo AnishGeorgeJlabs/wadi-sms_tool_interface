@@ -1,0 +1,24 @@
+.modal-header
+  h3.modal-title {{ title }}
+.modal-body
+  form(name='chForm').form-horizontal
+    .form-group
+      label.control-label.col-xs-4 Username
+      .col-xs-8
+        input.form-control(ng-model='data.username' name='username' type='text' readonly)
+    .form-group
+      label.control-label.col-xs-4 Old Password
+      .col-xs-8
+        input.form-control(ng-model='data.old_pass' name='old_pass' type='password' required)
+    .form-group
+      label.control-label.col-xs-4 New Password
+      .col-xs-8
+        input.form-control(ng-model='data.new_pass' name='new_pass' type='password' required)
+    .form-group
+      label.control-label.col-xs-4 Confirm new password
+      .col-xs-8
+        input.form-control(ng-model='data.new_pass_rep' name='new_pass_rep' type='password' required compare-to='data.new_pass')
+.modal-footer
+  .btn-group.btn-group-justified
+    a.btn.btn-warning.btn-sm(role='button' ng-click="$dismiss()") Cancel
+    a.btn.btn-primary.btn-sm(role='button' ng-click="submit()" ng-disabled='!chForm.$valid') Submit

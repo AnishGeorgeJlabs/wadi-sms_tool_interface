@@ -18,6 +18,7 @@ angular.module('Wadi.constants', [])
   external_data_counts: base + "external_data/count"
   form: base_api_url+"form"
   login: base_api_url+"login"
+  change_pass: base_api_url+"change_pass"
 }
 .constant 'wdBlockApi', {
   upload: block_list_url+"upload"

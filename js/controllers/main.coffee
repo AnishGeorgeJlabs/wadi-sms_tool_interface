@@ -39,6 +39,43 @@ angular.module('Wadi.controllers.main', [])
     $state.go(statename)
 
 
+.controller 'AccountDropDownCtrl', ($scope, $modal, $http, wdInterfaceApi, wdToast, $log) ->
+  $scope.data =
+    username: ''
+
+  $scope.changePass = () ->
+    $modal.open(
+      templateUrl: './templates/modals/modal_change_pass.html'
+      resolve:
+        username: () -> $scope.$parent.creds.username
+      controller: ($scope, $modalInstance, username) ->
+        $scope.data =
+          username: username
+          old_pass: ''
+          new_pass: ''
+          new_pass_rep: ''
+
+        $scope.submit = () ->
+          $modalInstance.close(
+            username: $scope.data.username
+            old_pass: md5($scope.data.old_pass)
+            new_pass: md5($scope.data.new_pass)
+          )
+    ).result.then (
+      (creds) ->
+        $http.post(wdInterfaceApi.change_pass, {
+          username: creds.username
+          old_pass: creds.old_pass
+          new_pass: creds.new_pass
+        }).success (data) ->
+          $log.debug "Got data: "+JSON.stringify(data)
+          if data.success
+            wdToast("Password change", "The password was changed successfully, please login", "success")
+            $scope.$parent.goTo 'login'
+          else
+            wdToast("Password change", "Wrong username or password", "error")
+    )
+
 .controller 'LoginCtrl', ($scope, $log) ->
   $scope.data = {
     username: ''
