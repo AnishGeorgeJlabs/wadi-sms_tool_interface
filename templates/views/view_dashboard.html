@@ -17,7 +17,7 @@
   <div class="col-md-offset-2 col-md-8">
     <div ng-repeat="job in job_data" class="panel panel-default">
       <div class="panel-heading">
-        <div class="pull-right text-info"><i ng-if="job.segmented" class="fa fa-wrench"></i>&nbsp {{ job.status }} &nbsp<span class="badge">{{ job.t_id }}</span></div>
+        <div ng-class="{'text-warning': job.status == 'Cancel' || job.status == 'Cancelled', 'text-danger': job.status == 'Missed', 'text-success': job.status == 'Done' }" class="pull-right"><i ng-if="job.segmented" class="fa fa-wrench"></i>&nbsp {{ job.status }} &nbsp<span class="badge">{{ job.t_id }}</span></div>
         <h3 class="panel-title">{{ job.name }}</h3>
       </div>
       <div class="panel-body">

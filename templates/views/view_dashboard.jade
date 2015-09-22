@@ -15,7 +15,8 @@
   .col-md-offset-2.col-md-8
     .panel.panel-default(ng-repeat="job in job_data")
       .panel-heading
-        .pull-right.text-info
+        .pull-right(ng-class="{'text-warning': job.status == 'Cancel' || job.status == 'Cancelled', " +
+          "'text-danger': job.status == 'Missed', 'text-success': job.status == 'Done' }")
           i.fa.fa-wrench(ng-if='job.segmented')
           | &nbsp {{ job.status }} &nbsp
           span.badge {{ job.t_id }}
